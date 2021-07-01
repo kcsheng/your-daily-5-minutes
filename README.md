@@ -33,8 +33,8 @@ As a busy person who has some free time available now, I would like to be able t
 
 - WHEN I view the youtube card
   THEN I see a thumbnail of the top recommended video (5 min max) matching my preferences
-  WHEN I click on Video result
-  I am able to view a video (5 min max)
+- WHEN I click on Video result
+  THEN I am able to view a video (5 min max)
 
 - WHEN I view the news card
   THEN I see the preview of the top news headline matching my preferences
