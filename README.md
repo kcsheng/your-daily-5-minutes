@@ -2,7 +2,7 @@
 
 ---
 
-A responsive app for an individual who seeks 5 minute entertainment by a video, a song, fun facts or news headlines. Your daily 5 minutes is a collaborative projects of four team members.
+A responsive app for an individual who seeks 5 minute entertainment by a video, a song, fun facts or news headlines. Your daily 5 minutes is a collaborative project of four team members.
 
 ### Branding(Tagline)
 
