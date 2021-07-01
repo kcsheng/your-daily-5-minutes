@@ -52,7 +52,7 @@ As a busy person who has some free time available now, I would like to be able t
 
 ---
 
-## ![wireframe1 for the project](./assets/img/wireframe1.png)
+![wireframe1 for the project](./assets/img/wireframe1.png)
 
 ![wireframe2 for the project](./assets/img/wireframe2.png)
 
