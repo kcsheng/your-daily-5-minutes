@@ -56,9 +56,9 @@ As a busy person who has some free time available now, I would like to be able t
 
 ![wireframe2 for the project](./assets/img/wireframe2.png)
 
-### Technologies
+### Technologies used
 
 ---
 
 - Third party APIs
-- Javacript, jQuery and CSS framwork
+- Javacript, jQuery and CSS framework
