@@ -20,32 +20,32 @@ As a busy person who has some free time available now, I would like to be able t
 
 ---
 
-- WHEN I first visit the site
-  THEN I am presented with a choice of videos, songs, fun facts or news
+- WHEN I first visit the site<br>
+  THEN I am presented with a choice of videos, songs, fun facts or news<br>
   THEN I am presented with a list of interests that will filter my results.
 
-- WHEN I click on the preferences buttons
-  THEN I can change my media type
+- WHEN I click on the preferences buttons<br>
+  THEN I can change my media type<br>
   THEN I can change my interests
 
-- WHEN I select my selection of results
+- WHEN I select my selection of results<br>
   THEN I am presented with card previews of my entertainment results
 
-- WHEN I view the youtube card
+- WHEN I view the youtube card<br>
   THEN I see a thumbnail of the top recommended video (5 min max) matching my preferences
-- WHEN I click on Video result
+- WHEN I click on Video result<br>
   THEN I am able to view a video (5 min max)
 
-- WHEN I view the news card
+- WHEN I view the news card<br>
   THEN I see the preview of the top news headline matching my preferences
 
-- WHEN I click on the news card
+- WHEN I click on the news card<br>
   THEN I am able to view a list news article headlines
 
-- WHEN I click on a headline
+- WHEN I click on a headline<br>
   THEN I am able to read the news article for that headline
 
-- WHEN I view the music card
+- WHEN I view the music card<br>
   THEN I am presented with the ability to preview the first song recommended song in a web playback
 
 ### Initial wireframes/ideas
