@@ -51,4 +51,13 @@ timeline.add({
 			
 		});
 
-    
+        window.addEventListener('load',
+        function() {
+            //if(!localStorage.getItem('preferencesSaved')) {
+            $('#settings').modal({
+                fadeDuration: 1000,
+                fadeDelay: 0.50
+            });
+            //}
+            
+        });
