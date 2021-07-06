@@ -1,5 +1,74 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+head {
+}
+
+body {
+    background-color: whitesmoke;
+}
+
+
+#logoDiv {
+    display:flex;
+    justify-content: center;
+    
+}
+
+.svgLogo {
+    margin:10px;
+}
+
+.cards {
+    display:flex;
+    border-radius: 10px;
+    background-color: black;
+    opacity: 80%;
+    margin: 20px;
+    margin-top:10%;
+    min-width: 20%;
+    box-shadow: rgba(240, 46, 46, 0.342) 5px 5px, rgba(240, 46, 46, 0.3) 10px 10px, rgba(240, 46, 46, 0.2) 15px 15px, rgba(240, 46, 46, 0.1) 20px 20px, rgba(240, 46, 46, 0.05) 25px 25px;
+
+
+}
+
+#container {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.mainCard {
+
+}
+
+.ldMode {
+    text-align: right;
+    position: relative;
+    transform:translateY(-90px);
+}
+
+.light {
+    background-color:whitesmoke;
+    transition:background-color 2s;
+}
+
+.dark {
+    background-color:rgb(20, 20, 20);
+    transition:background-color 2s;
+}
+
+.logoTransition {
+    
+}
+
+.timer {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    font-size:3rem;
+}
+
+.timerContainer {
+    display:flex;
+}
+
+h2 {
+    color: whitesmoke;
 }
