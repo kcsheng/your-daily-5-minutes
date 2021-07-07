@@ -2,73 +2,99 @@ head {
 }
 
 body {
-    background-color: whitesmoke;
+  background-color: whitesmoke;
 }
 
-
 #logoDiv {
-    display:flex;
-    justify-content: center;
-    
+  display: flex;
+  justify-content: center;
 }
 
 .svgLogo {
-    margin:10px;
+  margin: 10px;
 }
 
 .cards {
-    display:flex;
-    border-radius: 10px;
-    background-color: black;
-    opacity: 80%;
-    margin: 20px;
-    margin-top:10%;
-    min-width: 20%;
-    box-shadow: rgba(240, 46, 46, 0.342) 5px 5px, rgba(240, 46, 46, 0.3) 10px 10px, rgba(240, 46, 46, 0.2) 15px 15px, rgba(240, 46, 46, 0.1) 20px 20px, rgba(240, 46, 46, 0.05) 25px 25px;
-
-
+  display: flex;
+  border-radius: 10px;
+  background-color: black;
+  opacity: 80%;
+  margin: 20px;
+  margin-top: 10%;
+  min-width: 20%;
+  box-shadow: rgba(240, 46, 46, 0.342) 5px 5px, rgba(240, 46, 46, 0.3) 10px 10px,
+    rgba(240, 46, 46, 0.2) 15px 15px, rgba(240, 46, 46, 0.1) 20px 20px,
+    rgba(240, 46, 46, 0.05) 25px 25px;
 }
 
 #container {
-    display:flex;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .mainCard {
-
 }
 
 .ldMode {
-    text-align: right;
-    position: relative;
-    transform:translateY(-90px);
+  text-align: right;
+  position: relative;
+  transform: translateY(-90px);
 }
 
 .light {
-    background-color:whitesmoke;
-    transition:background-color 2s;
+  background-color: whitesmoke;
+  transition: background-color 2s;
 }
 
 .dark {
-    background-color:rgb(20, 20, 20);
-    transition:background-color 2s;
+  background-color: rgb(20, 20, 20);
+  transition: background-color 2s;
 }
 
 .logoTransition {
-    
 }
 
 .timer {
-    font-family: 'Poppins', sans-serif;
-    text-align: center;
-    font-size:3rem;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  font-size: 3rem;
 }
 
 .timerContainer {
-    display:flex;
+  display: flex;
 }
 
 h2 {
-    color: whitesmoke;
+  color: whitesmoke;
+}
+
+/* video modal */
+.video-dropdown {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+}
+
+/* video iframe css */
+.video-container {
+  width: 853px;
+  height: 531.25px;
+  border: 1px solid black;
+}
+
+.iframe-container {
+  position: relative;
+  overflow: hidden;
+  padding-top: 56.25%;
+}
+
+.iframe-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
 }
