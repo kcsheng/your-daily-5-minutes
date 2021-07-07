@@ -13,10 +13,31 @@ const societyBtn = $("#society-button");
 const memoContainer = $("#memo-btn-container");
 const allMemoBtns = $("#memo-btn-container button");
 const videoIframe = $(".iframe-video");
+const videoStartBtn = $(".video-start-btn");
+const backToMainBtn = $("#back-to-main-btn");
+// const videoContainer = $("video-container");
 const apiKey = "AIzaSyDth48mpb2PvfpU7X190s1TFNrWNtyTh4o";
 let url = "";
 const baseUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoDuration=short&videoEmbeddable=true&videoSyndicated=true&key=${apiKey}`;
+// Action required when clicking on start video
+videoStartBtn.on("click", showVideoContainer);
+function showVideoContainer(e) {
+  e.stopPropagation();
+  // dom traversal
+  videoContainer = $(e.target).parent().siblings().eq(3);
+  videoContainer.css({ display: "block" });
+}
+//Action required when clikcing on back to main
+backToMainBtn.on("click", hideVideoContainer);
+function hideVideoContainer(e) {
+  console.log("yes");
+  e.stopImmediatePropagation();
+  videoContainer = $(e.target).parent().parent();
+  console.log(videoContainer);
+  videoContainer.css({ display: "none" });
+}
 
+// Create memory buttons
 gamingSelect.on("change", createCardBtn);
 sportsSelect.on("change", createCardBtn);
 entertainmentSelect.on("change", createCardBtn);
@@ -180,7 +201,7 @@ function createApiUrl(e) {
   }
 
   console.log("connecting to fetch api...");
-  // showVideo();
+  // showVideo(); please do not activate the video, unless necessary. Thank you.
 }
 
 function showVideo() {
