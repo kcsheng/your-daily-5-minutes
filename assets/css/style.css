@@ -295,3 +295,15 @@ margin:20px;
   text-decoration: none;
 }
 
+
+
+/***** Song related css ****/
+/* Song preference */
+.spotify-pref{
+  min-width: 70%;
+}
+
+.music{
+  display: inline-block;
+  color: white;
+}
