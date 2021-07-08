@@ -99,17 +99,23 @@ h2 {
   width: 63%;
   border: 1px solid black;
   position: absolute;
+  transition: height 0.25s ease;
+}
+
+.hide {
   display: none;
 }
 
 .back-to-main {
   font-size: 1.2rem;
   text-align: center;
+  margin-bottom: 1%;
 }
 
 .memo {
   display: flex;
-  justify-content: space-evenly;
+  flex-wrap: wrap;
+  justify-content: center;
   padding: 1%;
 }
 
