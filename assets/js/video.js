@@ -15,14 +15,34 @@ const allMemoBtns = $("#memo-btn-container button");
 const videoIframe = $(".iframe-video");
 const videoStartBtn = $(".video-start-btn");
 const backToMainBtn = $("#back-to-main-btn");
-// const videoContainer = $("video-container");
-const apiKey = "AIzaSyDth48mpb2PvfpU7X190s1TFNrWNtyTh4o";
+let apiKey = "";
 let url = "";
 const baseUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoDuration=short&videoEmbeddable=true&videoSyndicated=true&key=${apiKey}`;
+// Ask for api key if exists in local storage, if not, generate one.
+function checkApiKey() {
+  let storedKey = localStorage.getItem("apiKey");
+  let keyEntered = "";
+  let exitApiCheckLoop = false;
+  while (!exitApiCheckLoop) {
+    if (!storedKey) {
+      keyEntered = window.prompt(
+        "Please enter your API key to access the video:"
+      );
+      if (keyEntered.length != 39) {
+        window.alert("The key entered is invalid!");
+      } else {
+        localStorage.setItem("apiKey", keyEntered);
+        exitApiCheckLoop = true;
+      }
+    }
+  }
+  apiKey = storedKey;
+}
 // Action required when clicking on start video
 videoStartBtn.on("click", showVideoContainer);
 function showVideoContainer(e) {
   e.stopPropagation();
+  checkApiKey();
   // dom traversal
   videoContainer = $(e.target).parent().siblings().eq(3);
   videoContainer.css({ display: "block" });
@@ -206,8 +226,9 @@ function createApiUrl(e) {
 
 function showVideo() {
   fetch(url)
-    .then((res) => res.json())
+    .then((res) => res.json()) //need to deal with bad api request here, if clients api is wrong what do we do
     .then(function (data) {
+      //go back to check api key if not working properly
       let videoCollection = data.items;
       let videoPicked =
         videoCollection[Math.floor(Math.random() * videoCollection.length)];
