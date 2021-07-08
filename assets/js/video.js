@@ -13,7 +13,7 @@ const societyBtn = $("#society-button");
 const memoContainer = $("#memo-btn-container");
 const allMemoBtns = $("#memo-btn-container button");
 const videoIframe = $(".iframe-video");
-const videoStartBtn = $(".video-start-btn");
+const videoStartBtn = $("#video");
 const backToMainBtn = $("#back-to-main-btn");
 let apiKey = "";
 let url = "";
@@ -48,17 +48,21 @@ videoStartBtn.on("click", showVideoContainer);
 function showVideoContainer(e) {
   e.stopPropagation();
   checkApiKey();
-  videoContainer = $(e.target).parent().siblings().eq(3);
-  videoContainer.removeClass("hide");
+  videoContainer = $('.video-container');
+  videoContainer.removeClass("hidden");
   url = baseUrl + `&maxResults=3&topicId=%2Fm%2F01k8wb&relevanceLanguage=en`;
   showVideo();
 }
 //Action required when clikcing on back to main
+
+const mainButtons2 = document.querySelector('.mainButtons');
 backToMainBtn.on("click", hideVideoContainer);
 function hideVideoContainer(e) {
   e.stopImmediatePropagation();
   videoContainer = $(e.target).parent().parent();
-  videoContainer.addClass("hide");
+  videoContainer.addClass("hidden");
+  mainButtons2.classList.remove('class','hidden');
+
 }
 
 // Create memory buttons

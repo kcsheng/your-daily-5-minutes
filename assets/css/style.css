@@ -8,6 +8,8 @@ body {
 #logoDiv {
   display: flex;
   justify-content: center;
+  margin:0 auto;
+  align-items: center;
 }
 
 .svgLogo {
@@ -109,10 +111,6 @@ h2 {
   position: absolute;
 }
 
-.hide {
-  display: none;
-}
-
 .back-to-main {
   font-size: 1.2rem;
   text-align: center;
@@ -177,7 +175,16 @@ margin:20px;
     align-items:center;
 
   }
+
+  /* #ydfmLogo {
+    width:30%;
+    height:auto;
+  } */
 }
+
+/* .parentNavbar {
+  max-width: 80%;
+} */
 
 #settingsCog {
   max-width: 50px;
@@ -287,3 +294,4 @@ margin:20px;
   color: whitesmoke;
   text-decoration: none;
 }
+
