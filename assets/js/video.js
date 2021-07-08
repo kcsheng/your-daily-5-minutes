@@ -22,9 +22,11 @@ const baseUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=
 function checkApiKey() {
   let storedKey = localStorage.getItem("apiKey");
   let keyEntered = "";
-  let exitApiCheckLoop = false;
-  while (!exitApiCheckLoop) {
-    if (!storedKey) {
+  if (storedKey) {
+    apiKey = storedKey;
+  } else {
+    let exitApiCheckLoop = false;
+    while (!exitApiCheckLoop) {
       keyEntered = window.prompt(
         "Please enter your API key to access the video:"
       );
@@ -32,18 +34,17 @@ function checkApiKey() {
         window.alert("The key entered is invalid!");
       } else {
         localStorage.setItem("apiKey", keyEntered);
+        apiKey = keyEntered;
         exitApiCheckLoop = true;
       }
     }
   }
-  apiKey = storedKey;
 }
 // Action required when clicking on start video
 videoStartBtn.on("click", showVideoContainer);
 function showVideoContainer(e) {
   e.stopPropagation();
   checkApiKey();
-  // dom traversal
   videoContainer = $(e.target).parent().siblings().eq(3);
   videoContainer.css({ display: "block" });
 }
@@ -53,7 +54,6 @@ function hideVideoContainer(e) {
   console.log("yes");
   e.stopImmediatePropagation();
   videoContainer = $(e.target).parent().parent();
-  console.log(videoContainer);
   videoContainer.css({ display: "none" });
 }
 
@@ -221,7 +221,7 @@ function createApiUrl(e) {
   }
 
   console.log("connecting to fetch api...");
-  // showVideo(); please do not activate the video, unless necessary. Thank you.
+  showVideo();
 }
 
 function showVideo() {
