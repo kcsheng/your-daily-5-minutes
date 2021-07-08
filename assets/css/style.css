@@ -99,7 +99,6 @@ h2 {
   width: 63%;
   border: 1px solid black;
   position: absolute;
-  transition: height 0.25s ease;
 }
 
 .hide {
