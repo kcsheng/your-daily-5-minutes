@@ -1,10 +1,11 @@
-const moonPath = "M 27.5 0 C 34.791 0 41.79 2.899 46.945 8.055 C 52.101 13.21 55 20.209 55 27.5 C 55 34.791 52.101 41.79 46.945 46.945 C 41.79 52.101 34.791 55 27.5 55 C 20.209 55 13.21 52.101 8.055 46.945 C 2.899 41.79 0 34.791 0 27.5 C 0 20.209 2.899 13.21 8.055 8.055 C 13.21 2.899 20.209 0 27.5 0 Z";
-const sunPath = "M 27.5 0 C 34.791 0 41.79 2.899 46.945 8.055 C 33.991 9.89 26.93 20.209 26.93 27.5 C 26.93 34.791 33.689 45.261 46.945 46.945 C 41.79 52.101 34.791 55 27.5 55 C 20.209 55 13.21 52.101 8.055 46.945 C 2.899 41.79 0 34.791 0 27.5 C 0 20.209 2.899 13.21 8.055 8.055 C 13.21 2.899 20.209 0 27.5 0 Z";
+const moonPath = "M38 19C38 29.4934 29.4934 38 19 38C8.50659 38 0 29.4934 0 19C0 8.50659 8.50659 0 19 0C29.4934 0 38 8.50659 38 19Z";
+const sunPath = "M11 19C11 29.4934 19.5 38.9936 19.5 38.9936C9.00659 38.9936 0.5 30.487 0.5 19.9936C0.5 9.50015 9.00659 0.99356 19.5 0.99356C19.5 -0.00645276 11 8.50659 11 19Z";
+
 const darkMode = document.querySelector("#dark_mode");
+const settings = document.getElementById('settingsCog');
 let toggle = false;
 
 darkMode.addEventListener("click", ()=>{
-
 
 	const timeline = anime.timeline({
 		duration : 750,
@@ -23,6 +24,8 @@ timeline.add({
 			logoContainer = document.getElementById('logoDiv');
             if(!toggle){
 				toggle = true;
+                settings.classList.add('class','invert');
+                darkMode.classList.add('class','invert');
 				ldBody.classList.add('class','dark');
                 ldBody.classList.remove('class','light');
                 for (i=0;i<ldCards.length;i++) {
@@ -36,6 +39,8 @@ timeline.add({
                 logoContainer.appendChild(changeLogo);
 			}else{
 				toggle= false;
+                settings.classList.remove('class','invert');
+                darkMode.classList.remove('class','invert');
 				ldBody.classList.add('class','light');
                 ldBody.classList.remove('class','dark');
                 for (i=0;i<ldCards.length;i++) {
@@ -53,11 +58,94 @@ timeline.add({
 
         window.addEventListener('load',
         function() {
-            //if(!localStorage.getItem('preferencesSaved')) {
+            if(!localStorage.getItem('preferencesSaved')) {
             $('#settings').modal({
                 fadeDuration: 1000,
                 fadeDelay: 0.50
             });
-            //}
+            }
             
         });
+        var newsVideo = document.getElementById('newsVideo');
+        var videoGraphic = document.getElementById('videoGraphic');       
+        var musicGraphic = document.getElementById('musicGraphic');
+        var news = document.getElementById('news');
+        var music = document.getElementById('music');
+        var video = document.getElementById('video');
+        document.getElementById("news").addEventListener("mouseover", function() {
+            newsVideo.classList.remove('class','fadeOut');
+            news.classList.remove('class','fadein');
+            newsVideo.classList.remove('class','hidden');
+            newsVideo.classList.add('class','fadeIn');
+            video.classList.add('class','fadeOut');
+            music.classList.add('class','fadeOut');
+            newsVideo.play();
+        });
+        
+        document.getElementById("news").addEventListener("mouseleave", function() {
+            newsVideo.classList.add('class','fadeOut');
+            video.classList.remove('class','fadeOut');
+            music.classList.remove('class','fadeOut');
+            video.classList.add('class','fadeIn');
+            music.classList.add('class','fadeIn');
+            newsVideo.pause();
+            
+        });
+
+        document.getElementById("video").addEventListener("mouseover", function() {
+            videoGraphic.classList.remove('class','fadeOut');
+            video.classList.remove('class','fadein');
+            videoGraphic.classList.remove('class','hidden');
+            videoGraphic.classList.add('class','fadeIn');
+            news.classList.add('class','fadeOut');
+            music.classList.add('class','fadeOut');
+            videoGraphic.play();
+        });
+        
+        document.getElementById("video").addEventListener("mouseleave", function() {
+            videoGraphic.classList.add('class','fadeOut');
+            news.classList.remove('class','fadeOut');
+            music.classList.remove('class','fadeOut');
+            news.classList.add('class','fadeIn');
+            music.classList.add('class','fadeIn');
+            videoGraphic.pause();
+
+        });
+
+        document.getElementById("music").addEventListener("mouseover", function() {
+            musicGraphic.classList.remove('class','fadeOut');
+            music.classList.remove('class','fadein');
+            musicGraphic.classList.remove('class','hidden');
+            musicGraphic.classList.add('class','fadeIn');
+            video.classList.add('class','fadeOut');
+            news.classList.add('class','fadeOut');
+            musicGraphic.play();
+        });
+        
+        document.getElementById("music").addEventListener("mouseleave", function() {
+            musicGraphic.classList.add('class','fadeOut');
+            video.classList.remove('class','fadeOut');
+            news.classList.remove('class','fadeOut');
+            news.classList.add('class','fadeIn');
+            video.classList.add('class','fadeIn');
+            musicGraphic.pause();
+        });
+
+        settings.addEventListener('click',function() {
+            $('#settings').modal({
+                fadeDuration: 1000,
+                fadeDelay: 0.50
+            });
+        })
+
+        video.addEventListener('click',function() {
+            video.classList.add('class','hidden');
+            music.classList.add('class','hidden');
+            news.classList.add('class','hidden');
+            document.querySelector('.mainButtons').classList.add('class','hidden');
+            document.getElementById('videoCard').classList.remove('class','hidden');
+        })
+
+        $( function() {
+            $( "#tabs" ).tabs();
+          } );
