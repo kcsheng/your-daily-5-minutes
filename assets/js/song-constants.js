@@ -7,3 +7,4 @@ const LS_REDIRECT_URI = 'ydfmSpotifyRedirectURI'; // access token used for user 
 const LS_SONG_PREF_REC_SEED = 'ydfmSpotifyRecSeedArtistTrack';
 
 const SPOTIFY_AUTH_REDIRECT_PAGE = 'complete-spotify-auth.html'; // page that handles the redirect for spotify authorization
+const SPOTIFY_ICON_LOCATION = 'assets/img/spotify/SPotify_Icon_CMYK_Greeen.png' // location for spotify image

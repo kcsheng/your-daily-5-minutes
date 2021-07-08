@@ -144,6 +144,7 @@ async function generateSongRecommendations(){
         data = await response.json()
 
     $('#song-rec').empty();
+    var hidden = false;
     // go through returned tracks
     data.tracks.forEach((track) => {
         var artists = "";
@@ -153,12 +154,13 @@ async function generateSongRecommendations(){
                 artists += ", ";
             artists += artist.name;
         });     
-        displaySong(track.name, artists, track.album.name, track.external_urls.spotify, track.uri);
-    })
+        displaySong(track.name, artists, track.album.name, track.external_urls.spotify, track.uri, hidden);
+        hidden = true; // only show the first song
+    });
 
 }
 
-function displaySong(title, artists, album, open_link, play_uri){
+function displaySong(title, artists, album, open_link, play_uri, isHidden){
 
     const elLi = $('<li>');
     const elTitle = $('<h3>');
@@ -166,19 +168,35 @@ function displaySong(title, artists, album, open_link, play_uri){
     const elAlbum = $('<h4>');
     const linkOpen = $('<a>');
     const linkPlay = $('<button>');
+
+    const divImage = $('<div class="song-image">');
+    const divSongDetails = $('<div class="song-details">');
+    const divPlayerControls = $('<div  class="song-controls">');
+    const elSpotifyLogo = $(`<img class="spotify-logo" src="${SPOTIFY_ICON_LOCATION}">`)
+    const spanSpotifyOpen = $('<span>');
+
     elTitle.text(title);
     elAlbum.text(album);
     elArtists.text(artists);
+    
     linkOpen.attr('href', open_link);
-    linkOpen.text('[Spotify URL]');
+    spanSpotifyOpen.text('PLAY ON SPOTIFY');
     linkPlay.text('[Play Song]');
     linkPlay.addClass('play-song');
     linkPlay.val(play_uri);
-    elLi.append(elTitle);
-    elLi.append(elArtists);
-    elLi.append(elAlbum);
-    elLi.append(linkOpen);
-    elLi.append(linkPlay);
+    elLi.addClass('song');
+    if(isHidden)
+        elLi.addClass('song-hidden');
+    divSongDetails.append(elTitle);
+    divSongDetails.append(elAlbum);
+    divSongDetails.append(elArtists);
+    linkOpen.append(elSpotifyLogo);
+    linkOpen.append(spanSpotifyOpen);
+    divPlayerControls.append(linkOpen);
+    divPlayerControls.append(linkPlay);
+    elLi.append(divImage);
+    elLi.append(divSongDetails);
+    elLi.append(divPlayerControls);
     $('#song-rec').append(elLi);
 
 }
@@ -394,6 +412,7 @@ function saveSongPref(){
     localStorage.setItem(LS_SONG_PREF_REC_SEED, JSON.stringify(seed_data));
 }
 
+// loads song preferences from local storage
 function loadSongPref(){
     if(!(localStorage.getItem(LS_SONG_PREF_REC_SEED) === null || localStorage.getItem(LS_SONG_PREF_REC_SEED) === 'undefined' )){
         var options = JSON.parse(localStorage.getItem(LS_SONG_PREF_REC_SEED));
@@ -404,4 +423,14 @@ function loadSongPref(){
             selectBox.trigger({type: 'select2:select', params: {data: option}});
         })
     }
+}
+
+// pause the song on the player
+function pauseSong(){
+    player.pause();
+}
+
+// resume the song on the player
+function resumeSong(){
+    player.resume();
 }

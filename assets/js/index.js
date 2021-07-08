@@ -20,7 +20,7 @@ timeline.add({
 			targets:'#dark_mode',
 			rotate : toggle? 0 : 320},"-=350")
 			ldBody = document.getElementById('ldChange');
-            ldCards = document.getElementById('container').querySelectorAll('.cards');
+            ldCards = document.getElementsByClassName('cards');
 			logoContainer = document.getElementById('logoDiv');
             if(!toggle){
 				toggle = true;
