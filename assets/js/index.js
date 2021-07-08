@@ -58,7 +58,7 @@ timeline.add({
 
         window.addEventListener('load',
         function() {
-            if(!localStorage.getItem('preferencesSaved')) {
+            if(!localStorage.getItem('gaming')) {
             $('#settings').modal({
                 fadeDuration: 1000,
                 fadeDelay: 0.50
@@ -139,11 +139,12 @@ timeline.add({
         })
 
         video.addEventListener('click',function() {
-            video.classList.add('class','hidden');
-            music.classList.add('class','hidden');
-            news.classList.add('class','hidden');
+            // video.classList.add('class','hidden');
+            // music.classList.add('class','hidden');
+            // news.classList.add('class','hidden');
             document.querySelector('.mainButtons').classList.add('class','hidden');
-            document.getElementById('videoCard').classList.remove('class','hidden');
+            // document.querySelector('video-container').classList.remove('class','hidden');
+            
         })
 
         $( function() {
