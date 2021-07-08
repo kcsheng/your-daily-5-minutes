@@ -27,6 +27,10 @@ body {
     rgba(240, 46, 46, 0.05) 25px 25px;
 }
 
+button {
+  cursor: pointer;
+}
+
 .video {
   justify-content: center;
   align-items: center;
