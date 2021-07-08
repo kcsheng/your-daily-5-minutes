@@ -27,11 +27,28 @@ body {
     rgba(240, 46, 46, 0.05) 25px 25px;
 }
 
+button {
+  cursor: pointer;
+}
+
+.video {
+  justify-content: center;
+  align-items: center;
+}
+
+.video-start-btn {
+  padding: 3%;
+  font-size: 1.2rem;
+  border-radius: 5px;
+}
+
 #container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  position: relative;
+
 }
 
 .invert {
@@ -85,9 +102,33 @@ h2 {
 
 /* video iframe css */
 .video-container {
-  width: 853px;
-  height: 531.25px;
+  /* width: 853px;
+  height: 531.25px; */
+  width: 63%;
   border: 1px solid black;
+  position: absolute;
+  transition: height 0.25s ease;
+}
+
+.hide {
+  display: none;
+}
+
+.back-to-main {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 1%;
+}
+
+.memo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1%;
+}
+
+.memo button {
+  font-size: 1.2rem;
 }
 
 .iframe-container {
