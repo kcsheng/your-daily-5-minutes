@@ -28,7 +28,16 @@ function initSongs(){
     setInterval(getSpotifyClientCredentials, 1000 * 60 * 60);
 
     
+    // set handlers for next/previous
+    $(document).on('click','.next-song', function (e) {
+        e.preventDefault();
+        nextSong();
+    });
 
+    $(document).on('click','.prev-song', function (e) {
+        e.preventDefault();
+        prevSong();
+    });
 }
 
 // function to attempt loading the Spotify Web Player
@@ -94,12 +103,23 @@ const play = ({
   };
 
 
-function playSong(play_uri){
-    console.log('playing '+play_uri);
-    play({
-        playerInstance: player,
-        spotify_uri: play_uri,
-      });
+async function playSong(play_uri){
+    var state = await player.getCurrentState();
+    var alreadyPlaying = false;
+    if(state === null)
+        alreadyPlaying = false;
+    else if (state.track_window.current_track.uri == play_uri)
+        alreadyPlaying = true;
+    if(!alreadyPlaying){
+        console.log('playing '+play_uri);
+        play({
+            playerInstance: player,
+            spotify_uri: play_uri,
+        });
+        togglePlayPauseIcon(FA_PAUSE_ICON);
+    } else {
+        togglePlaySong();
+    }
 }
 
 
@@ -146,32 +166,40 @@ async function generateSongRecommendations(){
     $('#song-rec').empty();
     var hidden = false;
     // go through returned tracks
-    data.tracks.forEach((track) => {
-        var artists = "";
-        //process artists
-        track.artists.forEach((artist) => {
-            if (!(artists === ""))
-                artists += ", ";
-            artists += artist.name;
-        });     
-        displaySong(track.name, artists, track.album.name, track.external_urls.spotify, track.uri, hidden);
+    data.tracks.forEach((track) => { 
+        displaySong(track, hidden);
         hidden = true; // only show the first song
     });
 
 }
 
-function displaySong(title, artists, album, open_link, play_uri, isHidden){
+function displaySong(track, isHidden){
+
+    var title = track.name;
+    var artists = "";
+    //process artists
+    track.artists.forEach((artist) => {
+        if (!(artists === ""))
+            artists += ", ";
+        artists += artist.name;
+    });    
+    var album = track.album.name;
+    var album_image_url = track.album.images[2].url;
+    var open_link = track.external_urls.spotify;
+    var play_uri = track.uri;
 
     const elLi = $('<li>');
     const elTitle = $('<h3>');
     const elArtists= $('<h5>');
     const elAlbum = $('<h4>');
-    const linkOpen = $('<a>');
-    const linkPlay = $('<button>');
+    const linkOpen = $('<a class="spotify-open" target=”_blank”>');
+    const btnPlay = $('<button>');
+    const playIcon = $('<i class="fa" aria-hidden="true"></i>');
 
-    const divImage = $('<div class="song-image">');
+    const divSongContainer = $('<div class="song-container">');
+    const divImage = $(`<img class="song-image" src="${album_image_url}">`);
     const divSongDetails = $('<div class="song-details">');
-    const divPlayerControls = $('<div  class="song-controls">');
+    const divPlayerControls = $('<div class="song-controls">');
     const elSpotifyLogo = $(`<img class="spotify-logo" src="${SPOTIFY_ICON_LOCATION}">`)
     const spanSpotifyOpen = $('<span>');
 
@@ -181,22 +209,28 @@ function displaySong(title, artists, album, open_link, play_uri, isHidden){
     
     linkOpen.attr('href', open_link);
     spanSpotifyOpen.text('PLAY ON SPOTIFY');
-    linkPlay.text('[Play Song]');
-    linkPlay.addClass('play-song');
-    linkPlay.val(play_uri);
+    //linkPlay.text('[Play Song]');
+    btnPlay.append(playIcon);
+    btnPlay.addClass('play-song');
+    playIcon.addClass(FA_PLAY_ICON);
+    btnPlay.val(play_uri);
     elLi.addClass('song');
     if(isHidden)
         elLi.addClass('song-hidden');
+    else
+        elLi.addClass('song-current');
     divSongDetails.append(elTitle);
     divSongDetails.append(elAlbum);
     divSongDetails.append(elArtists);
     linkOpen.append(elSpotifyLogo);
     linkOpen.append(spanSpotifyOpen);
-    divPlayerControls.append(linkOpen);
-    divPlayerControls.append(linkPlay);
-    elLi.append(divImage);
-    elLi.append(divSongDetails);
+    divSongDetails.append(linkOpen);
+    divPlayerControls.append(btnPlay);
+    divSongContainer.append(divImage);
+    divSongContainer.append(divSongDetails);
+    elLi.append(divSongContainer);
     elLi.append(divPlayerControls);
+
     $('#song-rec').append(elLi);
 
 }
@@ -313,7 +347,7 @@ async function refreshToken(){
         method: 'POST',
         headers: {
             'Content-Type':'application/x-www-form-urlencoded',
-            'Authorization':'basic ZjBmYTMzMDFjNjUyNDdmNTkxZjc1N2YyODhkNzFlMDE6Y2MxMjU0NTQ3YjE3NGVhZDk2MzM2OGQ3NDliYWJkYWQ='
+            'Authorization':'basic ' + localStorage.getItem(LS_SPOTIFY_API_KEY_B64)
           },
     });
     var data = await response.json();
@@ -384,7 +418,7 @@ async function getSpotifyClientCredentials()
         method: 'POST',
         headers: {
             'Content-Type':'application/x-www-form-urlencoded',
-            'Authorization':'basic ZjBmYTMzMDFjNjUyNDdmNTkxZjc1N2YyODhkNzFlMDE6Y2MxMjU0NTQ3YjE3NGVhZDk2MzM2OGQ3NDliYWJkYWQ='
+            'Authorization':'basic ' + localStorage.getItem(LS_SPOTIFY_API_KEY_B64)
           },
     });
     const data = await response.json();
@@ -425,12 +459,71 @@ function loadSongPref(){
     }
 }
 
-// pause the song on the player
-function pauseSong(){
-    player.pause();
+// toggle pause/play of the song on the player
+async function togglePlaySong(){
+    await player.togglePlay();
+
+    togglePlayPauseIcon();
+
+}
+
+function togglePlayPauseIcon(type){
+    var iconPlay = $('.song-current .song-controls .play-song').children('i');
+    if(type){
+        if(type == FA_PLAY_ICON){
+            iconPlay.removeClass(FA_PAUSE_ICON);
+            iconPlay.addClass(FA_PLAY_ICON);
+        } else {
+            iconPlay.removeClass(FA_PLAY_ICON);
+           iconPlay.addClass(FA_PAUSE_ICON);
+        }
+
+    } else if(iconPlay.hasClass(FA_PLAY_ICON)){
+        iconPlay.removeClass(FA_PLAY_ICON);
+        iconPlay.addClass(FA_PAUSE_ICON);
+    } else {
+        iconPlay.removeClass(FA_PAUSE_ICON);
+        iconPlay.addClass(FA_PLAY_ICON);
+    }
+
+    // set all other icons to play
+    var otherPlay = $('.song-hidden .song-controls .play-song').children('i');
+    otherPlay.removeClass(FA_PAUSE_ICON);
+    otherPlay.addClass(FA_PLAY_ICON);
 }
 
 // resume the song on the player
 function resumeSong(){
     player.resume();
+    var btnPlay = $('.'+FA_PAUSE_ICON);
+    btnPlay.removeClass(FA_PAUSE_ICON);
+    btnPlay.addClass(FA_PLAY_ICON);
+}
+
+function nextSong(){
+    // get the next item in li
+    var currSong = $('.song-current');
+    var nextSong = currSong.next();
+    if(nextSong.length == 0){
+        // if nextSong is empty loop to the beginning
+        nextSong = $('.song').first();
+    }
+    currSong.removeClass('song-current');
+    currSong.addClass('song-hidden');
+    nextSong.removeClass('song-hidden');
+    nextSong.addClass('song-current');
+}
+
+function prevSong(){
+    // get the next item in li
+    var currSong = $('.song-current');
+    var prevSong = currSong.prev();
+    if(prevSong.length == 0){
+        // if nextSong is empty loop to the beginning
+        prevSong = $('.song').last();
+    }
+    currSong.removeClass('song-current');
+    currSong.addClass('song-hidden');
+    prevSong.removeClass('song-hidden');
+    prevSong.addClass('song-current');
 }

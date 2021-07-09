@@ -340,19 +340,46 @@ margin:20px;
   height: 95%;
   display:flex;
   align-items: center;
-  margin-left: 15px;
-  margin-right: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  transition: 0.3s;
+  font-size: 1.2em;
+  min-width: 45px;
+  justify-content: center;
 }
+
+.next-song:hover{
+  cursor: pointer;
+  opacity: 0.6;
+  font-size: 1.5em;
+}
+
 .prev-song{
   height: 95%;
   display:flex;
   align-items: center;
-  margin-left: 15px;
-  margin-right: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  transition: 0.3s;
+  font-size: 1.2em;
+  min-width: 45px;
+  justify-content: center;
+}
+
+.prev-song:hover{
+  cursor: pointer;
+  opacity: 0.6;
+  font-size: 1.5em;
 }
 
 .song-recommendations{
   height: 95%;
+  width: 100%;
+}
+
+.song-recommendations ul{
+  width: 100%;
+  padding: 0;
 }
 
 .song-recommendations ul{
@@ -372,20 +399,29 @@ margin:20px;
 .song h3{
   margin: 0;
   padding: 0;
+  font-size: 1em;
+}
+
+.song{
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  justify-content: space-between;
 }
 
 .song h5{
   margin: 0;
   padding: 0;
+  font-size: .8em;
+  font-weight: lighter;
 }
 
 .song h4{
   margin: 0;
   padding: 0;
-}
-
-.song{
-  display: flex;
+  font-size: .9em;
+  font-weight: normal;
 }
 
 .song-hidden{
@@ -396,3 +432,34 @@ margin:20px;
   text-align: left;
 }
 
+.spotify-open{
+  color: green;
+  font-family: sans-serif;
+  text-decoration: none;
+  font-size: .8em;
+  margin-top: 1em;
+}
+
+.play-song{
+  background-color: black; /* Blue background */
+  border: none; /* Remove borders */
+  color: green; /* White text */
+  font-size: 3em; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+}
+
+.song-image{
+  margin-right: .7em;
+  height: 4em;
+}
+.spotify-open .spotify-logo{
+  height: 1em;
+  margin-right: 0.2em;
+  margin-top: 0.1em;
+}
+
+.song-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
