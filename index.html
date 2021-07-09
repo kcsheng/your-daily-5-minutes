@@ -195,12 +195,11 @@
           <button onclick="linkSpotifyAccount()">Link and Authorize</button>
         </section>
         <section class="song-is-authorized">
-          <h2>Recommend Songs Like</h2>
-          <p>Provide up to 5 artists or songs to base recommendations off. If none are provided, if you've connected
-            your spotify account your top 5 artists will be used. If no spotify account is connected and no artists and
-            songs are provided, we will choose at random.</p>
-          <select class="spotify-pref" name="spotifypref[]" multiple="multiple">
+          <h3>Recommend Songs Like</h3>
+          <p>Provide up to 5 artists or songs to base recommendations off. You must set at least one selection to use the music feature.</p>
+          <select id="spotify-pref" style="width: 95%; display: block;" class="spotify-pref" name="spotifypref[]" multiple="multiple">
           </select>
+          <span class='error' id='song-pref-error'></span>
           <button onclick="saveSongPref()">Save Song Preferences</button>
         </section>
       </div>
@@ -238,10 +237,13 @@
         laborum."</p>
     </div>
     <div id='selectSpotifyPlayer' class='modal'>
+      <div class="select-player">
         <h2>Select a Spotify Player</h2>
         <ul class="spotify-devices">
-          <li><a href="#" onClick="selectPlayer(SPOTIFY_NO_PLAYER);" rel="modal:close">No Playback - Recommendations Only</a></li>
+          <li class='device-option no-player-option' onClick="selectPlayer(SPOTIFY_NO_PLAYER);" rel="modal:close">No Playback - Recommendations Only</li>
+          <li class='device-option web-player-option' onClick="selectPlayer(SPOTIFY_WEB_PLAYER);" rel="modal:close">Play in browser (Desktop only)</li>
         </ul>
+        <span class="spotify-basic-text">To enable playback options upgrade to Spotify premium.</span>
         <a href="#" rel="modal:close">Close</a>
       </div>
     </div>

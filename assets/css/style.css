@@ -297,9 +297,6 @@ margin:20px;
 
 /***** Song related css ****/
 /* Song preference */
-.spotify-pref{
-  min-width: 70%;
-}
 
 .music-footer{
   display: flex;
@@ -478,3 +475,57 @@ margin:20px;
   justify-content: center;
   border-radius: 100%;
 }
+
+.select-player{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.spotify-devices{
+  display: flex;
+  width: 95%;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.spotify-devices li{
+  border-bottom: 2px solid rgb(109, 0, 0);
+  border-left: 2px solid rgb(109, 0, 0);
+  border-right: 2px solid rgb(109, 0, 0);
+  width: 100%;
+  padding: .5em;
+}
+
+.spotify-devices li:first-child{
+  border-top: 2px solid rgb(109, 0, 0);
+}
+
+li.player-select-heading {
+  border-left: none;
+  border-right: none;
+}
+.device-option:hover{
+  cursor: pointer;
+}
+
+#tabs-3 p{
+
+  margin-bottom: .5em;
+  font-size: 1em;
+  font-style: italic;
+  
+}
+#tabs-3 h3{
+
+  margin-bottom: .3em;
+  
+}
+.error{
+  color: red;
+  font-style: italic;
+  display: block;
+  margin-bottom: .5em;
+}
+

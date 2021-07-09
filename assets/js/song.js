@@ -24,7 +24,7 @@ var v_player = {
     togglePlay: async function(){
         switch(this.playback_type){
             case SPOTIFY_WEB_PLAYER:
-                web_player.togglePlay();
+                await web_player.togglePlay();
                 break;
             case SPOTIFY_REMOTE_PLAYER:
                 // get remote player playback info
@@ -42,7 +42,7 @@ var v_player = {
                 if(!data.is_playing){
                     //resume
                     await refreshToken();
-                    fetch(`https://api.spotify.com/v1/me/player/play?device_id=${this.remote_player_device_id}`, {
+                    await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${this.remote_player_device_id}`, {
                         method: 'PUT',
                         body: JSON.stringify({}),
                         headers: {
@@ -53,7 +53,7 @@ var v_player = {
                 } else {
                     //pause
                     await refreshToken();
-                    fetch(`https://api.spotify.com/v1/me/player/pause?device_id=${this.remote_player_device_id}`, {
+                    await fetch(`https://api.spotify.com/v1/me/player/pause?device_id=${this.remote_player_device_id}`, {
                         method: 'PUT',
                         body: JSON.stringify({}),
                         headers: {
@@ -84,7 +84,7 @@ var v_player = {
                 console.log('data', data)
                 if(data && data.hasOwnProperty('item') && data.item &&
                     data.item.hasOwnProperty('uri'))
-                     return {track_window: {current_track: {uri: data.item.uri}}}
+                     return {track_window: {current_track: {uri: data.item.uri} }, paused: !data.is_playing}
                 
                 return null;
                 break;
@@ -98,9 +98,8 @@ var v_player = {
                 break;
             case SPOTIFY_REMOTE_PLAYER:
                 await refreshToken();
-                fetch(`https://api.spotify.com/v1/me/player/volume?device_id=${this.remote_player_device_id}`, {
+                fetch(`https://api.spotify.com/v1/me/player/volume?device_id=${this.remote_player_device_id}&volume_percent=${Math.round(vol*100)}`, {
                     method: 'PUT',
-                    body: JSON.stringify({volume_precent: vol*100 }),
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': 'Bearer ' + localStorage.getItem(LS_USR_ACCESS_TOKEN)
@@ -207,11 +206,13 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 
 initSongs();
 
-function initSongs() {
+async function initSongs() {
+
+    initSongPreferences();
     // try load the player
     initAuthorizedFeatures();
 
-    getSpotifyClientCredentials()
+    await getSpotifyClientCredentials()
     //refresh Token every hour
     setInterval(getSpotifyClientCredentials, 1000 * 60 * 60);
 
@@ -228,18 +229,38 @@ function initSongs() {
     });
 }
 
+var auth_listener_enabled = false;
+function enableAuthListener(){
+    if(!auth_listener_enabled){
+        auth_listener_enabled = true;
+        $(window).on('storage.authlistener', ev =>{
+            console.log('storage even fired', ev)
+            if(ev.originalEvent.key != LS_USR_ACCESS_TOKEN && ev.originalEvent.key != LS_USR_REFRESH_TOKEN)
+                return;
+            console.log('retrying auth');
+            initAuthorizedFeatures();
+        });
+    }
+}
+
+function disableAuthListner(){
+    if(auth_listener_enabled)
+        $('window').off('storage.authlistener');
+}
+
 // function to attempt loading the Spotify Web Player
 async function initAuthorizedFeatures() {
     // check if the user is authorized
+
     if (!isAuthorized()) {
         //if not authorized
         // display functionality to connect spotify premium
         showConnectSpotify();
+        enableAuthListener();
     } else {
         // if authorized
-
-        // initialize features for linked accounts (premium and basic)
-        initLinkedFeatures();
+        disableAuthListner();
+        hideAuthorizeSpotify();
 
         // check if they have premium
         var isPremiumUser = await isPremium();
@@ -337,25 +358,31 @@ async function generateSongRecommendations() {
     })
     // returns array of {label: "Spotify Object Name [Type]", value: "<Spotify Type>-spotify object ID"}
     var bearer = 'Bearer ' + await getSpotifyClientCredentials();
-    var response = await fetch(`https://api.spotify.com/v1/recommendations?market=AU&limit=15&max_duration_ms=300000${sArtists + sTracks + sGenre}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': bearer
-        },
-    });
-    var data = {};
-    if (response.ok)
-        data = await response.json()
+    var qString = sArtists + sTracks + sGenre;
 
-    $('#song-rec').empty();
-    var hidden = false;
-    // go through returned tracks
-    data.tracks.forEach((track) => {
-        displaySong(track, hidden);
-        hidden = true; // only show the first song
-    });
+    //if recommendation settings filled out, generate the list
+    if(qString != ""){
+        $('#song-pref-error').text('');
+        var response = await fetch(`https://api.spotify.com/v1/recommendations?market=AU&limit=15&max_duration_ms=300000${qString}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': bearer
+            },
+        });
 
+        var data = {};
+        if (response.ok)
+            data = await response.json()
+
+        $('#song-rec').empty();
+        var hidden = false;
+        // go through returned tracks
+        data.tracks.forEach((track) => {
+            displaySong(track, hidden);
+            hidden = true; // only show the first song
+        });
+    } 
 }
 
 function displaySong(track, isHidden) {
@@ -420,7 +447,7 @@ function displaySong(track, isHidden) {
 
 }
 
-function initLinkedFeatures() {
+function initSongPreferences() {
     $(".song-is-authorized").show();
 
     // load the pillbox for saving artist and track recommendations
@@ -545,8 +572,13 @@ async function refreshToken() {
 function showConnectSpotify() {
     // display elements for connecting spotify
     console.log("hiding song is authorized")
-    $(".song-is-authorized").hide();
+    //$(".song-is-authorized").hide();
     $(".song-not-authorized").show();
+}
+
+function hideAuthorizeSpotify() {
+    $(".song-not-authorized").hide();
+    $(".song-is-authorized").show();
 }
 
 
@@ -633,6 +665,8 @@ function linkSpotifyAccount() {
 function saveSongPref() {
     var seed_data = $("select.spotify-pref").select2('data');
     localStorage.setItem(LS_SONG_PREF_REC_SEED, JSON.stringify(seed_data));
+    // also regenerate song recommendations
+    generateSongRecommendations();
 }
 
 // loads song preferences from local storage
@@ -668,9 +702,19 @@ function loadVolume() {
 
 // toggle pause/play of the song on the player
 async function togglePlaySong() {
-    await v_player.togglePlay();
+    await v_player.togglePlay().then(async () => {
+        var state = await v_player.getCurrentState();
+        console.log('state playpause',state)
+        if(state.hasOwnProperty('paused') && !state.paused){
+            togglePlayPauseIcon(FA_PAUSE_ICON);
+        } else {
+            // assume to show play icon if state comes back unpaused
+            // or if it errors (due to lack of any other handling)
+            togglePlayPauseIcon(FA_PLAY_ICON);
+        }
+    });
 
-    togglePlayPauseIcon();
+    
 
 }
 
@@ -697,23 +741,6 @@ function togglePlayPauseIcon(type) {
     var otherPlay = $('.song-hidden .song-controls .play-song').children('i');
     otherPlay.removeClass(FA_PAUSE_ICON);
     otherPlay.addClass(FA_PLAY_ICON);
-}
-
-
-async function pauseSong() {
-    var state = await v_player.getCurrentState();
-    if (state === null || state.track_window.current_track.uri == play_uri) {
-        v_player.pause();
-        togglePlayPauseIcon(FA_PLAY_ICON);
-    }
-}
-
-async function resumeSong() {
-    var state = await v_player.getCurrentState();
-    if (state === null || state.track_window.current_track.uri == play_uri) {
-        v_player.pause();
-        togglePlaySong(FA_PAUSE_ICON);
-    }
 }
 
 function nextSong() {
@@ -763,34 +790,77 @@ async function getSpotifyDevices(){
 }
 
 function displayDevices(){
-    // clear current list of remote devices
-    $('.spotify-remote-device').remove();
-    getSpotifyDevices().then((devices) => {
-        // append to list
-        devices.forEach(device => {
-            // don't include our own web player
-            if(device.name !== SPOTIFY_WEB_PLAYER_DEVICE_NAME ){
-                var liDevice = $('<li class="spotify-remote-device">');
-                var aDevice = $(`<a href="#" onClick="selectPlayer(SPOTIFY_REMOTE_PLAYER, '${device.id}');" rel="modal:close">`)
-                aDevice.text(`${device.name} [${device.type}]`);
-                liDevice.append(aDevice);
-                $('.spotify-devices').append(liDevice);
+    if($('.spotify-pref').val().length < 1){
+        // open the settings modal
+        $('#settings').modal({
+            fadeDuration: 1000,
+            fadeDelay: 0.50
+        });
+        $('#tabs-3').tabs('show');
+        $('#song-pref-error').text('You must provide at least one song or artist');
+
+    } else if(is_authorized_preimum){
+        // if premium
+        // show web player
+        $('.web-player-option').show();
+        //hide upgrade text
+        $('.spotify-basic-text').hide();
+        // clear current list of remote devices
+        $('.spotify-remote-device').remove();
+        $('.spotify-remote-device-heading').remove();
+        getSpotifyDevices().then((devices) => {
+            if(devices.length > 0){
+                $('.spotify-devices').append($('<li class="player-select-heading spotify-remote-device-heading">Other Devices</li>'));
             }
-        })
-    });
+            // append to list
+            devices.forEach(device => {
+                // don't include our own web player
+                if(device.name !== SPOTIFY_WEB_PLAYER_DEVICE_NAME ){
+                    var liDevice = $(`<li class="spotify-remote-device device-option" onClick="selectPlayer(SPOTIFY_REMOTE_PLAYER, '${device.id}');" rel="modal:close">`);
+                    liDevice.text(`${device.name} [${device.type}]`);
+                    $('.spotify-devices').append(liDevice);
+                }
+            })
+        });
+    } else {
+        //hide webplayer option
+        $('.spotify-basic-text').show();
+        $('.web-player-option').hide();
+    }
+}
+
+function showSongFeature(){
+    $('.music').removeClass('hidden');
 }
 
 function selectPlayer(type, device_id){
     playback_type = type;
     switch(type){
         case SPOTIFY_NO_PLAYER:
+            disablePlayback();
             break;
         case SPOTIFY_WEB_PLAYER:
             v_player.playback_type = type;
+            enablePlayback();
             break;
         case SPOTIFY_REMOTE_PLAYER:
             v_player.playback_type = type;
             v_player.remote_player_device_id = device_id;
+            enablePlayback();
             break;
     }
+    //close the current modal
+    $.modal.close();
+    //show the song feature
+    showSongFeature();
+}
+
+function disablePlayback(){
+    $('.song-volume').hide();
+    $('.song-controls').hide();
+}
+
+function enablePlayback(){
+    $('.song-volume').show();
+    $('.song-controls').show();
 }
