@@ -147,6 +147,11 @@ timeline.add({
             
         })
 
+        music.addEventListener('click',function() {
+            // unhide the music panels
+            $('.music').removeClass('hidden');
+        })
+
         $( function() {
             $( "#tabs" ).tabs();
           } );

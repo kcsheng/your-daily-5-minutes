@@ -161,10 +161,6 @@ option {
   
 }
 
-.hidden {
-  display:none;
-}
-
 #dark_mode {
 margin:20px;
 }
@@ -373,6 +369,8 @@ margin:20px;
 }
 
 .song-recommendations{
+  display: flex;
+  align-items: center;;
   height: 95%;
   width: 100%;
 }
@@ -462,4 +460,9 @@ margin:20px;
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+
+.hidden {
+  display:none;
 }
