@@ -20,7 +20,7 @@ timeline.add({
 			targets:'#dark_mode',
 			rotate : toggle? 0 : 320},"-=350")
 			ldBody = document.getElementById('ldChange');
-            ldCards = document.getElementById('container').querySelectorAll('.cards');
+            ldCards = document.getElementsByClassName('cards');
 			logoContainer = document.getElementById('logoDiv');
             if(!toggle){
 				toggle = true;
@@ -145,6 +145,16 @@ timeline.add({
             document.querySelector('.mainButtons').classList.add('class','hidden');
             // document.querySelector('video-container').classList.remove('class','hidden');
             
+        })
+
+        music.addEventListener('click',function() {
+            // unhide the music panels
+            //$('.music').removeClass('hidden');
+            displayDevices();
+            $('#selectSpotifyPlayer').modal({
+                fadeDuration: 1000,
+                fadeDelay: 0.50
+            });
         })
 
         $( function() {
