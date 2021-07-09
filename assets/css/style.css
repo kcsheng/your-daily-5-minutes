@@ -370,7 +370,7 @@ margin:20px;
 
 .song-recommendations{
   display: flex;
-  align-items: center;;
+  align-items: center;
   height: 95%;
   width: 100%;
 }
@@ -462,7 +462,19 @@ margin:20px;
   align-items: center;
 }
 
+.song-volume{
+  width: 200px;
+  margin-left: 1em;
+  margin-right: 1em;
+}
 
 .hidden {
   display:none;
+}
+
+.ui-slider .ui-slider-handle {
+  width: 1.5em;
+  text-align: center;
+  justify-content: center;
+  border-radius: 100%;
 }

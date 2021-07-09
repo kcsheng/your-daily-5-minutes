@@ -150,6 +150,11 @@ timeline.add({
         music.addEventListener('click',function() {
             // unhide the music panels
             $('.music').removeClass('hidden');
+            displayDevices();
+            $('#selectSpotifyPlayer').modal({
+                fadeDuration: 1000,
+                fadeDelay: 0.50
+            });
         })
 
         $( function() {
