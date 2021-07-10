@@ -24,7 +24,7 @@ var v_player = {
     togglePlay: async function(){
         switch(this.playback_type){
             case SPOTIFY_WEB_PLAYER:
-                await web_player.togglePlay();
+                return await web_player.togglePlay();
                 break;
             case SPOTIFY_REMOTE_PLAYER:
                 // get remote player playback info
@@ -81,7 +81,7 @@ var v_player = {
                     },
                 });
                 var data = await playback.json();
-                console.log('data', data)
+//                console.log('data', data)
                 if(data && data.hasOwnProperty('item') && data.item &&
                     data.item.hasOwnProperty('uri'))
                      return {track_window: {current_track: {uri: data.item.uri} }, paused: !data.is_playing}
@@ -234,10 +234,10 @@ function enableAuthListener(){
     if(!auth_listener_enabled){
         auth_listener_enabled = true;
         $(window).on('storage.authlistener', ev =>{
-            console.log('storage even fired', ev)
+//            console.log('storage even fired', ev)
             if(ev.originalEvent.key != LS_USR_ACCESS_TOKEN && ev.originalEvent.key != LS_USR_REFRESH_TOKEN)
                 return;
-            console.log('retrying auth');
+//            console.log('retrying auth');
             initAuthorizedFeatures();
         });
     }
@@ -264,7 +264,7 @@ async function initAuthorizedFeatures() {
 
         // check if they have premium
         var isPremiumUser = await isPremium();
-        console.log('isPremium()', isPremiumUser);
+//        console.log('isPremium()', isPremiumUser);
         if (!isPremiumUser) {
             // if not premium, don't load the player
             // display any notifications regarding basic accounts not supported
@@ -280,7 +280,7 @@ async function initAuthorizedFeatures() {
         // set listener for play buttons
         $(document).on('click', '.play-song', function (e) {
             e.preventDefault();
-            console.log('event fired')
+//            console.log('event fired')
             if(player_ready)
                 playSong($(this).val());
         });
@@ -320,7 +320,7 @@ async function playSong(play_uri) {
     else if (state.track_window.current_track.uri == play_uri)
         alreadyPlaying = true;
     if (!alreadyPlaying) {
-        console.log('playing ' + play_uri);
+//        console.log('playing ' + play_uri);
         v_player.play(play_uri);
         togglePlayPauseIcon(FA_PAUSE_ICON);
     } else {
@@ -484,7 +484,7 @@ function initSongPreferences() {
                     returnList = returnList.concat({ "text": "Tracks", "children": processSearchType(data['tracks']["items"]) });
                 if (returnList.length === 0)
                     returnList = [];
-                console.log(returnList);
+//                console.log(returnList);
                 var returnSearchResults = { "results": returnList }
                 return returnSearchResults;
 
@@ -511,13 +511,13 @@ function processSearchType(arr) {
         // return a list of labels and values for a given array of spotify objects
         retArray.push({ text: `${obj.name}`, id: `${obj.type}-${obj.id}` });
     })
-    console.log(retArray);
+//    console.log(retArray);
     return retArray;
 }
 
 // function to check if user has Authorized the app to their spotify account
 function isAuthorized() {
-    console.log('LS_USR_ACCESS_TOKEN===', LS_USR_ACCESS_TOKEN)
+//    console.log('LS_USR_ACCESS_TOKEN===', LS_USR_ACCESS_TOKEN)
     if (localStorage.getItem(LS_USR_ACCESS_TOKEN) === null || localStorage.getItem(LS_USR_ACCESS_TOKEN) === 'undefined') {
         is_authorized_preimum = false;
         return false;
@@ -563,7 +563,7 @@ async function refreshToken() {
         },
     });
     var data = await response.json();
-    console.log('data', data)
+//    console.log('data', data)
     localStorage.setItem(LS_USR_ACCESS_TOKEN, data['access_token']);
     if (data.hasOwnProperty('refresh_token'))
         localStorage.setItem(LS_USR_REFRESH_TOKEN, data['refresh_token']);
@@ -571,7 +571,6 @@ async function refreshToken() {
 
 function showConnectSpotify() {
     // display elements for connecting spotify
-    console.log("hiding song is authorized")
     //$(".song-is-authorized").hide();
     $(".song-not-authorized").show();
 }
@@ -604,7 +603,7 @@ function loadPlayer() {
 
                 // Playback status updates
                 web_player.addListener('player_state_changed', state => {
-                    console.log(state);
+//                    console.log(state);
                 });
 
                 // Ready
@@ -692,27 +691,49 @@ function loadVolume() {
         min: 0,
         max: 100,
         slide: function () {
-            var value = $(".song-volume").slider("value");
-            v_player.setVolume(value / 100);
+            handleVolumeChange();
+        },
+        stop: function(){
+            handleVolumeChange();
         }
     });
-    $('.song-volume span.ui-slider-handle').addClass('fa fa-volume-up');
+    $('.song-volume span.ui-slider-handle');
 
+}
+
+function handleVolumeChange(){
+    var value = $(".song-volume").slider("value");
+    v_player.setVolume(value / 100);
+    console.log(value)
+    if(value > 50){
+        $('#volume-icon').removeClass();
+        $('#volume-icon').addClass('fa fa-volume-up');
+    } else if (value > 0){
+        $('#volume-icon').removeClass();
+        $('#volume-icon').addClass('fa fa-volume-down');
+    } else {
+        $('#volume-icon').removeClass();
+        $('#volume-icon').addClass('fa fa-volume-off');
+    }
 }
 
 // toggle pause/play of the song on the player
 async function togglePlaySong() {
-    await v_player.togglePlay().then(async () => {
+    
+    await v_player.togglePlay().then(setTimeout(async () => {
+        // site a timeout to account for the time it takes to transition state from pause to resume
         var state = await v_player.getCurrentState();
         console.log('state playpause',state)
         if(state.hasOwnProperty('paused') && !state.paused){
+            console.log('Playing');
             togglePlayPauseIcon(FA_PAUSE_ICON);
         } else {
+            console.log('Paused');
             // assume to show play icon if state comes back unpaused
             // or if it errors (due to lack of any other handling)
             togglePlayPauseIcon(FA_PLAY_ICON);
         }
-    });
+    },200));
 
     
 
