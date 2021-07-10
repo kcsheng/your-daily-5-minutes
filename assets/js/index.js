@@ -3,6 +3,19 @@ const sunPath = "M11 19C11 29.4934 19.5 38.9936 19.5 38.9936C9.00659 38.9936 0.5
 
 const darkMode = document.querySelector("#dark_mode");
 const settings = document.getElementById('settingsCog');
+
+// check if API keys exist in localStorage. If not, redirect to page.
+function checkAndRedirectAPIKeys(){
+    if(
+        !(
+            localStorage.getItem("apiKey") && localStorage.getItem("apiKey").length == 39 &&
+            localStorage.getItem(LS_SPOTIFY_API_KEY_B64) && localStorage.getItem(LS_SPOTIFY_API_KEY_B64) != 'undefined'
+        )
+    ){
+        window.location.replace('./DemoSettings.html');
+    }
+}
+
 let toggle = false;
 
 darkMode.addEventListener("click", ()=>{
@@ -156,7 +169,9 @@ timeline.add({
                 fadeDelay: 0.50
             });
         })
-
+        //onload
         $( function() {
             $( "#tabs" ).tabs();
           } );
+        
+          checkAndRedirectAPIKeys();
