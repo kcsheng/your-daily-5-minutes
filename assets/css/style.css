@@ -493,10 +493,14 @@ margin:20px;
   height: 1.2em;
   text-align: center;
   justify-content: center;
+  background-color: darkred;
   border-radius: 100%;
 }
 
-.song-volume .ui-widget-content { border: 1px solid red; background: red;}
+.ui-slider-range { 
+  border: 1px solid white; 
+  background: darkred;
+}
 
 .select-player{
   display: flex;
