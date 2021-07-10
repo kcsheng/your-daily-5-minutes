@@ -488,6 +488,7 @@ margin:20px;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  color: black;
 }
 
 .spotify-devices li{
