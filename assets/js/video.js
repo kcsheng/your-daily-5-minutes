@@ -48,21 +48,20 @@ videoStartBtn.on("click", showVideoContainer);
 function showVideoContainer(e) {
   e.stopPropagation();
   checkApiKey();
-  videoContainer = $('.video-container');
+  videoContainer = $(".video-container");
   videoContainer.removeClass("hidden");
   url = baseUrl + `&maxResults=3&topicId=%2Fm%2F01k8wb&relevanceLanguage=en`;
   showVideo();
 }
 //Action required when clikcing on back to main
 
-const mainButtons2 = document.querySelector('.mainButtons');
+const mainButtons2 = document.querySelector(".mainButtons");
 backToMainBtn.on("click", hideVideoContainer);
 function hideVideoContainer(e) {
   e.stopImmediatePropagation();
   videoContainer = $(e.target).parent().parent();
   videoContainer.addClass("hidden");
-  mainButtons2.classList.remove('class','hidden');
-
+  mainButtons2.classList.remove("class", "hidden");
 }
 
 // Create memory buttons
@@ -234,9 +233,8 @@ function createApiUrl(e) {
 
 function showVideo() {
   fetch(url)
-    .then((res) => res.json()) //need to deal with bad api request here, if clients api is wrong what do we do
+    .then((res) => res.json())
     .then(function (data) {
-      //go back to check api key if not working properly
       let videoCollection = data.items;
       let videoPicked =
         videoCollection[Math.floor(Math.random() * videoCollection.length)];
