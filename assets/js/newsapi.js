@@ -1,15 +1,31 @@
 $(document).ready(function () {
     renderButtons();
+    $('#news-article').hide();
 
-        if (!(localStorage.getItem('savedButtons') === null || localStorage.getItem('savedButtons') === 'undefined')) {
-            var options = JSON.parse(localStorage.getItem('savedButtons'));
-            var selectBox = $("select#news-pref-select");
-            options.forEach((option) => {
-                var option = new Option(option, option, true, true);
-                selectBox.append(option).trigger('change');
-                selectBox.trigger({ type: 'select2:select', params: { data: option } });
-            })
-        }
+    // load previously saved preferences for news
+    if (!(localStorage.getItem('savedButtons') === null || localStorage.getItem('savedButtons') === 'undefined')) {
+        var options = JSON.parse(localStorage.getItem('savedButtons'));
+        var selectBox = $("select#news-pref-select");
+        options.forEach((option) => {
+            var option = new Option(option, option, true, true);
+            selectBox.append(option).trigger('change');
+            selectBox.trigger({ type: 'select2:select', params: { data: option } });
+        })
+    }
+
+    // handler for clicking the card
+    $(document).on("click", '.news-card', (event) => {
+        console.log('news clicked', $(event.target).closest('.news-card').data('newsurl'))
+        $('#news-iframe').attr('src',$(event.target).closest('.news-card').data('newsurl'));
+        $('#news-article').show();
+        $('#newsRow').hide();
+    });
+
+    $('#back-to-results').on('click', () => {
+        $('#news-article').hide();
+        $('#newsRow').show();
+        $('#news-iframe').attr('src','');
+    })
 
     $("#news-pref-select").select2({
         tags: true
@@ -57,6 +73,7 @@ $(document).ready(function () {
                     for (var i = 0; i < latestNews.length; i++) {
                         var newsCard = $('<div>');
                         newsCard.addClass('news-card')
+                        newsCard.data('newsurl', latestNews[i].url);
 
                         var newsImage = $('<img>');
                         newsImage.attr('src', latestNews[i].urlToImage);
@@ -91,12 +108,10 @@ $(document).ready(function () {
                     }
                     if (latestNews.length > 0) {
                         $(".title-news").html("News")
-                        $("#newsRow").removeClass("hidden hide");
                     }
                     else {
 
                         $(".title-news").html("There is no news on this topic today!");
-                        $("#newsRow").addClass("hidden hide");
 
                     }
                 },

@@ -154,34 +154,6 @@
         <div id="tabs-2">              
             <form id="news-topics">
               <div class="news-wrapper">
-                <div>
-                  <input type="checkbox" id="business" name="business" value="business">
-                  <label for="business">Business</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="entertainment" name="entertainment" value="entertainment">
-                  <label for="entertainment">Entertainment</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="general" name="general" value="general">
-                  <label for="general">General</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="health" name="health" value="health">
-                  <label for="health">Health</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="science" name="science" value="science">
-                  <label for="science">Science</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="sports" name="sports" value="sports">
-                  <label for="sports">Sports</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="technology" name="technology" value="technology">
-                  <label for="technology">Technology</label>
-                </div>
                 <select id="news-pref-select" style="width: 95%; display: block;"  name="newspref[]" multiple="multiple">
                 </select>
                 <button class="news-keyword-save">Save Keyword</button>
@@ -237,13 +209,18 @@
         <div class="news-container">
         <div class="row">
           <h2 class = "title-news">News </h2>
-          <div class="topic-buttons memo"></div>
           </div>
         <div id="newsRow" class="row">
 
+          <div class="topic-buttons memo"></div>
           <div id="newsResults">
 
           </div>
+          
+        </div>
+        <div id="news-article" class="hidden">
+          <button id="back-to-results">Back to Search Results</button>
+          <iframe id="news-iframe"></iframe>
         </div>
         <div class="back-to-main">
           <button class="news-back-to-main-btn">Back to main</button>

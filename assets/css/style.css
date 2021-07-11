@@ -801,3 +801,26 @@ border: darkred;
 #volume-icon:hover{
   cursor: pointer;
 }
+
+.news-card:hover{
+  cursor: pointer;
+}
+#news-article{
+  display: block;
+  text-align: center;
+  flex-direction: column;
+}
+#news-iframe{
+  display: block;
+  width: 100%;
+  height: 400px;
+}
+
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+  background-color: #5897fb;
+  color: white;
+}
+
+.select2-container--default .select2-results__option {
+  color: black;
+}
