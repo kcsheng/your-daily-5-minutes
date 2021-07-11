@@ -12,6 +12,7 @@ body {
 .svgLogo {
   justify-content: center;
   max-width: 50%;
+  padding-top: 30px;
 }
 
 .cards {
@@ -546,6 +547,7 @@ li.player-select-heading {
   left: 0;
   min-width: 70px;
   opacity: 80%;
+  padding-top: 50px;
 }
 
 #menuIcon:hover {
@@ -603,7 +605,7 @@ li.player-select-heading {
 }
 
 .container-text {
-  background-image: url(https://cdn.pixabay.com/photo/2017/03/28/18/11/mountains-2182894_960_720.jpg);
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/8/88/Sunset_RedRocks_AZ.jpg);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   color: #ffffff;
@@ -617,6 +619,7 @@ li.player-select-heading {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  padding-top: 200px;
 }
 
 .hidden {
@@ -645,7 +648,8 @@ select {
 .photoCards {
   border-radius: 50%;
   width: 300px;
-  padding: 50px;
+  padding: 30px;
+  margin:50px;
 }
 
 .profileCards {
@@ -658,7 +662,6 @@ select {
   animation-name: photoCardEnlargen;
   animation-duration: 1s;
   animation-fill-mode: forwards;
-  overflow: hidden;
 }
 
 @keyframes photoCardEnlargen {
@@ -700,4 +703,12 @@ select {
 
 .photoCards p {
   font-size: 20px;
+}
+
+.profileCards img {
+  border:7px solid rgb(98, 16, 98);
+}
+
+.removeBorder {
+  border:0;
 }
