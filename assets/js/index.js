@@ -2,8 +2,78 @@ const moonPath = "M38 19C38 29.4934 29.4934 38 19 38C8.50659 38 0 29.4934 0 19C0
 const sunPath = "M11 19C11 29.4934 19.5 38.9936 19.5 38.9936C9.00659 38.9936 0.5 30.487 0.5 19.9936C0.5 9.50015 9.00659 0.99356 19.5 0.99356C19.5 -0.00645276 11 8.50659 11 19Z";
 
 const darkMode = document.querySelector("#dark_mode");
-const settings = document.getElementById('settingsCog');
+
+// check if API keys exist in localStorage. If not, redirect to page.
+function checkAndRedirectAPIKeys(){
+    if(
+        !(
+            localStorage.getItem("apiKey") && localStorage.getItem("apiKey").length == 39 &&
+            localStorage.getItem(LS_SPOTIFY_API_KEY_B64) && localStorage.getItem(LS_SPOTIFY_API_KEY_B64) != 'undefined'
+        )
+    ){
+        window.location.replace('./DemoSettings.html');
+    }
+}
+
+const menu = document.getElementById('menuIcon');
 let toggle = false;
+var ldBody = document.getElementById('ldChange');
+var ldCards = document.getElementsByClassName('cards');
+var changeLogo = $('#ydfmLogo');
+var path = document.getElementById('path');
+let wave = new Wave();
+
+if(localStorage.getItem('ldMode')=='dark') {
+    dark();
+    path.setAttribute('d','M11 19C11 29.4934 19.5 38.9936 19.5 38.9936C9.00659 38.9936 0.5 30.487 0.5 19.9936C0.5 9.50015 9.00659 0.99356 19.5 0.99356C19.5 -0.00645276 11 8.50659 11 19Z')
+}
+
+if(localStorage.getItem('ldMode')=='light') {
+    light();
+    path.setAttribute('d','M38 19C38 29.4934 29.4934 38 19 38C8.50659 38 0 29.4934 0 19C0 8.50659 8.50659 0 19 0C29.4934 0 38 8.50659 38 19Z')
+}
+
+function reload() {
+    location.reload();
+}
+
+function mtt() {
+    document.getElementById('mainContent').setAttribute('class','hidden');
+    document.getElementsByClassName('.mtt')
+    document.querySelector('.mtt').classList.remove('class','hidden');
+    document.querySelector('.mtt').classList.add('class','container-text');
+    // $('.mtt').removeAttr('class','hidden');
+    // $('.mtt').attr('class','container-text');
+}
+
+function dark() {
+    toggle = true;
+                menu.classList.add('class','invert');
+                darkMode.classList.add('class','invert');
+                localStorage.setItem('ldMode','dark');
+				ldBody.classList.add('class','dark');
+                ldBody.classList.remove('class','light');
+                for (i=0;i<ldCards.length;i++) {
+                    ldCards[i].classList.add('class','light');
+                    ldCards[i].classList.remove('class','dark');
+                }
+                changeLogo.attr('src',"assets/img/logo dark.png");
+}
+
+function light() {
+    toggle= false;
+                menu.classList.remove('class','invert');
+                darkMode.classList.remove('class','invert');
+                localStorage.setItem('ldMode','light');
+				ldBody.classList.add('class','light');
+                ldBody.classList.remove('class','dark');
+                for (i=0;i<ldCards.length;i++) {
+                    ldCards[i].classList.add('class','dark');
+                    ldCards[i].classList.remove('class','light');
+                }
+                changeLogo.attr('src',"assets/img/logo light.png");
+
+}
 
 darkMode.addEventListener("click", ()=>{
 
@@ -19,39 +89,11 @@ timeline.add({
 		.add({
 			targets:'#dark_mode',
 			rotate : toggle? 0 : 320},"-=350")
-			ldBody = document.getElementById('ldChange');
-            ldCards = document.getElementsByClassName('cards');
-			logoContainer = document.getElementById('logoDiv');
             if(!toggle){
-				toggle = true;
-                settings.classList.add('class','invert');
-                darkMode.classList.add('class','invert');
-				ldBody.classList.add('class','dark');
-                ldBody.classList.remove('class','light');
-                for (i=0;i<ldCards.length;i++) {
-                    ldCards[i].classList.add('class','light');
-                    ldCards[i].classList.remove('class','dark');
-                }
-                $('#logoDiv').children().remove();
-                var changeLogo = document.createElement('img');
-                changeLogo.setAttribute('class','svgLogo');
-                changeLogo.setAttribute('src',"assets/img/logo dark.png");
-                logoContainer.appendChild(changeLogo);
+                dark();
+
 			}else{
-				toggle= false;
-                settings.classList.remove('class','invert');
-                darkMode.classList.remove('class','invert');
-				ldBody.classList.add('class','light');
-                ldBody.classList.remove('class','dark');
-                for (i=0;i<ldCards.length;i++) {
-                    ldCards[i].classList.add('class','dark');
-                    ldCards[i].classList.remove('class','light');
-                }
-                $('#logoDiv').children().remove();
-                changeLogo = document.createElement('img');
-                changeLogo.setAttribute('class','svgLogo');
-                changeLogo.setAttribute('src',"assets/img/logo light.png");
-                logoContainer.appendChild(changeLogo);
+				light();
 			}
 			
 		});
@@ -131,12 +173,12 @@ timeline.add({
             musicGraphic.pause();
         });
 
-        settings.addEventListener('click',function() {
+        function settings() {
             $('#settings').modal({
                 fadeDuration: 1000,
                 fadeDelay: 0.50
             });
-        })
+        }
 
         video.addEventListener('click',function() {
             // video.classList.add('class','hidden');
@@ -157,6 +199,26 @@ timeline.add({
             });
         })
 
+        
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            };
+
+        
+        menuIcon = document.getElementById('menuIcon')
+        menuIcon.addEventListener('click',function() {
+            openNav();
+        });
+
         $( function() {
             $( "#tabs" ).tabs();
+            checkAndRedirectAPIKeys();
           } );
+          
+
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            };
+
+        

@@ -15,54 +15,28 @@ const allMemoBtns = $("#memo-btn-container button");
 const videoIframe = $(".iframe-video");
 const videoStartBtn = $("#video");
 const backToMainBtn = $("#back-to-main-btn");
-let apiKey = "";
+let apiKey = localStorage.getItem("apiKey");
+let baseUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoDuration=short&videoEmbeddable=true&videoSyndicated=true&key=${apiKey}`;
 let url = "";
-let baseUrl = "";
-function setBaseUrl(apiKey) {
-  baseUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoDuration=short&videoEmbeddable=true&videoSyndicated=true&key=${apiKey}`;
-}
-// Ask for api key if exists in local storage, if not, generate one.
-function checkApiKey() {
-  let storedKey = localStorage.getItem("apiKey");
-  let keyEntered = "";
-  if (storedKey) {
-    setBaseUrl(storedKey);
-  } else {
-    let exitApiCheckLoop = false;
-    while (!exitApiCheckLoop) {
-      keyEntered = window.prompt(
-        "Please enter your API key to access the video:"
-      );
-      if (keyEntered.length != 39) {
-        window.alert("The key entered is invalid!");
-      } else {
-        localStorage.setItem("apiKey", keyEntered);
-        setBaseUrl(keyEntered);
-        exitApiCheckLoop = true;
-      }
-    }
-  }
-}
+
 // Action required when clicking on start video
 videoStartBtn.on("click", showVideoContainer);
 function showVideoContainer(e) {
   e.stopPropagation();
-  checkApiKey();
-  videoContainer = $('.video-container');
+  videoContainer = $(".video-container");
   videoContainer.removeClass("hidden");
   url = baseUrl + `&maxResults=3&topicId=%2Fm%2F01k8wb&relevanceLanguage=en`;
   showVideo();
 }
 //Action required when clikcing on back to main
 
-const mainButtons2 = document.querySelector('.mainButtons');
+const mainButtons2 = document.querySelector(".mainButtons");
 backToMainBtn.on("click", hideVideoContainer);
 function hideVideoContainer(e) {
   e.stopImmediatePropagation();
   videoContainer = $(e.target).parent().parent();
   videoContainer.addClass("hidden");
-  mainButtons2.classList.remove('class','hidden');
-
+  mainButtons2.classList.remove("class", "hidden");
 }
 
 // Create memory buttons
@@ -234,9 +208,8 @@ function createApiUrl(e) {
 
 function showVideo() {
   fetch(url)
-    .then((res) => res.json()) //need to deal with bad api request here, if clients api is wrong what do we do
+    .then((res) => res.json())
     .then(function (data) {
-      //go back to check api key if not working properly
       let videoCollection = data.items;
       let videoPicked =
         videoCollection[Math.floor(Math.random() * videoCollection.length)];

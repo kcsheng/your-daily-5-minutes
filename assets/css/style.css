@@ -1,19 +1,17 @@
-head {
-}
-
 body {
   background-color: whitesmoke;
 }
-
+/* 
 #logoDiv {
   display: flex;
   justify-content: center;
   margin:0 auto;
   align-items: center;
-}
+} */
 
 .svgLogo {
-  margin: 10px;
+  justify-content: center;
+  max-width: 50%;
 }
 
 .cards {
@@ -50,23 +48,13 @@ button {
   justify-content: center;
   align-items: center;
   position: relative;
-
 }
 
 .invert {
-  animation-name:invertSlow;
+  animation-name: invertSlow;
   animation-duration: 0.25s;
-  animation-fill-mode:forwards;
+  animation-fill-mode: forwards;
 }
-
-.ldMode {
-  display:flex;
-  text-align: left;
-  position: relative;
-  transform: translateY(-90px);
-  padding-left: 15px;
-}
-
 .light {
   background-color: whitesmoke;
   transition: background-color 2s;
@@ -91,17 +79,17 @@ button {
 
 h2 {
   color: rgb(109, 0, 0);
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 30px;
-  padding:5px;
+  padding: 5px;
 }
 
 /* video modal */
 .video-dropdown {
   display: flex;
   flex-direction: column;
-  border: 3px solid rgb(109,0,0);
-  border-radius:5px;
+  /* border: 3px solid rgb(109,0,0); */
+  border-radius: 5px;
 }
 
 /* video iframe css */
@@ -109,8 +97,12 @@ h2 {
   /* width: 853px;
   height: 531.25px; */
   width: 63%;
-  border: 1px solid black;
-  position: absolute;
+  border: 1px solid rgb(70, 70, 70);
+  background-color: #844747;
+  border-radius: 10px;
+  padding: 30px;
+  margin-top: 50px;
+  box-shadow: 5px 10px #502929;
 }
 
 .back-to-main {
@@ -124,10 +116,22 @@ h2 {
   flex-wrap: wrap;
   justify-content: center;
   padding: 1%;
+  margin-top: 1%;
 }
 
 .memo button {
   font-size: 1.2rem;
+  padding: 1%;
+  margin: 0.2%;
+  border-radius: 5px;
+  background-color: rgb(42, 48, 13);
+  color: #fff;
+}
+
+#back-to-main-btn {
+  padding: 1%;
+  border-radius: 5px;
+  background-color: rgb(235, 235, 151);
 }
 
 .iframe-container {
@@ -150,71 +154,60 @@ option {
   font-family: 'Poppins', sans-serif;
 } */
 
-
 .mainButtons {
-  display:flex;
-  flex-direction:row;
+  display: flex;
+  flex-direction: row;
   align-items: flex-end;
-  justify-content:space-between;
+  justify-content: space-between;
   margin: 200px;
   min-width: 80%;
-  
 }
 
 #dark_mode {
-margin:20px;
+  display: inline-block;
+  width: 30px;
 }
 
-@media only screen and (max-width:1300px) {
+@media only screen and (max-width: 1300px) {
   .mainButtons {
-    flex-direction:column;
+    flex-direction: column;
     justify-content: center;
-    min-width:0%;
-    align-items:center;
-
+    min-width: 0%;
+    align-items: center;
   }
-
-  /* #ydfmLogo {
-    width:30%;
-    height:auto;
-  } */
 }
-
-/* .parentNavbar {
-  max-width: 80%;
-} */
 
 #settingsCog {
   max-width: 50px;
   text-align: left;
 }
 
-#settingsCog.invert:hover {
+/* #settingsCog.invert:hover {
   filter:invert(100);
-}
-
+} */
+/* 
 #settingsCog:hover {
   animation-name: largen;
   animation-duration:0.25s;
   animation-fill-mode:forwards;
-}
+} */
 
 #news:hover {
   animation-name: largen;
-  animation-duration:1s;
+  animation-duration: 1s;
   animation-fill-mode: forwards;
 }
 
 #music:hover {
   animation-name: largen;
-  animation-duration:1s;
+  animation-duration: 1s;
   animation-fill-mode: forwards;
 }
 
 #video:hover {
-  background-blend-mode:luminosity;
+  background-blend-mode: luminosity;
   animation-name: largen;
-  animation-duration:1s;
+  animation-duration: 1s;
   animation-fill-mode: forwards;
 }
 
@@ -246,31 +239,31 @@ margin:20px;
 
 @keyframes invertSlow {
   from {
-    filter:invert(0);
+    filter: invert(0);
   }
 
   to {
-    filter:invert(100);
+    filter: invert(100);
   }
 }
 
 .videoBackgrounds {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -1;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
 }
 
 .fadeIn {
   animation-name: fade;
-  animation-duration:1s;
+  animation-duration: 1s;
   animation-fill-mode: forwards;
 }
 
 .fadeOut {
-  animation-name:fadeOut;
+  animation-name: fadeOut;
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
@@ -280,12 +273,12 @@ margin:20px;
 }
 
 .listPreferences {
-  display:inline;
+  display: inline;
   border-radius: 5px 5px 0px 0px;
-  background-color:rgb(114, 0, 0);
+  background-color: rgb(114, 0, 0);
   font-size: 20px;
-  margin:5px;
-  padding:3px;
+  margin: 5px;
+  padding: 3px;
 }
 
 .listPreferences a {
@@ -293,16 +286,14 @@ margin:20px;
   text-decoration: none;
 }
 
-
-
 /***** Song related css ****/
 /* Song preference */
 
-.music-footer{
+.music-footer {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content:space-between;
+  justify-content: space-between;
   align-items: center;
   height: 120px;
   margin: 0;
@@ -316,22 +307,21 @@ margin:20px;
   z-index: 1;
 
   border-radius: 5px 5px 0px 0px;
-  background-color: black;
+  background-color: #844747;
   color: white;
   opacity: 95%;
-
 }
 
 /* Holds space to make sure content scrolls all the way up */
-.music-footer-hold{
-  height:130px;
+.music-footer-hold {
+  height: 130px;
   width: 400px;
   display: block;
 }
 
-.next-song{
+.next-song {
   height: 95%;
-  display:flex;
+  display: flex;
   align-items: center;
   padding-left: 15px;
   padding-right: 15px;
@@ -341,15 +331,15 @@ margin:20px;
   justify-content: center;
 }
 
-.next-song:hover{
+.next-song:hover {
   cursor: pointer;
   opacity: 0.6;
   font-size: 1.5em;
 }
 
-.prev-song{
+.prev-song {
   height: 95%;
-  display:flex;
+  display: flex;
   align-items: center;
   padding-left: 15px;
   padding-right: 15px;
@@ -359,25 +349,25 @@ margin:20px;
   justify-content: center;
 }
 
-.prev-song:hover{
+.prev-song:hover {
   cursor: pointer;
   opacity: 0.6;
   font-size: 1.5em;
 }
 
-.song-recommendations{
+.song-recommendations {
   display: flex;
   align-items: center;
   height: 95%;
   width: 100%;
 }
 
-.song-recommendations ul{
+.song-recommendations ul {
   width: 100%;
   padding: 0;
 }
 
-.song-recommendations ul{
+.song-recommendations ul {
   list-style-type: none;
 }
 
@@ -391,98 +381,118 @@ margin:20px;
   color: black;
 }
 
-.song h3{
+.song h3 {
   margin: 0;
   padding: 0;
   font-size: 1em;
 }
 
-.song{
+.song {
   font-family: sans-serif;
   display: flex;
   flex-direction: row;
-  align-items:center;
+  align-items: center;
   justify-content: space-between;
 }
 
-.song h5{
+.song h5 {
   margin: 0;
   padding: 0;
-  font-size: .8em;
+  font-size: 0.8em;
   font-weight: lighter;
 }
 
-.song h4{
+.song h4 {
   margin: 0;
   padding: 0;
-  font-size: .9em;
+  font-size: 0.9em;
   font-weight: normal;
 }
 
-.song-hidden{
+.song-hidden {
   display: none;
 }
 
-.song-details{
+.song-details {
   text-align: left;
 }
 
-.spotify-open{
+.spotify-open {
   color: green;
   font-family: sans-serif;
+  font-weight: bold;
   text-decoration: none;
-  font-size: .8em;
+  font-size: 0.8em;
   margin-top: 1em;
 }
 
-.play-song{
-  background-color: black; /* Blue background */
+.play-song {
+  background-color: transparent; /* Blue background */
   border: none; /* Remove borders */
-  color: green; /* White text */
+  color: white; /* White text */
   font-size: 3em; /* Set a font size */
   cursor: pointer; /* Mouse pointer on hover */
 }
 
-.song-image{
-  margin-right: .7em;
+.song-image {
+  margin-right: 0.7em;
   height: 4em;
 }
-.spotify-open .spotify-logo{
+.spotify-open .spotify-logo {
   height: 1em;
   margin-right: 0.2em;
   margin-top: 0.1em;
 }
 
-.song-container{
+.song-container {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.song-volume{
-  width: 200px;
+.volume-container {
   margin-left: 1em;
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+}
+
+#volume-icon {
+  display: inline-block;
+  width: 1.5em;
+  justify-content: left;
+}
+
+.song-volume {
+  display: block;
+  width: 100%;
+  margin-left: 0.5em;
   margin-right: 1em;
 }
 
-.hidden {
-  display:none;
-}
-
 .ui-slider .ui-slider-handle {
-  width: 1.5em;
+  width: 1.2em;
+  height: 1.2em;
   text-align: center;
   justify-content: center;
+  background-color: darkred;
   border-radius: 100%;
 }
 
-.select-player{
+.ui-slider-range {
+  border: 1px solid white;
+  background: darkred;
+}
+
+.select-player {
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
-.spotify-devices{
+.spotify-devices {
   display: flex;
   width: 95%;
   flex-direction: column;
@@ -490,15 +500,15 @@ margin:20px;
   text-align: center;
 }
 
-.spotify-devices li{
+.spotify-devices li {
   border-bottom: 2px solid rgb(109, 0, 0);
   border-left: 2px solid rgb(109, 0, 0);
   border-right: 2px solid rgb(109, 0, 0);
   width: 100%;
-  padding: .5em;
+  padding: 0.5em;
 }
 
-.spotify-devices li:first-child{
+.spotify-devices li:first-child {
   border-top: 2px solid rgb(109, 0, 0);
 }
 
@@ -506,26 +516,147 @@ li.player-select-heading {
   border-left: none;
   border-right: none;
 }
-.device-option:hover{
+.device-option:hover {
   cursor: pointer;
 }
 
-#tabs-3 p{
-
-  margin-bottom: .5em;
-  font-size: 1em;
-  font-style: italic;
-  
-}
-#tabs-3 h3{
-
-  margin-bottom: .3em;
-  
-}
-.error{
+.error {
   color: red;
   font-style: italic;
   display: block;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
 }
 
+#menuIcon {
+  display: inline-flex;
+  width: 70px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 70px;
+  opacity: 80%;
+}
+
+#menuIcon:hover {
+  opacity: 100%;
+}
+
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.parentNav {
+  display: flex;
+  justify-content: center;
+}
+
+@keyframes filling {
+  from {
+    background-position: center 25%;
+  }
+  to {
+    background-position: center 50%;
+  }
+}
+
+.container-text {
+  background-image: url(https://cdn.pixabay.com/photo/2017/03/28/18/11/mountains-2182894_960_720.jpg);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  color: #ffffff;
+  padding-top: 20px;
+  font-size: 170px;
+  font-family: "Poppins", sans-serif;
+  animation: filling 3s ease forwards;
+}
+
+.mtt {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.hidden {
+  display: none;
+}
+
+select {
+  margin-top: 10px;
+  background-color: rgb(59, 57, 57);
+  color: white;
+  border-radius: 5px;
+}
+
+/* p {
+  font-size: 50px;
+} */
+
+.profileCardsMain {
+  display: flex;
+  margin: 80px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.photoCards {
+  border-radius: 50%;
+  width: 200px;
+  padding: 15px;
+}
+
+.profileCards {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.photoCards:hover {
+  animation-name: photoCardEnlargen;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes photoCardEnlargen {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(2);
+  }
+}
+
+h3 {
+  text-align: center;
+}

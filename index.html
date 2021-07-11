@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="assets/css/reset.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/gh/foobar404/wave.js/dist/bundle.iife.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
@@ -24,22 +25,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <div class='parentNavbar'>
-    <div id="logoDiv">
+  <!-- <img id='menuIcon' class = '' src = "assets/img/three line menu icon.png"/> -->
+    <div class = "parentNav">
+      <img id='menuIcon' class = '' src = "assets/img/three line menu icon.png"/>
       <img id='ydfmLogo' class=svgLogo src="assets/img/logo light.png">
     </div>
-    <div class='ldMode'>
-      <svg id='settingsCog' href="#settings" rel="modal:open" aria-hidden="true" focusable="false" data-prefix="fas"
-        data-icon="user-cog" class="svg-inline--fa fa-user-cog fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 640 512">
-        <path fill="currentColor"
-          d="M610.5 373.3c2.6-14.1 2.6-28.5 0-42.6l25.8-14.9c3-1.7 4.3-5.2 3.3-8.5-6.7-21.6-18.2-41.2-33.2-57.4-2.3-2.5-6-3.1-9-1.4l-25.8 14.9c-10.9-9.3-23.4-16.5-36.9-21.3v-29.8c0-3.4-2.4-6.4-5.7-7.1-22.3-5-45-4.8-66.2 0-3.3.7-5.7 3.7-5.7 7.1v29.8c-13.5 4.8-26 12-36.9 21.3l-25.8-14.9c-2.9-1.7-6.7-1.1-9 1.4-15 16.2-26.5 35.8-33.2 57.4-1 3.3.4 6.8 3.3 8.5l25.8 14.9c-2.6 14.1-2.6 28.5 0 42.6l-25.8 14.9c-3 1.7-4.3 5.2-3.3 8.5 6.7 21.6 18.2 41.1 33.2 57.4 2.3 2.5 6 3.1 9 1.4l25.8-14.9c10.9 9.3 23.4 16.5 36.9 21.3v29.8c0 3.4 2.4 6.4 5.7 7.1 22.3 5 45 4.8 66.2 0 3.3-.7 5.7-3.7 5.7-7.1v-29.8c13.5-4.8 26-12 36.9-21.3l25.8 14.9c2.9 1.7 6.7 1.1 9-1.4 15-16.2 26.5-35.8 33.2-57.4 1-3.3-.4-6.8-3.3-8.5l-25.8-14.9zM496 400.5c-26.8 0-48.5-21.8-48.5-48.5s21.8-48.5 48.5-48.5 48.5 21.8 48.5 48.5-21.7 48.5-48.5 48.5zM224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm201.2 226.5c-2.3-1.2-4.6-2.6-6.8-3.9l-7.9 4.6c-6 3.4-12.8 5.3-19.6 5.3-10.9 0-21.4-4.6-28.9-12.6-18.3-19.8-32.3-43.9-40.2-69.6-5.5-17.7 1.9-36.4 17.9-45.7l7.9-4.6c-.1-2.6-.1-5.2 0-7.8l-7.9-4.6c-16-9.2-23.4-28-17.9-45.7.9-2.9 2.2-5.8 3.2-8.7-3.8-.3-7.5-1.2-11.4-1.2h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c10.1 0 19.5-3.2 27.2-8.5-1.2-3.8-2-7.7-2-11.8v-9.2z">
-        </path>
-      </svg>
 
-      <svg id="dark_mode" width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="#">Light/Dark <span><svg id="dark_mode" width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g filter="url(#filter0_i)">
-          <path class="moon"
+          <path id = 'path' class="moon"
             d="M38 19C38 29.4934 29.4934 38 19 38C8.50659 38 0 29.4934 0 19C0 8.50659 8.50659 0 19 0C29.4934 0 38 8.50659 38 19Z"
             fill="#313131" />
         </g>
@@ -57,139 +53,106 @@
             <feBlend mode="normal" in2="shape" result="effect1_innerShadow" />
           </filter>
         </defs>
-      </svg>
-
-    </div class='timerContainer'>
-
-  </div>
-  </div>
-  <!-- <div id = "logoDiv">
-        <img id = 'ydfmLogo' class = svgLogo src="assets/img/logo light.png">
-    </div> -->
-
-  <!-- <div class = 'ldMode'>
-      <svg id = 'settingsCog' href = "#settings" rel = "modal:open" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-cog" class="svg-inline--fa fa-user-cog fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M610.5 373.3c2.6-14.1 2.6-28.5 0-42.6l25.8-14.9c3-1.7 4.3-5.2 3.3-8.5-6.7-21.6-18.2-41.2-33.2-57.4-2.3-2.5-6-3.1-9-1.4l-25.8 14.9c-10.9-9.3-23.4-16.5-36.9-21.3v-29.8c0-3.4-2.4-6.4-5.7-7.1-22.3-5-45-4.8-66.2 0-3.3.7-5.7 3.7-5.7 7.1v29.8c-13.5 4.8-26 12-36.9 21.3l-25.8-14.9c-2.9-1.7-6.7-1.1-9 1.4-15 16.2-26.5 35.8-33.2 57.4-1 3.3.4 6.8 3.3 8.5l25.8 14.9c-2.6 14.1-2.6 28.5 0 42.6l-25.8 14.9c-3 1.7-4.3 5.2-3.3 8.5 6.7 21.6 18.2 41.1 33.2 57.4 2.3 2.5 6 3.1 9 1.4l25.8-14.9c10.9 9.3 23.4 16.5 36.9 21.3v29.8c0 3.4 2.4 6.4 5.7 7.1 22.3 5 45 4.8 66.2 0 3.3-.7 5.7-3.7 5.7-7.1v-29.8c13.5-4.8 26-12 36.9-21.3l25.8 14.9c2.9 1.7 6.7 1.1 9-1.4 15-16.2 26.5-35.8 33.2-57.4 1-3.3-.4-6.8-3.3-8.5l-25.8-14.9zM496 400.5c-26.8 0-48.5-21.8-48.5-48.5s21.8-48.5 48.5-48.5 48.5 21.8 48.5 48.5-21.7 48.5-48.5 48.5zM224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm201.2 226.5c-2.3-1.2-4.6-2.6-6.8-3.9l-7.9 4.6c-6 3.4-12.8 5.3-19.6 5.3-10.9 0-21.4-4.6-28.9-12.6-18.3-19.8-32.3-43.9-40.2-69.6-5.5-17.7 1.9-36.4 17.9-45.7l7.9-4.6c-.1-2.6-.1-5.2 0-7.8l-7.9-4.6c-16-9.2-23.4-28-17.9-45.7.9-2.9 2.2-5.8 3.2-8.7-3.8-.3-7.5-1.2-11.4-1.2h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c10.1 0 19.5-3.2 27.2-8.5-1.2-3.8-2-7.7-2-11.8v-9.2z"></path></svg>
-
-      <svg id = "dark_mode" width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g filter="url(#filter0_i)">
-        <path class = "moon" d="M38 19C38 29.4934 29.4934 38 19 38C8.50659 38 0 29.4934 0 19C0 8.50659 8.50659 0 19 0C29.4934 0 38 8.50659 38 19Z" fill="#313131"/>
-        </g>
-        <defs>
-        <filter id="filter0_i" x="0" y="0" width="38" height="42" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-        <feOffset dy="4"/>
-        <feGaussianBlur stdDeviation="2"/>
-        <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
-        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-        <feBlend mode="normal" in2="shape" result="effect1_innerShadow"/>
-        </filter>
-        </defs>
-        </svg>
-      
-    </div class = 'timerContainer'>
-
-    </div> -->
+      </svg></span></a>
+      <a id = 'settingsCog' onclick = "settings()">Preferences</a>
+      <a onclick = 'mtt()'>About</a>
+      <a onclick = 'reload()'>Back To Main</a>
+    </div>
+    
 </head>
 
-<body id='ldChange'>
-  <div>
-    <video autoplay muted loop id='newsVideo' class='videoBackgrounds hidden'>
-      <source src="assets/img/royalty free spinning globe.mp4" type='video/mp4'>
-    </video>
-
-    <video autoplay muted loop id='videoGraphic' class=' videoBackgrounds hidden'>
-      <source src="assets/img/royalty free video showreal.mp4" type='video/mp4'>
-    </video>
-
-    <video autoplay muted loop id='musicGraphic' class='videoBackgrounds hidden'>
-      <source src='assets/img/video image .mp4' type='video/mp4'>
-    </video>
-  </div>
-  <div id='settings' class='modal'>
+<body id = 'ldChange'>
+  <div id = 'mainContent'>
     <div>
-      <h2>Preferences</h2>
+      <video autoplay muted loop id='newsVideo' class='videoBackgrounds hidden'>
+        <source src="assets/img/royalty free spinning globe.mp4" type='video/mp4'>
+      </video>
+  
+      <video autoplay muted loop id='videoGraphic' class=' videoBackgrounds hidden'>
+        <source src="assets/img/royalty free video showreal.mp4" type='video/mp4'>
+      </video>
+  
+      <video autoplay muted loop id='musicGraphic' class='videoBackgrounds hidden'>
+        <source src='assets/img/video image .mp4' type='video/mp4'>
+      </video>
     </div>
-    <div id="tabs">
-      <ul id='tabCSS'>
-        <li class='listPreferences'><a href="#tabs-1">Video</a></li>
-        <li class='listPreferences'><a href="#tabs-2">News</a></li>
-        <li class='listPreferences'><a href="#tabs-3">Music</a></li>
-      </ul>
-      <div id="tabs-1">
-        <div class="video-dropdown">
-          <h3>Select your video preference:</h3>
-          <select name="gaming" id="gaming">
-            <option value="gaming">Gaming</option>
-            <option value="action">Action</option>
-            <option value="adventure">Adventure</option>
-            <option value="casual">Casual</option>
-            <option value="music">Music</option>
-            <option value="puzzle">Puzzle</option>
-            <option value="racing">Racing</option>
-            <option value="roleplay">Role-Play</option>
-            <option value="simulation">Simulation</option>
-            <option value="sports">Sports</option>
-            <option value="strategy">Strategy</option>
-          </select>
-          <select name="sports" id="sports">
-            <option value="sports">Sports</option>
-            <option value="usFootball">US football</option>
-            <option value="baseball">Baseball</option>
-            <option value="basketball">Basketball</option>
-            <option value="boxing">Boxing</option>
-            <option value="cricket">Cricket</option>
-            <option value="football">Football</option>
-            <option value="golf">Golf</option>
-            <option value="iceHockey">Ice hockey</option>
-            <option value="martialArts">Martial arts</option>
-            <option value="motorsports">Motorsports</option>
-            <option value="tennis">Tennis</option>
-            <option value="volleyball">Volleyball</option>
-          </select>
-          <select name="entertainment" id="entertainment">
-            <option value="entertainment">Entertainment</option>
-            <option value="humor">Humor</option>
-            <option value="movies">Movies</option>
-            <option value="performingArts">Performing arts</option>
-            <option value="wrestling">Wrestling</option>
-            <option value="tvshows">TV shows</option>
-          </select>
-          <select name="lifestyle" id="lifestyle">
-            <option value="lifestyle">Lifestyle</option>
-            <option value="fashion">Fashion</option>
-            <option value="fitness">Fitness</option>
-            <option value="food">Food</option>
-            <option value="hobby">Hobby</option>
-            <option value="pets">Pets</option>
-            <option value="beauty">Beauty</option>
-            <option value="technology">Technology</option>
-            <option value="tourism">Tourism</option>
-            <option value="vehicles">Vehicles</option>
-          </select>
-          <select name="society" id="society">
-            <option value="society">Society</option>
-            <option value="business">Business</option>
-            <option value="health">Health</option>
-            <option value="military">Military</option>
-            <option value="politics">Politics</option>
-            <option value="religion">Religion</option>
-          </select>
-          <a href="#" rel="modal:close">Close</a>
-        </div>
+    <div id='settings' class='modal'>
+      <div>
+        <h2>Preferences</h2>
       </div>
-      <div id="tabs-2">
-               <section id = "news">
-
-              <div class="topic-buttons">   <br>
-                <br></div> 
-
-              <form class = "search" action="">
-                <br>
-               
-                <br>
-                <br>
+      <div id="tabs">
+        <ul>
+          <li class='listPreferences'><a href="#tabs-1">Video</a></li>
+          <li class='listPreferences'><a href="#tabs-2">News</a></li>
+          <li class='listPreferences'><a href="#tabs-3">Music</a></li>
+        </ul>
+        <div id="tabs-1">
+          <div class="video-dropdown">
+            <h3>Select your video preference:</h3>
+            <select name="gaming" id="gaming">
+              <option value="gaming">Gaming</option>
+              <option value="action">Action</option>
+              <option value="adventure">Adventure</option>
+              <option value="casual">Casual</option>
+              <option value="music">Music</option>
+              <option value="puzzle">Puzzle</option>
+              <option value="racing">Racing</option>
+              <option value="roleplay">Role-Play</option>
+              <option value="simulation">Simulation</option>
+              <option value="sports">Sports</option>
+              <option value="strategy">Strategy</option>
+            </select>
+            <select name="sports" id="sports">
+              <option value="sports">Sports</option>
+              <option value="usFootball">US football</option>
+              <option value="baseball">Baseball</option>
+              <option value="basketball">Basketball</option>
+              <option value="boxing">Boxing</option>
+              <option value="cricket">Cricket</option>
+              <option value="football">Football</option>
+              <option value="golf">Golf</option>
+              <option value="iceHockey">Ice hockey</option>
+              <option value="martialArts">Martial arts</option>
+              <option value="motorsports">Motorsports</option>
+              <option value="tennis">Tennis</option>
+              <option value="volleyball">Volleyball</option>
+            </select>
+            <select name="entertainment" id="entertainment">
+              <option value="entertainment">Entertainment</option>
+              <option value="humor">Humor</option>
+              <option value="movies">Movies</option>
+              <option value="performingArts">Performing arts</option>
+              <option value="wrestling">Wrestling</option>
+              <option value="tvshows">TV shows</option>
+            </select>
+            <select name="lifestyle" id="lifestyle">
+              <option value="lifestyle">Lifestyle</option>
+              <option value="fashion">Fashion</option>
+              <option value="fitness">Fitness</option>
+              <option value="food">Food</option>
+              <option value="hobby">Hobby</option>
+              <option value="pets">Pets</option>
+              <option value="beauty">Beauty</option>
+              <option value="technology">Technology</option>
+              <option value="tourism">Tourism</option>
+              <option value="vehicles">Vehicles</option>
+            </select>
+            <select name="society" id="society">
+              <option value="society">Society</option>
+              <option value="business">Business</option>
+              <option value="health">Health</option>
+              <option value="military">Military</option>
+              <option value="politics">Politics</option>
+              <option value="religion">Religion</option>
+            </select>
+            <a href="#" rel="modal:close">Close</a>
+          </div>
+        </div>
+        <div id="tabs-2">
+           <section id = "news">
+              <div class="topic-buttons">
+               </div> 
+              <form class = "search" action="">           
                   <label for="">Custom search</label>
                 
                   <input autocomplete="off" class = "input " type="text" id="searchQuery">
@@ -197,71 +160,58 @@
                   <input type="submit" id="searchBtn"  value="Search" />
                   <input type="submit" class="clearBtn"  value="clear" />
               </form>
-             
-              
-             </section>
-             <div class="topic-buttons">   <br>
-              <br></div> 
-      
-          
-               
-           
-                       
-
-          </div>
-     
-      
-    
-     
-  
-    
-      <div id="tabs-3">
-        <h2>Song preferences</h2>
-        <section class="song-not-authorized">
-          <h3>Link Spotify Account</h3>
-          <p>For additional features link your spotify account.</p>
-          <ul>
-            <li>Basic Spotify Account - Customized song recommendations</li>
-            <li>Premium Spotify Account - Customized song recommendations + In browser player</li>
-          </ul>
-          <button onclick="linkSpotifyAccount()">Link and Authorize</button>
-        </section>
-        <section class="song-is-authorized">
-          <h3>Recommend Songs Like</h3>
-          <p>Provide up to 5 artists or songs to base recommendations off. You must set at least one selection to use the music feature.</p>
-          <select id="spotify-pref" style="width: 95%; display: block;" class="spotify-pref" name="spotifypref[]" multiple="multiple">
-          </select>
-          <span class='error' id='song-pref-error'></span>
-          <button onclick="saveSongPref()">Save Song Preferences</button>
-        </section>
+            </section>
+            <div class="topic-buttons">
+             </div> 
+        </div>
+        <div id="tabs-3">
+          <h2>Song preferences</h2>
+          <section class="song-not-authorized">
+            <h3>Link Spotify Account</h3>
+            <p>For additional features link your spotify account.</p>
+            <ul>
+              <li>Basic Spotify Account - Customized song recommendations</li>
+              <li>Premium Spotify Account - Customized song recommendations + In browser player</li>
+            </ul>
+            <button onclick="linkSpotifyAccount()">Link and Authorize</button>
+          </section>
+          <section class="song-is-authorized">
+            <h3>Recommend Songs Like</h3>
+            <p>Provide up to 5 artists or songs to base recommendations off. You must set at least one selection to use the music feature.</p>
+            <select id="spotify-pref" style="width: 95%; display: block;" class="spotify-pref" name="spotifypref[]" multiple="multiple">
+            </select>
+            <span class='error' id='song-pref-error'></span>
+            <button onclick="saveSongPref()">Save Song Preferences</button>
+          </section>
+        </div>
       </div>
-    </div>
-  </div>
-  <div id="container">
-    <div class='mainButtons'>
-      <svg id='news' width="318" height="72" viewBox="0 0 318 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M43.25 0.499999C51.4167 0.499999 57.9167 3.16667 62.75 8.5C67.6667 13.75 70.125 21 70.125 30.25V71H48.875V33.125C48.875 28.4583 47.6667 24.8333 45.25 22.25C42.8333 19.6667 39.5833 18.375 35.5 18.375C31.4167 18.375 28.1667 19.6667 25.75 22.25C23.3333 24.8333 22.125 28.4583 22.125 33.125V71H0.75V1.25H22.125V10.5C24.2917 7.41666 27.2083 5 30.875 3.24999C34.5417 1.41666 38.6667 0.499999 43.25 0.499999ZM147.604 35C147.604 37 147.479 39.0833 147.229 41.25H98.8535C99.1869 45.5833 100.562 48.9167 102.979 51.25C105.479 53.5 108.52 54.625 112.104 54.625C117.437 54.625 121.145 52.375 123.229 47.875H145.979C144.812 52.4583 142.687 56.5833 139.604 60.25C136.604 63.9167 132.812 66.7917 128.229 68.875C123.645 70.9583 118.52 72 112.854 72C106.02 72 99.9369 70.5417 94.6035 67.625C89.2702 64.7083 85.1035 60.5417 82.1035 55.125C79.1035 49.7083 77.6035 43.375 77.6035 36.125C77.6035 28.875 79.0618 22.5417 81.9785 17.125C84.9785 11.7083 89.1452 7.54166 94.4785 4.625C99.8119 1.70833 105.937 0.249994 112.854 0.249994C119.604 0.249994 125.604 1.66666 130.854 4.5C136.104 7.33333 140.187 11.375 143.104 16.625C146.104 21.875 147.604 28 147.604 35ZM125.729 29.375C125.729 25.7083 124.479 22.7917 121.979 20.625C119.479 18.4583 116.354 17.375 112.604 17.375C109.02 17.375 105.979 18.4167 103.479 20.5C101.062 22.5833 99.5619 25.5417 98.9785 29.375H125.729ZM255.88 1.25L237.005 71H213.38L202.38 25.75L191.005 71H167.505L148.505 1.25H169.88L179.755 51.125L191.505 1.25H214.13L226.005 50.875L235.755 1.25H255.88ZM289.281 72C283.198 72 277.781 70.9583 273.031 68.875C268.281 66.7917 264.531 63.9583 261.781 60.375C259.031 56.7083 257.49 52.625 257.156 48.125H278.281C278.531 50.5417 279.656 52.5 281.656 54C283.656 55.5 286.115 56.25 289.031 56.25C291.698 56.25 293.74 55.75 295.156 54.75C296.656 53.6667 297.406 52.2917 297.406 50.625C297.406 48.625 296.365 47.1667 294.281 46.25C292.198 45.25 288.823 44.1667 284.156 43C279.156 41.8333 274.99 40.625 271.656 39.375C268.323 38.0417 265.448 36 263.031 33.25C260.615 30.4167 259.406 26.625 259.406 21.875C259.406 17.875 260.49 14.25 262.656 11C264.906 7.66666 268.156 5.04166 272.406 3.12499C276.74 1.20833 281.865 0.249994 287.781 0.249994C296.531 0.249994 303.406 2.41666 308.406 6.75C313.49 11.0833 316.406 16.8333 317.156 24H297.406C297.073 21.5833 295.99 19.6667 294.156 18.25C292.406 16.8333 290.073 16.125 287.156 16.125C284.656 16.125 282.74 16.625 281.406 17.625C280.073 18.5417 279.406 19.8333 279.406 21.5C279.406 23.5 280.448 25 282.531 26C284.698 27 288.031 28 292.531 29C297.698 30.3333 301.906 31.6667 305.156 33C308.406 34.25 311.24 36.3333 313.656 39.25C316.156 42.0833 317.448 45.9167 317.531 50.75C317.531 54.8333 316.365 58.5 314.031 61.75C311.781 64.9167 308.49 67.4167 304.156 69.25C299.906 71.0833 294.948 72 289.281 72Z"
-          fill="#BE0000" />
-      </svg>
-
-      <svg id='video' width="340" height="102" viewBox="0 0 340 102" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M38.125 81L53.25 31.25H76L51.25 101H24.875L0.125 31.25H23L38.125 81ZM92.6221 24C88.8721 24 85.7887 22.9167 83.3721 20.75C81.0387 18.5 79.8721 15.75 79.8721 12.5C79.8721 9.16666 81.0387 6.41666 83.3721 4.24999C85.7887 1.99999 88.8721 0.874993 92.6221 0.874993C96.2887 0.874993 99.2887 1.99999 101.622 4.24999C104.039 6.41666 105.247 9.16666 105.247 12.5C105.247 15.75 104.039 18.5 101.622 20.75C99.2887 22.9167 96.2887 24 92.6221 24ZM103.247 31.25V101H81.8721V31.25H103.247ZM111.362 66C111.362 58.8333 112.696 52.5417 115.362 47.125C118.112 41.7083 121.821 37.5417 126.487 34.625C131.154 31.7083 136.362 30.25 142.112 30.25C146.696 30.25 150.862 31.2083 154.612 33.125C158.446 35.0417 161.446 37.625 163.612 40.875V8.5H184.987V101H163.612V91C161.612 94.3333 158.737 97 154.987 99C151.321 101 147.029 102 142.112 102C136.362 102 131.154 100.542 126.487 97.625C121.821 94.625 118.112 90.4167 115.362 85C112.696 79.5 111.362 73.1667 111.362 66ZM163.612 66.125C163.612 60.7917 162.112 56.5833 159.112 53.5C156.196 50.4167 152.612 48.875 148.362 48.875C144.112 48.875 140.487 50.4167 137.487 53.5C134.571 56.5 133.112 60.6667 133.112 66C133.112 71.3333 134.571 75.5833 137.487 78.75C140.487 81.8333 144.112 83.375 148.362 83.375C152.612 83.375 156.196 81.8333 159.112 78.75C162.112 75.6667 163.612 71.4583 163.612 66.125ZM263.076 65C263.076 67 262.951 69.0833 262.701 71.25H214.326C214.66 75.5833 216.035 78.9167 218.451 81.25C220.951 83.5 223.993 84.625 227.576 84.625C232.91 84.625 236.618 82.375 238.701 77.875H261.451C260.285 82.4583 258.16 86.5833 255.076 90.25C252.076 93.9167 248.285 96.7917 243.701 98.875C239.118 100.958 233.993 102 228.326 102C221.493 102 215.41 100.542 210.076 97.625C204.743 94.7083 200.576 90.5417 197.576 85.125C194.576 79.7083 193.076 73.375 193.076 66.125C193.076 58.875 194.535 52.5417 197.451 47.125C200.451 41.7083 204.618 37.5417 209.951 34.625C215.285 31.7083 221.41 30.25 228.326 30.25C235.076 30.25 241.076 31.6667 246.326 34.5C251.576 37.3333 255.66 41.375 258.576 46.625C261.576 51.875 263.076 58 263.076 65ZM241.201 59.375C241.201 55.7083 239.951 52.7917 237.451 50.625C234.951 48.4583 231.826 47.375 228.076 47.375C224.493 47.375 221.451 48.4167 218.951 50.5C216.535 52.5833 215.035 55.5417 214.451 59.375H241.201ZM302.978 102C296.144 102 289.978 100.542 284.478 97.625C279.061 94.7083 274.769 90.5417 271.603 85.125C268.519 79.7083 266.978 73.375 266.978 66.125C266.978 58.9583 268.561 52.6667 271.728 47.25C274.894 41.75 279.228 37.5417 284.728 34.625C290.228 31.7083 296.394 30.25 303.228 30.25C310.061 30.25 316.228 31.7083 321.728 34.625C327.228 37.5417 331.561 41.75 334.728 47.25C337.894 52.6667 339.478 58.9583 339.478 66.125C339.478 73.2917 337.853 79.625 334.603 85.125C331.436 90.5417 327.061 94.7083 321.478 97.625C315.978 100.542 309.811 102 302.978 102ZM302.978 83.5C307.061 83.5 310.519 82 313.353 79C316.269 76 317.728 71.7083 317.728 66.125C317.728 60.5417 316.311 56.25 313.478 53.25C310.728 50.25 307.311 48.75 303.228 48.75C299.061 48.75 295.603 50.25 292.853 53.25C290.103 56.1667 288.728 60.4583 288.728 66.125C288.728 71.7083 290.061 76 292.728 79C295.478 82 298.894 83.5 302.978 83.5Z"
-          fill="#BE0000" />
-      </svg>
-
-      <svg id='music' width="376" height="102" viewBox="0 0 376 102" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M89.75 30.5C98.4167 30.5 105.292 33.125 110.375 38.375C115.542 43.625 118.125 50.9167 118.125 60.25V101H96.875V63.125C96.875 58.625 95.6667 55.1667 93.25 52.75C90.9167 50.25 87.6667 49 83.5 49C79.3333 49 76.0417 50.25 73.625 52.75C71.2917 55.1667 70.125 58.625 70.125 63.125V101H48.875V63.125C48.875 58.625 47.6667 55.1667 45.25 52.75C42.9167 50.25 39.6667 49 35.5 49C31.3333 49 28.0417 50.25 25.625 52.75C23.2917 55.1667 22.125 58.625 22.125 63.125V101H0.75V31.25H22.125V40C24.2917 37.0833 27.125 34.7917 30.625 33.125C34.125 31.375 38.0833 30.5 42.5 30.5C47.75 30.5 52.4167 31.625 56.5 33.875C60.6667 36.125 63.9167 39.3333 66.25 43.5C68.6667 39.6667 71.9583 36.5417 76.125 34.125C80.2917 31.7083 84.8333 30.5 89.75 30.5ZM198.824 31.25V101H177.449V91.5C175.283 94.5833 172.324 97.0833 168.574 99C164.908 100.833 160.824 101.75 156.324 101.75C150.991 101.75 146.283 100.583 142.199 98.25C138.116 95.8333 134.949 92.375 132.699 87.875C130.449 83.375 129.324 78.0833 129.324 72V31.25H150.574V69.125C150.574 73.7917 151.783 77.4167 154.199 80C156.616 82.5833 159.866 83.875 163.949 83.875C168.116 83.875 171.408 82.5833 173.824 80C176.241 77.4167 177.449 73.7917 177.449 69.125V31.25H198.824ZM239.428 102C233.344 102 227.928 100.958 223.178 98.875C218.428 96.7917 214.678 93.9583 211.928 90.375C209.178 86.7083 207.636 82.625 207.303 78.125H228.428C228.678 80.5417 229.803 82.5 231.803 84C233.803 85.5 236.261 86.25 239.178 86.25C241.844 86.25 243.886 85.75 245.303 84.75C246.803 83.6667 247.553 82.2917 247.553 80.625C247.553 78.625 246.511 77.1667 244.428 76.25C242.344 75.25 238.969 74.1667 234.303 73C229.303 71.8333 225.136 70.625 221.803 69.375C218.469 68.0417 215.594 66 213.178 63.25C210.761 60.4167 209.553 56.625 209.553 51.875C209.553 47.875 210.636 44.25 212.803 41C215.053 37.6667 218.303 35.0417 222.553 33.125C226.886 31.2083 232.011 30.25 237.928 30.25C246.678 30.25 253.553 32.4167 258.553 36.75C263.636 41.0833 266.553 46.8333 267.303 54H247.553C247.219 51.5833 246.136 49.6667 244.303 48.25C242.553 46.8333 240.219 46.125 237.303 46.125C234.803 46.125 232.886 46.625 231.553 47.625C230.219 48.5417 229.553 49.8333 229.553 51.5C229.553 53.5 230.594 55 232.678 56C234.844 57 238.178 58 242.678 59C247.844 60.3333 252.053 61.6667 255.303 63C258.553 64.25 261.386 66.3333 263.803 69.25C266.303 72.0833 267.594 75.9167 267.678 80.75C267.678 84.8333 266.511 88.5 264.178 91.75C261.928 94.9167 258.636 97.4167 254.303 99.25C250.053 101.083 245.094 102 239.428 102ZM288.38 24C284.63 24 281.547 22.9167 279.13 20.75C276.797 18.5 275.63 15.75 275.63 12.5C275.63 9.16666 276.797 6.41666 279.13 4.24999C281.547 1.99999 284.63 0.874993 288.38 0.874993C292.047 0.874993 295.047 1.99999 297.38 4.24999C299.797 6.41666 301.005 9.16666 301.005 12.5C301.005 15.75 299.797 18.5 297.38 20.75C295.047 22.9167 292.047 24 288.38 24ZM299.005 31.25V101H277.63V31.25H299.005ZM307.12 66.125C307.12 58.875 308.578 52.5417 311.495 47.125C314.495 41.7083 318.62 37.5417 323.87 34.625C329.203 31.7083 335.287 30.25 342.12 30.25C350.87 30.25 358.162 32.5417 363.995 37.125C369.912 41.7083 373.787 48.1667 375.62 56.5H352.87C350.953 51.1667 347.245 48.5 341.745 48.5C337.828 48.5 334.703 50.0417 332.37 53.125C330.037 56.125 328.87 60.4583 328.87 66.125C328.87 71.7917 330.037 76.1667 332.37 79.25C334.703 82.25 337.828 83.75 341.745 83.75C347.245 83.75 350.953 81.0833 352.87 75.75H375.62C373.787 83.9167 369.912 90.3333 363.995 95C358.078 99.6667 350.787 102 342.12 102C335.287 102 329.203 100.542 323.87 97.625C318.62 94.7083 314.495 90.5417 311.495 85.125C308.578 79.7083 307.12 73.375 307.12 66.125Z"
-          fill="#BE0000" />
-      </svg>
-
-    </div>
-
+     </div>
     
+    <div id="container">
+      <div class='mainButtons'>
+        <svg id='news' width="318" height="72" viewBox="0 0 318 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M43.25 0.499999C51.4167 0.499999 57.9167 3.16667 62.75 8.5C67.6667 13.75 70.125 21 70.125 30.25V71H48.875V33.125C48.875 28.4583 47.6667 24.8333 45.25 22.25C42.8333 19.6667 39.5833 18.375 35.5 18.375C31.4167 18.375 28.1667 19.6667 25.75 22.25C23.3333 24.8333 22.125 28.4583 22.125 33.125V71H0.75V1.25H22.125V10.5C24.2917 7.41666 27.2083 5 30.875 3.24999C34.5417 1.41666 38.6667 0.499999 43.25 0.499999ZM147.604 35C147.604 37 147.479 39.0833 147.229 41.25H98.8535C99.1869 45.5833 100.562 48.9167 102.979 51.25C105.479 53.5 108.52 54.625 112.104 54.625C117.437 54.625 121.145 52.375 123.229 47.875H145.979C144.812 52.4583 142.687 56.5833 139.604 60.25C136.604 63.9167 132.812 66.7917 128.229 68.875C123.645 70.9583 118.52 72 112.854 72C106.02 72 99.9369 70.5417 94.6035 67.625C89.2702 64.7083 85.1035 60.5417 82.1035 55.125C79.1035 49.7083 77.6035 43.375 77.6035 36.125C77.6035 28.875 79.0618 22.5417 81.9785 17.125C84.9785 11.7083 89.1452 7.54166 94.4785 4.625C99.8119 1.70833 105.937 0.249994 112.854 0.249994C119.604 0.249994 125.604 1.66666 130.854 4.5C136.104 7.33333 140.187 11.375 143.104 16.625C146.104 21.875 147.604 28 147.604 35ZM125.729 29.375C125.729 25.7083 124.479 22.7917 121.979 20.625C119.479 18.4583 116.354 17.375 112.604 17.375C109.02 17.375 105.979 18.4167 103.479 20.5C101.062 22.5833 99.5619 25.5417 98.9785 29.375H125.729ZM255.88 1.25L237.005 71H213.38L202.38 25.75L191.005 71H167.505L148.505 1.25H169.88L179.755 51.125L191.505 1.25H214.13L226.005 50.875L235.755 1.25H255.88ZM289.281 72C283.198 72 277.781 70.9583 273.031 68.875C268.281 66.7917 264.531 63.9583 261.781 60.375C259.031 56.7083 257.49 52.625 257.156 48.125H278.281C278.531 50.5417 279.656 52.5 281.656 54C283.656 55.5 286.115 56.25 289.031 56.25C291.698 56.25 293.74 55.75 295.156 54.75C296.656 53.6667 297.406 52.2917 297.406 50.625C297.406 48.625 296.365 47.1667 294.281 46.25C292.198 45.25 288.823 44.1667 284.156 43C279.156 41.8333 274.99 40.625 271.656 39.375C268.323 38.0417 265.448 36 263.031 33.25C260.615 30.4167 259.406 26.625 259.406 21.875C259.406 17.875 260.49 14.25 262.656 11C264.906 7.66666 268.156 5.04166 272.406 3.12499C276.74 1.20833 281.865 0.249994 287.781 0.249994C296.531 0.249994 303.406 2.41666 308.406 6.75C313.49 11.0833 316.406 16.8333 317.156 24H297.406C297.073 21.5833 295.99 19.6667 294.156 18.25C292.406 16.8333 290.073 16.125 287.156 16.125C284.656 16.125 282.74 16.625 281.406 17.625C280.073 18.5417 279.406 19.8333 279.406 21.5C279.406 23.5 280.448 25 282.531 26C284.698 27 288.031 28 292.531 29C297.698 30.3333 301.906 31.6667 305.156 33C308.406 34.25 311.24 36.3333 313.656 39.25C316.156 42.0833 317.448 45.9167 317.531 50.75C317.531 54.8333 316.365 58.5 314.031 61.75C311.781 64.9167 308.49 67.4167 304.156 69.25C299.906 71.0833 294.948 72 289.281 72Z"
+            fill="#BE0000" />
+        </svg>
+  
+        <svg id='video' width="340" height="102" viewBox="0 0 340 102" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M38.125 81L53.25 31.25H76L51.25 101H24.875L0.125 31.25H23L38.125 81ZM92.6221 24C88.8721 24 85.7887 22.9167 83.3721 20.75C81.0387 18.5 79.8721 15.75 79.8721 12.5C79.8721 9.16666 81.0387 6.41666 83.3721 4.24999C85.7887 1.99999 88.8721 0.874993 92.6221 0.874993C96.2887 0.874993 99.2887 1.99999 101.622 4.24999C104.039 6.41666 105.247 9.16666 105.247 12.5C105.247 15.75 104.039 18.5 101.622 20.75C99.2887 22.9167 96.2887 24 92.6221 24ZM103.247 31.25V101H81.8721V31.25H103.247ZM111.362 66C111.362 58.8333 112.696 52.5417 115.362 47.125C118.112 41.7083 121.821 37.5417 126.487 34.625C131.154 31.7083 136.362 30.25 142.112 30.25C146.696 30.25 150.862 31.2083 154.612 33.125C158.446 35.0417 161.446 37.625 163.612 40.875V8.5H184.987V101H163.612V91C161.612 94.3333 158.737 97 154.987 99C151.321 101 147.029 102 142.112 102C136.362 102 131.154 100.542 126.487 97.625C121.821 94.625 118.112 90.4167 115.362 85C112.696 79.5 111.362 73.1667 111.362 66ZM163.612 66.125C163.612 60.7917 162.112 56.5833 159.112 53.5C156.196 50.4167 152.612 48.875 148.362 48.875C144.112 48.875 140.487 50.4167 137.487 53.5C134.571 56.5 133.112 60.6667 133.112 66C133.112 71.3333 134.571 75.5833 137.487 78.75C140.487 81.8333 144.112 83.375 148.362 83.375C152.612 83.375 156.196 81.8333 159.112 78.75C162.112 75.6667 163.612 71.4583 163.612 66.125ZM263.076 65C263.076 67 262.951 69.0833 262.701 71.25H214.326C214.66 75.5833 216.035 78.9167 218.451 81.25C220.951 83.5 223.993 84.625 227.576 84.625C232.91 84.625 236.618 82.375 238.701 77.875H261.451C260.285 82.4583 258.16 86.5833 255.076 90.25C252.076 93.9167 248.285 96.7917 243.701 98.875C239.118 100.958 233.993 102 228.326 102C221.493 102 215.41 100.542 210.076 97.625C204.743 94.7083 200.576 90.5417 197.576 85.125C194.576 79.7083 193.076 73.375 193.076 66.125C193.076 58.875 194.535 52.5417 197.451 47.125C200.451 41.7083 204.618 37.5417 209.951 34.625C215.285 31.7083 221.41 30.25 228.326 30.25C235.076 30.25 241.076 31.6667 246.326 34.5C251.576 37.3333 255.66 41.375 258.576 46.625C261.576 51.875 263.076 58 263.076 65ZM241.201 59.375C241.201 55.7083 239.951 52.7917 237.451 50.625C234.951 48.4583 231.826 47.375 228.076 47.375C224.493 47.375 221.451 48.4167 218.951 50.5C216.535 52.5833 215.035 55.5417 214.451 59.375H241.201ZM302.978 102C296.144 102 289.978 100.542 284.478 97.625C279.061 94.7083 274.769 90.5417 271.603 85.125C268.519 79.7083 266.978 73.375 266.978 66.125C266.978 58.9583 268.561 52.6667 271.728 47.25C274.894 41.75 279.228 37.5417 284.728 34.625C290.228 31.7083 296.394 30.25 303.228 30.25C310.061 30.25 316.228 31.7083 321.728 34.625C327.228 37.5417 331.561 41.75 334.728 47.25C337.894 52.6667 339.478 58.9583 339.478 66.125C339.478 73.2917 337.853 79.625 334.603 85.125C331.436 90.5417 327.061 94.7083 321.478 97.625C315.978 100.542 309.811 102 302.978 102ZM302.978 83.5C307.061 83.5 310.519 82 313.353 79C316.269 76 317.728 71.7083 317.728 66.125C317.728 60.5417 316.311 56.25 313.478 53.25C310.728 50.25 307.311 48.75 303.228 48.75C299.061 48.75 295.603 50.25 292.853 53.25C290.103 56.1667 288.728 60.4583 288.728 66.125C288.728 71.7083 290.061 76 292.728 79C295.478 82 298.894 83.5 302.978 83.5Z"
+            fill="#BE0000" />
+        </svg>
+  
+        <svg id='music' width="376" height="102" viewBox="0 0 376 102" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M89.75 30.5C98.4167 30.5 105.292 33.125 110.375 38.375C115.542 43.625 118.125 50.9167 118.125 60.25V101H96.875V63.125C96.875 58.625 95.6667 55.1667 93.25 52.75C90.9167 50.25 87.6667 49 83.5 49C79.3333 49 76.0417 50.25 73.625 52.75C71.2917 55.1667 70.125 58.625 70.125 63.125V101H48.875V63.125C48.875 58.625 47.6667 55.1667 45.25 52.75C42.9167 50.25 39.6667 49 35.5 49C31.3333 49 28.0417 50.25 25.625 52.75C23.2917 55.1667 22.125 58.625 22.125 63.125V101H0.75V31.25H22.125V40C24.2917 37.0833 27.125 34.7917 30.625 33.125C34.125 31.375 38.0833 30.5 42.5 30.5C47.75 30.5 52.4167 31.625 56.5 33.875C60.6667 36.125 63.9167 39.3333 66.25 43.5C68.6667 39.6667 71.9583 36.5417 76.125 34.125C80.2917 31.7083 84.8333 30.5 89.75 30.5ZM198.824 31.25V101H177.449V91.5C175.283 94.5833 172.324 97.0833 168.574 99C164.908 100.833 160.824 101.75 156.324 101.75C150.991 101.75 146.283 100.583 142.199 98.25C138.116 95.8333 134.949 92.375 132.699 87.875C130.449 83.375 129.324 78.0833 129.324 72V31.25H150.574V69.125C150.574 73.7917 151.783 77.4167 154.199 80C156.616 82.5833 159.866 83.875 163.949 83.875C168.116 83.875 171.408 82.5833 173.824 80C176.241 77.4167 177.449 73.7917 177.449 69.125V31.25H198.824ZM239.428 102C233.344 102 227.928 100.958 223.178 98.875C218.428 96.7917 214.678 93.9583 211.928 90.375C209.178 86.7083 207.636 82.625 207.303 78.125H228.428C228.678 80.5417 229.803 82.5 231.803 84C233.803 85.5 236.261 86.25 239.178 86.25C241.844 86.25 243.886 85.75 245.303 84.75C246.803 83.6667 247.553 82.2917 247.553 80.625C247.553 78.625 246.511 77.1667 244.428 76.25C242.344 75.25 238.969 74.1667 234.303 73C229.303 71.8333 225.136 70.625 221.803 69.375C218.469 68.0417 215.594 66 213.178 63.25C210.761 60.4167 209.553 56.625 209.553 51.875C209.553 47.875 210.636 44.25 212.803 41C215.053 37.6667 218.303 35.0417 222.553 33.125C226.886 31.2083 232.011 30.25 237.928 30.25C246.678 30.25 253.553 32.4167 258.553 36.75C263.636 41.0833 266.553 46.8333 267.303 54H247.553C247.219 51.5833 246.136 49.6667 244.303 48.25C242.553 46.8333 240.219 46.125 237.303 46.125C234.803 46.125 232.886 46.625 231.553 47.625C230.219 48.5417 229.553 49.8333 229.553 51.5C229.553 53.5 230.594 55 232.678 56C234.844 57 238.178 58 242.678 59C247.844 60.3333 252.053 61.6667 255.303 63C258.553 64.25 261.386 66.3333 263.803 69.25C266.303 72.0833 267.594 75.9167 267.678 80.75C267.678 84.8333 266.511 88.5 264.178 91.75C261.928 94.9167 258.636 97.4167 254.303 99.25C250.053 101.083 245.094 102 239.428 102ZM288.38 24C284.63 24 281.547 22.9167 279.13 20.75C276.797 18.5 275.63 15.75 275.63 12.5C275.63 9.16666 276.797 6.41666 279.13 4.24999C281.547 1.99999 284.63 0.874993 288.38 0.874993C292.047 0.874993 295.047 1.99999 297.38 4.24999C299.797 6.41666 301.005 9.16666 301.005 12.5C301.005 15.75 299.797 18.5 297.38 20.75C295.047 22.9167 292.047 24 288.38 24ZM299.005 31.25V101H277.63V31.25H299.005ZM307.12 66.125C307.12 58.875 308.578 52.5417 311.495 47.125C314.495 41.7083 318.62 37.5417 323.87 34.625C329.203 31.7083 335.287 30.25 342.12 30.25C350.87 30.25 358.162 32.5417 363.995 37.125C369.912 41.7083 373.787 48.1667 375.62 56.5H352.87C350.953 51.1667 347.245 48.5 341.745 48.5C337.828 48.5 334.703 50.0417 332.37 53.125C330.037 56.125 328.87 60.4583 328.87 66.125C328.87 71.7917 330.037 76.1667 332.37 79.25C334.703 82.25 337.828 83.75 341.745 83.75C347.245 83.75 350.953 81.0833 352.87 75.75H375.62C373.787 83.9167 369.912 90.3333 363.995 95C358.078 99.6667 350.787 102 342.12 102C335.287 102 329.203 100.542 323.87 97.625C318.62 94.7083 314.495 90.5417 311.495 85.125C308.578 79.7083 307.12 73.375 307.12 66.125Z"
+            fill="#BE0000" />
+        </svg>
+  
+      </div>
 
-      <div class = "cards news hidden">
+      <div class="cards new hidden">
+  
+        <div class = "cards news hidden">
 
         <div class="container" id="hidden">
             <div class="row">
@@ -299,54 +249,92 @@
 
              -->
         </div> 
-       </div>  
-  
-    <div id='selectSpotifyPlayer' class='modal'>
-      <div class="select-player">
-        <h2>Select a Spotify Player</h2>
-        <ul class="spotify-devices">
-          <li class='device-option no-player-option' onClick="selectPlayer(SPOTIFY_NO_PLAYER);" rel="modal:close">No Playback - Recommendations Only</li>
-          <li class='device-option web-player-option' onClick="selectPlayer(SPOTIFY_WEB_PLAYER);" rel="modal:close">Play in browser (Desktop only)</li>
-        </ul>
-        <span class="spotify-basic-text">To enable playback options upgrade to Spotify premium.</span>
-        <a href="#" rel="modal:close">Close</a>
+       </div> 
       </div>
-    </div>
-    <div class="video-container hidden">
-      <div class="iframe-container">
-        <iframe class="iframe-video"></iframe>
+      
+
+      <div id='selectSpotifyPlayer' class='modal'>
+        <div class="select-player">
+          <h2>Select a Spotify Player</h2>
+          <ul class="spotify-devices">
+            <li class='device-option no-player-option' onClick="selectPlayer(SPOTIFY_NO_PLAYER);" rel="modal:close">No Playback - Recommendations Only</li>
+            <li class='device-option web-player-option' onClick="selectPlayer(SPOTIFY_WEB_PLAYER);" rel="modal:close">Play in browser (Desktop only)</li>
+          </ul>
+          <span class="spotify-basic-text">To enable playback options upgrade to Spotify premium.</span>
+          <a href="#" rel="modal:close">Close</a>
+        </div>
       </div>
-      <div class="memo" id="memo-btn-container">
-        <button id="gaming-button" data-category="gaming">Gaming</button>
-        <button id="sports-button" data-category="sports">Sports</button>
-        <button id="entertainment-button" data-category="entertainment">
-          Entertainment
-        </button>
-        <button id="lifestyle-button" data-category="lifestyle">
-          Lifestyle
-        </button>
-        <button id="society-button" data-category="society">Society</button>
-        <button id="random-video">Feeling Lucky?</button>
-        <button id="knowledge-video">Knowledge Thirsty?</button>
-      </div>
-      <div class="back-to-main">
-        <button id="back-to-main-btn">Back to main</button>
+      
+      <div class="video-container hidden">
+        <div class="iframe-container">
+          <iframe class="iframe-video"></iframe>
+        </div>
+        <div class="memo" id="memo-btn-container">
+          <button id="gaming-button" data-category="gaming">Gaming</button>
+          <button id="sports-button" data-category="sports">Sports</button>
+          <button id="entertainment-button" data-category="entertainment">
+            Entertainment
+          </button>
+          <button id="lifestyle-button" data-category="lifestyle">
+            Lifestyle
+          </button>
+          <button id="society-button" data-category="society">Society</button>
+          <button id="random-video">Feeling Lucky?</button>
+          <button id="knowledge-video">Knowledge Thirsty?</button>
+        </div>
+        <div class="back-to-main">
+          <button id="back-to-main-btn">Back to main</button>
+        </div>
       </div>
     </div>
   </div>
-  <div class="hidden music-footer-hold music"></div>
-  <div class="hidden song-player music-footer music">
-    <div class="prev-song"><span><i class="fa fa-chevron-circle-left"></i></span></div>
-    <div class="song-recommendations">
-      <ul id="song-rec">
+    <div class="hidden music-footer-hold music"></div>
+    <div class="hidden song-player music-footer music">
+      <div class="prev-song"><span><i class="fa fa-chevron-circle-left"></i></span></div>
+      <div class="song-recommendations">
+        <ul id="song-rec">
+        </ul>
+      </div>
+      <div class="volume-container"><i id="volume-icon" class="fa fa-volume-up"></i><div class="song-volume"></div>
+      </div>
+      <div class="next-song"><span><i class="volume-icon fa fa-chevron-circle-right"></i></span></div>
+    </div>
+  </div>
+ 
+  <div class =  "mtt hidden">
 
-      </ul>
+      <h3>Meet The Team</h3>
+
+    <div class = 'profileCardsMain'>
+      <div class = 'profileCards'>
+        
+        <img class = 'photoCards' src ="assets/img/suva.jpg"/>
+        <div class = 'flipBack'>
+          <p>UI Design/Functionality</p>
+        </div>
+        <!-- <p>UI Design and Functionality</p> -->
+      </div>
+
+      <div class = 'profileCards'>
+        <img class = 'photoCards' src = "assets/img/KC.png"/>
+        <!-- <p>Youtube API Functionality</p> -->
+      </div>
+
+      <div class = 'profileCards'>
+        
+        <img class = 'photoCards' src = "assets/img/ron.jpg"/>
+        <!-- <p>Spotify API Funtionality</p> -->
+      </div>
+
+      <div class = 'profileCards'>
+        
+        <img class = 'photoCards' src = "assets/img/tika.jpg"/>
+        <!-- <p>News API Functionality</p> -->
+      </div>
     </div>
-    <div class="song-volume">
-    </div>
-    <div class="next-song"><span><i class="fa fa-chevron-circle-right"></i></span></div>
   </div>
 </body>
+<script src="./assets/js/song-constants.js"></script>
 <script src="assets/js/index.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
@@ -354,7 +342,6 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://sdk.scdn.co/spotify-player.js"></script>
 <script src="./assets/js/video.js"></script>
-<script src="./assets/js/song-constants.js"></script>
 <script src="./assets/js/song.js"></script>
 <script src="./Assets-NewsApi/JS/newsapi.js"></script>
 <script src="./Assets-NewsApi/JS/selectionbox.js"></script>

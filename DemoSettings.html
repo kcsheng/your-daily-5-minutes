@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            label{
+                display:block;
+                margin-top: 1em;
+            }
+            input{
+                display:block;
+                width: 80%;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Demo Settings</h1>
+        <p>In order to run this MVP, you'll need to provide all 3 API Keys. Please refer to the README on how to generate each.</p>
+        <label>Youtube API Keys</label>
+        <input class="youtube-api" />
+        <label>Spotify API Key (Base 64 encoded)</label>
+        <input class="spotify-api" />
+        <label>Video API Keys</label>
+        <input class="video-api" />
+        <button onclick="saveAPIKeys()">Save</button>
+    </body>
+    <script src="./assets/js/song-constants.js"></script>
+    <script>
+        loadAPIKeys();
+        function saveAPIKeys(){
+            localStorage.setItem('apiKey', $('.youtube-api').val());
+            localStorage.setItem(LS_SPOTIFY_API_KEY_B64, $('.spotify-api').val());
+            //localStorage.setItem('video-apiKey', $('.youtube-api').val());
+            window.location.replace('./index.html');
+        }
+        function loadAPIKeys(){
+            $('.youtube-api').val(localStorage.getItem('apiKey'));
+            $('.spotify-api').val(localStorage.getItem(LS_SPOTIFY_API_KEY_B64));
+        }
+    </script>
+</html>

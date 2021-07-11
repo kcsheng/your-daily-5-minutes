@@ -56,9 +56,26 @@ As a busy person who has some free time available now, I would like to be able t
 
 ![wireframe2 for the project](./assets/img/wireframe2.png)
 
+### Plan refinement
+
+---
+
+In the course of the app development, we have decided to remove the fun fact feature, as its value in substantiating our app is much lower than news, music and video.
+
+### Media access instructions
+
+---
+
+As a frontend app without the backend support, to protect API keys and or auth tokens from exposing to the public, we utilise local storage.
+
+- Music: <br>
+- News: <br>
+- Video: <br>
+  To access video, the user must have a valid youtube api key. To apply for youtube API, the user is required to have an account on the Google cloud platform and a named project associated with Youtube Data API v3. API key can be generated under credentials.
+
 ### Technologies used
 
 ---
 
-- Third party APIs
-- Javacript, jQuery and CSS framework
+- Third party APIs (NewsAPI, Spotify, YouTube)
+- Javacript, jQuery, jQuery library(anime) and CSS framework (materialize)
