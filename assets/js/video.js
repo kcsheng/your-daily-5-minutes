@@ -37,6 +37,8 @@ function hideVideoContainer(e) {
   videoContainer = $(e.target).parent().parent();
   videoContainer.addClass("hidden");
   mainButtons2.classList.remove("class", "hidden");
+  //resume song if playing
+  resumeIfPlaying();
 }
 
 // Create memory buttons

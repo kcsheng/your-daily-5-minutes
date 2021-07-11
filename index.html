@@ -4,21 +4,21 @@
 <head>
   <link rel="stylesheet" href="assets/css/reset.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="https://cdn.jsdelivr.net/gh/foobar404/wave.js/dist/bundle.iife.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
     integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://use.fontawesome.com/90e2e28e3d.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
   <!-- News API CSS-->
   <link href="./assets/css/newsApi.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/css/materialize.min.css">
   
   
  
@@ -84,7 +84,7 @@
         <h2>Preferences</h2>
       </div>
       <div id="tabs">
-        <ul>
+        <ul class="pref-tabs">
           <li class='listPreferences'><a href="#tabs-1">Video</a></li>
           <li class='listPreferences'><a href="#tabs-2">News</a></li>
           <li class='listPreferences'><a href="#tabs-3">Music</a></li>
@@ -154,34 +154,9 @@
         <div id="tabs-2">              
             <form id="news-topics">
               <div class="news-wrapper">
-                <div>
-                  <input type="checkbox" id="business" name="business" value="business">
-                  <label for="business">Business</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="entertainment" name="entertainment" value="entertainment">
-                  <label for="entertainment">Entertainment</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="general" name="general" value="general">
-                  <label for="general">General</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="health" name="health" value="health">
-                  <label for="health">Health</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="science" name="science" value="science">
-                  <label for="science">Science</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="sports" name="sports" value="sports">
-                  <label for="sports">Sports</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="technology" name="technology" value="technology">
-                  <label for="technology">Technology</label>
-                </div>
+                <select id="news-pref-select" style="width: 95%; display: block;"  name="newspref[]" multiple="multiple">
+                </select>
+                <button class="news-keyword-save">Save Keyword</button>
               </div>
             </form>
         </div>
@@ -231,26 +206,25 @@
       </div>
 
       <div class="cards new hidden news-Div">
-        <div class="container">
+        <div class="news-container">
         <div class="row">
-          <div class="topic-buttons"></div>
-                   <h2 class = "title-news">News </h2>
-                   <span id="btn-close-news" class="card-title"><i class="material-icons right">close</i></span>
+          <h2 class = "title-news">News </h2>
           </div>
         <div id="newsRow" class="row">
 
+          <div class="topic-buttons memo"></div>
           <div id="newsResults">
 
           </div>
+          
         </div>
-             <section class = "news-search">
-            <form class="search" action="">                
-              <input autocomplete="off" class="input searchQuery" type="text" value="News">
-              <input type="submit" class="searchBtn waves-effect waves-light btn" value="Search" />
-              <input type="submit" class="clearBtn waves-effect waves-light btn" value="clear" />
-            </form>
-        </section>
-        
+        <div id="news-article" class="hidden">
+          <button id="back-to-results">Back to Search Results</button>
+          <iframe id="news-iframe"></iframe>
+        </div>
+        <div class="back-to-main">
+          <button class="news-back-to-main-btn">Back to main</button>
+        </div>
       </div>
     </div>
 
@@ -334,8 +308,6 @@
 </body>
 <script src="./assets/js/song-constants.js"></script>
 <script src="assets/js/index.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://sdk.scdn.co/spotify-player.js"></script>
@@ -343,8 +315,6 @@
 <script src="./assets/js/song.js"></script>
   <!-- News API JS-->
   <script src="./Assets/js/newsapi.js"></script>
-  <script src="./Assets/js/materialize.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   </html>
 
 
