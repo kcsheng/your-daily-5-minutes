@@ -4,7 +4,6 @@
 // and Private Key API calls to spotify
 // In a production build, these would be stored in back-end
 // services, as to not expose PK and Auth Token info to the public
-
 var is_authorized_preimum = false;
 var spotify_sdk_ready = false;
 
@@ -16,7 +15,7 @@ var playback_type = SPOTIFY_WEB_PLAYER;
 
 var web_player; // spotify player object
 
-// virtual object to handle actions if remote player or web player
+// virtual player object to handle actions if remote player or web player
 var v_player = {
     web_player_device_id: null,
     remote_player_device_id: null,
@@ -197,6 +196,38 @@ var v_player = {
         });
     }
     
+}
+
+
+// variable to resume/pause if playing previously played
+// to be used when loading videos or where the song needs to be paused temporarily
+var was_playing_to_resume = false;
+
+async function pauseIfPlaying(){
+    var state = await v_player.getCurrentState();
+    if(state.hasOwnProperty('paused') && !state.paused){
+        was_playing_to_resume = true;
+        v_player.pause();
+    }
+}
+
+async function resumeIfPlaying(){
+    if(was_playing_to_resume)
+    v_player.resume();
+}
+
+var unmute_vol = 0;
+async function toggleMute(){
+    if($('.song-volume').slider('value') > 0){
+        unmute_vol = $('.song-volume').slider('value');
+        $('.song-volume').slider('value', 0);
+        v_player.setVolume(0);
+    } else {
+        if(unmute_vol == 0)
+            unmute_vol = 2;
+        $('.song-volume').slider('value', unmute_vol);
+        v_player.setVolume(unmute_vol/100);
+    }
 }
 
 // update variable when spotify sdk is ready
@@ -698,6 +729,9 @@ function loadVolume() {
         }
     });
     $('.song-volume span.ui-slider-handle');
+    $('#volume-icon').on('click.togglemute', () => {
+        toggleMute();
+    })
 
 }
 
@@ -830,13 +864,15 @@ function displayDevices(){
         $('.spotify-remote-device').remove();
         $('.spotify-remote-device-heading').remove();
         getSpotifyDevices().then((devices) => {
-            if(devices.length > 0){
-                $('.spotify-devices').append($('<li class="player-select-heading spotify-remote-device-heading">Other Devices</li>'));
-            }
+            var deviceExists = false;
             // append to list
             devices.forEach(device => {
                 // don't include our own web player
                 if(device.name !== SPOTIFY_WEB_PLAYER_DEVICE_NAME ){
+                    if(!deviceExists){
+                        $('.spotify-devices').append($('<li class="player-select-heading spotify-remote-device-heading">Other Devices</li>'));
+                        deviceExists = true;
+                    }
                     var liDevice = $(`<li class="spotify-remote-device device-option" onClick="selectPlayer(SPOTIFY_REMOTE_PLAYER, '${device.id}');" rel="modal:close">`);
                     liDevice.text(`${device.name} [${device.type}]`);
                     $('.spotify-devices').append(liDevice);

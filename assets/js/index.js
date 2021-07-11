@@ -186,6 +186,7 @@ timeline.add({
             // news.classList.add('class','hidden');
             document.querySelector('.mainButtons').classList.add('class','hidden');
             // document.querySelector('video-container').classList.remove('class','hidden');
+            pauseIfPlaying();
             
         })
 
@@ -207,6 +208,16 @@ timeline.add({
             $(".news-Div").removeClass("hidden hide");
             
         })
+
+        $(".news-back-to-main-btn").on('click', () => {
+                // video.classList.add('class','hidden');
+                // music.classList.add('class','hidden');
+                // news.classList.add('class','hidden');
+                $('.mainButtons').removeClass('hidden');
+                // document.querySelector('video-container').classList.remove('class','hidden');
+                $(".news-Div").addClass("hidden");
+                
+        });
         
 
         

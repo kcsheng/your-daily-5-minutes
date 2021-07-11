@@ -1,27 +1,5 @@
-button
-{
-    width: auto !important;
-    height: auto !important;
-    font-size: 2rem;
-    padding: 3px !important;
-    
-    color: rgb(158, 12, 1);
-    background-color: rgba(151, 216, 200, 0.925);
-    text-align: center;
-    margin: 1px;
-    border: none !important;
-}
+
 .searchQuery
 {
     color: rgb(238, 238, 238) !important;
-}
-.btn, .topic-buttons
-{
-margin: 50px !important;
-margin-left: 2px !important;
-
-}
-#btn-close-news
-{
-    color: white !important;
 }

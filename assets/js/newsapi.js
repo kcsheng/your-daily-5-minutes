@@ -1,4 +1,19 @@
 $(document).ready(function () {
+    renderButtons();
+
+        if (!(localStorage.getItem('savedButtons') === null || localStorage.getItem('savedButtons') === 'undefined')) {
+            var options = JSON.parse(localStorage.getItem('savedButtons'));
+            var selectBox = $("select#news-pref-select");
+            options.forEach((option) => {
+                var option = new Option(option, option, true, true);
+                selectBox.append(option).trigger('change');
+                selectBox.trigger({ type: 'select2:select', params: { data: option } });
+            })
+        }
+
+    $("#news-pref-select").select2({
+        tags: true
+    });
 
     function shuffle(array) {
         var currentIndex = array.length, randomIndex;
@@ -18,7 +33,7 @@ $(document).ready(function () {
         //b81303861fdb4c548b144102d6650a78
         const apiKey = '010a2da8b8934a4b98619a8b89ac4267';//'59882bca0c60494f8922187779d44479'; //'59882bca0c60494f8922187779d44479';
         console.log(query);
-        let url = "https://newsapi.org/v2/top-headlines?q=" + query + "&apiKey=" + apiKey;
+        let url = "https://newsapi.org/v2/top-headlines?q=" + encodeURIComponent(query) + "&apiKey=" + apiKey;
         console.log(url);
 
         if (query !== "") {
@@ -40,35 +55,41 @@ $(document).ready(function () {
                     let largeScrenColWidth = 12 / postLimit;
                     console.log(latestNews);
                     for (var i = 0; i < latestNews.length; i++) {
+                        var newsCard = $('<div>');
+                        newsCard.addClass('news-card')
 
-                        output += `<div class = "col l$(largeScrenColWidth) m6 s12">
-                            <div class="card medium hoverable">
-                            <div Class="card-image">
-                                <img src="${latestNews[i].urlToImage}" class="responsive-img" alt="${latestNews[i].title}">
-                            </div>
-                            <div class="card-content">
-                            <span class="card-title activator"><i class="material-icons right">more_vert</i></span>
-                          
-                            <h6 class="truncate">Title: 
-                            <!--<a href="${latestNews[i].url}" title="${latestNews[i].title}"  >--> ${latestNews[i].title}</h6>
-                                <p><b>Author</b>: ${latestNews[i].author} </p>
-                                <p><b>News source</b>: ${latestNews[i].source.name} </p>
-                                <p><b>Published</b>: ${latestNews[i].publishedAt} </p>
-                                </div>
-                                
-                                <div class="card-reveal">
-                                <span class="card-title"><i class="material-icons right">close</i></span>
-                                <p><b><h4>Title</b>:</h4> ${latestNews[i].title} <b> <br><h4>Description</b>:</h4> ${latestNews[i].description}</p>
-                            </div>     
-                            </div>
-                            </div>`;
-                            //if we wish to put read me link 
-                        //<div class="card-action">
-                        //                      <a href="${latestNews[i].url}" target="_blank" class="btn">Read More</a>
-                        //                   </div>
+                        var newsImage = $('<img>');
+                        newsImage.attr('src', latestNews[i].urlToImage);
+                        newsImage.attr('alt', latestNews[i].title);
+                        newsImage.addClass('news-image');
+                        var newsTitle = $('<h3>');
+                        newsTitle.text(latestNews[i].title);
+                        var newsAuthor = $('<span>');
+                        newsAuthor.text(latestNews[i].author);
+                        var newsSource = $('<span>');
+                        newsSource.text(latestNews[i].source.name);
+                        newsSource.addClass('news-source');
+                        var newsPublishDate = $('<span>');
+                        newsPublishDate.text(moment(latestNews[i].publishedAt).fromNow());
+                        newsPublishDate.addClass('news-date');
+                        var newsDescription = $('<p>');
+                        newsDescription.text(latestNews[i].description);
+
+                        var divSourceDate = $('<div>');
+                        divSourceDate.addClass('news-source-date');
+                        divSourceDate.append(newsSource);
+                        divSourceDate.append(' - ');
+                        divSourceDate.append(newsPublishDate);
+
+                        newsCard.append(newsImage);
+                        newsCard.append(newsTitle);
+                        newsCard.append(divSourceDate);
+                        newsCard.append(newsDescription);
+                        
+
+                        $("#newsResults").append(newsCard);
                     }
-                    if (output !== "") {
-                        $("#newsResults").html(output);
+                    if (latestNews.length > 0) {
                         $(".title-news").html("News")
                         $("#newsRow").removeClass("hidden hide");
                     }
@@ -88,34 +109,16 @@ $(document).ready(function () {
         }
     }
 
-    function clearInput() {
-        $(".searchQuery").val("");
-    }
-
     //on Page load, call this function
     function renderButtons() {
         //empty topic buttons div
         $(".topic-buttons").empty();
-        const savedButtons = JSON.parse(localStorage.getItem("savedButtons")) || [];
-        /* 
-        check this function later
-        To Limit number of input user allowed 
-        ************************* 
-        const topicCount =savedButtons.length;
-             console.log(savedButtons +"test"+topicCount);
-             if(topicCount > 7)
-             {
-                 const removeTopic = function(a, index)
-                 {
-                     let newtopicArray = [...a];
-                     newtopicArray.splice(index, 1);
-                     return newtopicArray;
- 
-                 };
-                 
-                const newsavedButtons = removeTopic (savedButtons, 0);
-                 console.log("new Buttons", newsavedButtons);
-                 */
+        if (!(localStorage.getItem('savedButtons') === null || localStorage.getItem('savedButtons') === 'undefined')) {
+            var savedButtons = JSON.parse(localStorage.getItem("savedButtons")) || [];
+        } else {
+            var savedButtons = [];
+        }
+    
         new Set(savedButtons).forEach(topic => {
             const button = $("<button class=''>");
             button.text(topic)
@@ -124,7 +127,7 @@ $(document).ready(function () {
                 event.preventDefault();
                 // grab the value of btn,
                 // set buttn value to input 
-                $(".searchQuery").val(topic);
+                $("#newsResults").empty();
                 // run the query
                 searchApi(topic);
             })
@@ -134,26 +137,11 @@ $(document).ready(function () {
         })
 
     }
-
-        function createPreferenceButton(query) {
-            const savedButtons = JSON.parse(localStorage.getItem("savedButtons")) || [];
-
-            if (!savedButtons.includes(query.toLowerCase())) {
-                savedButtons.push(query.toLowerCase());
-            }
-            localStorage.setItem("savedButtons", JSON.stringify(savedButtons));
-            renderButtons();
-        }
-        //button function call so user can click on the topic previously selected
-             renderButtons();
     
-    $(".searchBtn").on("click", function (e) {
+    $(".news-keyword-save").on("click", function (e) {
         e.preventDefault();
-        let query = $(".searchQuery").val();
-        searchApi(query).then(() => {
-            clearInput();
-            createPreferenceButton(query);
-        })
+        localStorage.setItem("savedButtons", JSON.stringify($('#news-pref-select').val()));
+        renderButtons();
     });
 
     // const videoEl = document.querySelector(".video");
@@ -172,11 +160,4 @@ $(document).ready(function () {
          
      });*/
 
-    $("#btn-close-news").on("click", function (e) {
-        e.preventDefault();
-        $("#newsRow").addClass("hidden hide");
-        // show video and music
-        //   videoEl.classList.remove("hide");
-        //  musicEl.classList.remove("hide");
-    })
 });
