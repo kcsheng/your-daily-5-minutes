@@ -56,6 +56,12 @@ As a busy person who has some free time available now, I would like to be able t
 
 ![wireframe2 for the project](./assets/img/wireframe2.png)
 
+### Plan refinement
+
+---
+
+In the course of the app development, we have decided to remove the fun fact feature, as its value in substantiating our app is much lower than news, music and video.
+
 ### Media access instructions
 
 ---
