@@ -150,16 +150,6 @@ h2 {
   height: 100%;
 }
 
-/* news styling*/
-
-input[type="checkbox"] {
-}
-
-/* 
-option {
-  font-family: 'Poppins', sans-serif;
-} */
-
 .mainButtons {
   display: flex;
   flex-direction: row;
@@ -172,6 +162,17 @@ option {
 #dark_mode {
   display: inline-block;
   width: 30px;
+}
+
+/* news styling */
+.news-wrapper div {
+  font-size: 1.3rem;
+  padding-left: 30px;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
 }
 
 @media only screen and (max-width: 1300px) {
