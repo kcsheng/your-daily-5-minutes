@@ -101,11 +101,11 @@ h2 {
   height: 531.25px; */
   width: 63%;
   border: 1px solid rgb(70, 70, 70);
-  background-color:rgb(70, 70, 70);
+  background-color:#844747;
   border-radius: 10px;
   padding:30px;
   margin-top: 50px;
-  box-shadow: 5px 10px rgb(40,40,40) ;
+  box-shadow: 5px 10px #502929;
 }
 
 .back-to-main {
