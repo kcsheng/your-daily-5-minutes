@@ -60,8 +60,6 @@ As a busy person who has some free time available now, I would like to be able t
 
 ---
 
-### Media access instructions
-
 As a frontend app without the backend support, to protect API keys and or auth tokens from exposing to the public, we utilise local storage.
 
 - Music: <br>
