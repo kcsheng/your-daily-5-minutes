@@ -15,6 +15,11 @@
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://use.fontawesome.com/90e2e28e3d.js"></script>
+  <!-- News API CSS-->
+
+  
+ 
+
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -144,13 +149,20 @@
           </div>
         </div>
         <div id="tabs-2">
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc.
-            Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut
-            tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam.
-            Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean
-            vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus
-            pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur
-            tortor et purus.</p>
+           <section id = "news">
+              <div class="topic-buttons">
+               </div> 
+              <form class = "search" action="">           
+                  <label for="">Custom search</label>
+                
+                  <input autocomplete="off" class = "input " type="text" id="searchQuery">
+                  
+                  <input type="submit" id="searchBtn"  value="Search" />
+                  <input type="submit" class="clearBtn"  value="clear" />
+              </form>
+            </section>
+            <div class="topic-buttons">
+             </div> 
         </div>
         <div id="tabs-3">
           <h2>Song preferences</h2>
@@ -173,7 +185,8 @@
           </section>
         </div>
       </div>
-    </div>
+     </div>
+    
     <div id="container">
       <div class='mainButtons'>
         <svg id='news' width="318" height="72" viewBox="0 0 318 72" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -195,16 +208,51 @@
         </svg>
   
       </div>
-  
+
       <div class="cards new hidden">
   
-        <h2>News</h2>
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-          laborum."</p>
+        <div class = "cards news hidden">
+
+        <div class="container" id="hidden">
+            <div class="row">
+                
+                <h2>News 
+            <span id="btn-close-news" class="card-title"><i class="material-icons right">close</i></span>
+
+                </h2>
+
+            </div>
+            <div id="newsRow" class = "row">
+                   <div id ="newsResults">
+                   </div>
+            </div>
+              <!--
+            <section id = "news">
+
+            <form class = "search" action="">
+
+                <label for="">News</label>
+              
+                <input autocomplete="off" class = "input " type="text" id="searchQuery">
+                
+                <input type="submit" id="searchBtn"  value="Search" />
+                <input type="submit" class="clearBtn"  value="clear" />
+            </form>
+           </section>
+        
+    
+           <div class="topic-buttons">
+             
+           
+                        
+     
+
+             -->
+        </div> 
+       </div> 
       </div>
+      
+
       <div id='selectSpotifyPlayer' class='modal'>
         <div class="select-player">
           <h2>Select a Spotify Player</h2>
@@ -239,12 +287,12 @@
         </div>
       </div>
     </div>
+  </div>
     <div class="hidden music-footer-hold music"></div>
     <div class="hidden song-player music-footer music">
       <div class="prev-song"><span><i class="fa fa-chevron-circle-left"></i></span></div>
       <div class="song-recommendations">
         <ul id="song-rec">
-  
         </ul>
       </div>
       <div class="volume-container"><i id="volume-icon" class="fa fa-volume-up"></i><div class="song-volume"></div>
@@ -295,5 +343,9 @@
 <script src="https://sdk.scdn.co/spotify-player.js"></script>
 <script src="./assets/js/video.js"></script>
 <script src="./assets/js/song.js"></script>
+<script src="./Assets-NewsApi/JS/newsapi.js"></script>
+<script src="./Assets-NewsApi/JS/selectionbox.js"></script>
 
-</html>
+
+
+
