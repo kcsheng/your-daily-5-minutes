@@ -203,7 +203,7 @@ function createApiUrl(e) {
   }
 
   console.log("connecting to fetch api...");
-  showVideo();
+  // showVideo();
 }
 
 function showVideo() {
