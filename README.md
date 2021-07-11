@@ -78,4 +78,4 @@ As a frontend app without the backend support, to protect API keys and or auth t
 ---
 
 - Third party APIs (NewsAPI, Spotify, YouTube)
-- Javacript, jQuery, jQuery library(anime) and CSS framework (materialize)
+- Javacript, jQuery, js library(anime) and CSS framework (materialize)
