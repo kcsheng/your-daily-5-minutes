@@ -221,4 +221,60 @@ timeline.add({
             document.getElementById("mySidenav").style.width = "0";
             };
 
+
+        var suvaImg = document.getElementById('suva');
+        var ronImg = document.getElementById('ron');
+        var kcImg = document.getElementById('kc');
+        var tikaImg = document.getElementById('tika');
+        suvaImg.addEventListener('mouseover', function() {
+            suvaImg.setAttribute('src',"assets/img/suvatest.png");
+            suvaImg.classList.add('class','photoCardEnlargen');
+            suvaImg.classList.remove('class','photoCardSmallen');
+        }) 
+        suvaImg.addEventListener('mouseleave', function() {
+            suvaImg.setAttribute('src',"assets/img/suva.jpg");
+            suvaImg.classList.add('class','photoCardSmallen');
+            suvaImg.classList.remove('class','photoCardEnlargen');
+
+        })
+
+        ronImg.addEventListener('mouseover', function() {
+            ronImg.setAttribute('src',"assets/img/rontest.png");
+            ronImg.classList.add('class','photoCardEnlargen');
+            ronImg.classList.remove('class','photoCardSmallen');
+        }) 
+        ronImg.addEventListener('mouseleave', function() {
+            ronImg.setAttribute('src',"assets/img/ron.jpg");
+            ronImg.classList.add('class','photoCardSmallen');
+            ronImg.classList.remove('class','photoCardEnlargen');
+
+        })
+
+        kcImg.addEventListener('mouseover', function() {
+            kcImg.setAttribute('src',"assets/img/kctest.png");
+            kcImg.classList.add('class','photoCardEnlargen');
+            kcImg.classList.remove('class','photoCardSmallen');
+        }) 
+        kcImg.addEventListener('mouseleave', function() {
+            kcImg.setAttribute('src',"assets/img/KC.png");
+            kcImg.classList.add('class','photoCardSmallen');
+            kcImg.classList.remove('class','photoCardEnlargen');
+
+        })
+
+        
+        tikaImg.addEventListener('mouseover', function() {
+            tikaImg.setAttribute('src',"assets/img/tikatest.png");
+            tikaImg.classList.add('class','photoCardEnlargen');
+            tikaImg.classList.remove('class','photoCardSmallen');
+        }) 
+        tikaImg.addEventListener('mouseleave', function() {
+            tikaImg.setAttribute('src',"assets/img/tika.jpg");
+            tikaImg.classList.add('class','photoCardSmallen');
+            tikaImg.classList.remove('class','photoCardEnlargen');
+
+        })
+
+        
+
         
