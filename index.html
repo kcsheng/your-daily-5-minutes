@@ -16,7 +16,10 @@
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://use.fontawesome.com/90e2e28e3d.js"></script>
   <!-- News API CSS-->
-
+  <link href="./assets/css/newsApi.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/materialize.min.css">
+  
   
  
 
@@ -227,49 +230,29 @@
   
       </div>
 
-      <div class="cards new hidden">
-  
-        <div class = "cards news hidden">
+      <div class="cards new hidden news-Div">
+        <div class="container">
+        <div class="row">
+          <div class="topic-buttons"></div>
+                   <h2 class = "title-news">News </h2>
+                   <span id="btn-close-news" class="card-title"><i class="material-icons right">close</i></span>
+          </div>
+        <div id="newsRow" class="row">
 
-        <div class="container" id="hidden">
-            <div class="row">
-                
-                <h2>News 
-            <span id="btn-close-news" class="card-title"><i class="material-icons right">close</i></span>
+          <div id="newsResults">
 
-                </h2>
-
-            </div>
-            <div id="newsRow" class = "row">
-                   <div id ="newsResults">
-                   </div>
-            </div>
-              <!--
-            <section id = "news">
-
-            <form class = "search" action="">
-
-                <label for="">News</label>
-              
-                <input autocomplete="off" class = "input " type="text" id="searchQuery">
-                
-                <input type="submit" id="searchBtn"  value="Search" />
-                <input type="submit" class="clearBtn"  value="clear" />
+          </div>
+        </div>
+             <section class = "news-search">
+            <form class="search" action="">                
+              <input autocomplete="off" class="input searchQuery" type="text" value="News">
+              <input type="submit" class="searchBtn waves-effect waves-light btn" value="Search" />
+              <input type="submit" class="clearBtn waves-effect waves-light btn" value="clear" />
             </form>
-           </section>
+        </section>
         
-    
-           <div class="topic-buttons">
-             
-           
-                        
-     
-
-             -->
-        </div> 
-       </div> 
       </div>
-      
+    </div>
 
       <div id='selectSpotifyPlayer' class='modal'>
         <div class="select-player">
@@ -358,9 +341,10 @@
 <script src="https://sdk.scdn.co/spotify-player.js"></script>
 <script src="./assets/js/video.js"></script>
 <script src="./assets/js/song.js"></script>
-<script src="./Assets-NewsApi/JS/newsapi.js"></script>
-<script src="./Assets-NewsApi/JS/selectionbox.js"></script>
-
-
+  <!-- News API JS-->
+  <script src="./Assets/js/newsapi.js"></script>
+  <script src="./Assets/js/materialize.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  </html>
 
 

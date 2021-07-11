@@ -198,6 +198,16 @@ timeline.add({
                 fadeDelay: 0.50
             });
         })
+        news.addEventListener('click',function() {
+            // video.classList.add('class','hidden');
+            // music.classList.add('class','hidden');
+            // news.classList.add('class','hidden');
+            document.querySelector('.mainButtons').classList.add('class','hidden');
+            // document.querySelector('video-container').classList.remove('class','hidden');
+            $(".news-Div").removeClass("hidden hide");
+            
+        })
+        
 
         
         function openNav() {
