@@ -39,6 +39,7 @@ function reload() {
 
 function mtt() {
     document.getElementById('mainContent').setAttribute('class','hidden');
+    document.getElementById('ydfmLogo').setAttribute('class','hidden');
     document.getElementsByClassName('.mtt')
     document.querySelector('.mtt').classList.remove('class','hidden');
     document.querySelector('.mtt').classList.add('class','container-text');
@@ -230,6 +231,7 @@ timeline.add({
             suvaImg.setAttribute('src',"assets/img/suvatest.png");
             suvaImg.classList.add('class','photoCardEnlargen');
             suvaImg.classList.remove('class','photoCardSmallen');
+            suvaImg.classList.add('class','removeBorder');
         }) 
         suvaImg.addEventListener('mouseleave', function() {
             suvaImg.setAttribute('src',"assets/img/suva.jpg");
