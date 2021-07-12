@@ -11,7 +11,7 @@ var song_recommendations = [];
 
 var player_ready = false;
 var remote_player_device_id; // device ID of remote player
-var playback_type = SPOTIFY_WEB_PLAYER;
+var playback_type = SPOTIFY_NO_PLAYER;
 
 var web_player; // spotify player object
 
