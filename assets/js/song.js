@@ -81,7 +81,10 @@ var v_player = {
                         'Authorization': 'Bearer ' + localStorage.getItem(LS_USR_ACCESS_TOKEN),
                     },
                 }, true);
-                var data = await playback.json();
+                var data = null;
+                try{
+                    data = await playback.json();
+                } catch{}
 //                console.log('data', data)
                 if(data && data.hasOwnProperty('item') && data.item &&
                     data.item.hasOwnProperty('uri'))
@@ -127,7 +130,7 @@ var v_player = {
                 var data = await playback.json();
 
                 // if remote player is not playing
-                if(data.is_playing){
+                if(!data.is_playing){
                     //resume playing
                     await refreshToken();
                     fetchAndRetry(`https://api.spotify.com/v1/me/player/play?device_id=${this.remote_player_device_id}`, {
@@ -219,6 +222,7 @@ async function resumeIfPlaying(){
     if(was_playing_to_resume){
         v_player.resume();
         showSongFeature();
+        was_playing_to_resume = false;
     }
     $(".music").css("pointer-events", "auto");
 }
@@ -928,7 +932,6 @@ async function selectPlayer(type, device_id){
             ){
                 v_player.pause();
                 togglePlayPauseIcon(FA_PLAY_ICON);
-                v_player.playback_type = type;
             }
             enablePlayback();
             break;
@@ -942,13 +945,14 @@ async function selectPlayer(type, device_id){
             ){
                 v_player.pause();
                 togglePlayPauseIcon(FA_PLAY_ICON);
-                v_player.playback_type = type;
-                v_player.remote_player_device_id = device_id;
-                v_player.no_toggle = true;
             }
+            v_player.remote_player_device_id = device_id;
+            v_player.no_toggle = true;
             enablePlayback();
             break;
     }
+
+    v_player.playback_type = type;
     //close the current modal
     $.modal.close();
     //show the song feature
