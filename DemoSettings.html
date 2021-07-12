@@ -24,7 +24,7 @@
     <label>Spotify API Key (Base 64 encoded)</label>
     <input class="spotify-api" />
     <label>News API Keys</label>
-    <input class="video-api" />
+    <input class="news-api" />
     <button onclick="saveAPIKeys()">Save</button>
   </body>
   <script src="./assets/js/song-constants.js"></script>
@@ -33,12 +33,14 @@
     function saveAPIKeys() {
       localStorage.setItem("apiKey", $(".youtube-api").val());
       localStorage.setItem(LS_SPOTIFY_API_KEY_B64, $(".spotify-api").val());
+      localStorage.setItem('newsAPiKey', $(".news-api").val());
       //localStorage.setItem('video-apiKey', $('.youtube-api').val());
       window.location.replace("./index.html");
     }
     function loadAPIKeys() {
       $(".youtube-api").val(localStorage.getItem("apiKey"));
       $(".spotify-api").val(localStorage.getItem(LS_SPOTIFY_API_KEY_B64));
+      $(".news-api").val(localStorage.getItem('newsAPiKey'))
     }
   </script>
 </html>
