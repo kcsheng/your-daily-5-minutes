@@ -103,7 +103,9 @@ h2 {
   border-radius: 10px;
   padding: 30px;
   margin-top: 50px;
-  box-shadow: 5px 10px #502929;
+  box-shadow: 5px 10px #502929,
+  0 0 0 99999px rgba(0, 0, 0, .5);
+  z-index: 3;
 }
 
 .back-to-main {
@@ -560,7 +562,7 @@ li.player-select-heading {
   height: 100%; /* 100% Full-height */
   width: 0; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
+  z-index: 2; /* Stay on top */
   top: 0; /* Stay at the top */
   left: 0;
   background-color: #111; /* Black*/
