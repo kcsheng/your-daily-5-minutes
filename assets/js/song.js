@@ -699,7 +699,7 @@ async function getSpotifyClientCredentials() {
 function authorizeSpotifyUser(client_id, redirect_page, scope) {
 
 
-    var redirect_uri = encodeURIComponent(window.location.href.split('/').slice(0, 3).join('/') + '/' + redirect_page);
+    var redirect_uri = encodeURIComponent(window.location.href.split('/').slice(0, 3).join('/') + window.location.pathname.substring(0,window.location.pathname.lastIndexOf('/')+1) + redirect_page);
 
     // store the location in local storage, this is used when getting the access token
     localStorage.setItem(LS_REDIRECT_URI, redirect_uri)
