@@ -205,15 +205,19 @@ var was_playing_to_resume = false;
 
 async function pauseIfPlaying(){
     var state = await v_player.getCurrentState();
-    if(state.hasOwnProperty('paused') && !state.paused){
+    if(state &&state.hasOwnProperty('paused') && !state.paused){
         was_playing_to_resume = true;
         v_player.pause();
     }
+    $(".music").css("pointer-events", "none");
 }
 
 async function resumeIfPlaying(){
-    if(was_playing_to_resume)
-    v_player.resume();
+    if(was_playing_to_resume){
+        v_player.resume();
+        showSongFeature();
+    }
+    $(".music").css("pointer-events", "auto");
 }
 
 var unmute_vol = 0;
@@ -728,7 +732,6 @@ function loadVolume() {
             handleVolumeChange();
         }
     });
-    $('.song-volume span.ui-slider-handle');
     $('#volume-icon').on('click.togglemute', () => {
         toggleMute();
     })
@@ -890,6 +893,10 @@ function showSongFeature(){
     $('.music').removeClass('hidden');
 }
 
+function hideSongFeature(){
+    $('.music').addClass('hidden'); 
+}
+
 function selectPlayer(type, device_id){
     playback_type = type;
     switch(type){
@@ -913,11 +920,11 @@ function selectPlayer(type, device_id){
 }
 
 function disablePlayback(){
-    $('.song-volume').hide();
+    $('.volume-container').hide();
     $('.song-controls').hide();
 }
 
 function enablePlayback(){
-    $('.song-volume').show();
+    $('.volume-container').show();
     $('.song-controls').show();
 }
