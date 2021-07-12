@@ -140,10 +140,10 @@ function createApiUrl(e) {
       baseUrl + `&maxResults=10&relevanceLanguage=en` + `&topicId=`;
     let sportsTopicIdMapping = {
       sports: `%2Fm%2F06ntj`,
-      usFootball: `%2Fm%2F06ntj`,
-      baseball: `%2Fm%2F06ntj`,
-      basketball: `%2Fm%2F06ntj`,
-      boxing: `%2Fm%2F06ntj`,
+      usFootball: `%2Fm%2F0jm_`,
+      baseball: `%2Fm%2F018jz`,
+      basketball: `%2Fm%2F018w8`,
+      boxing: `%2Fm%2F01cgz`,
       cricket: `%2Fm%2F09xp_`,
       football: `%2Fm%2F02vx4`,
       golf: `%2Fm%2F037hz`,
