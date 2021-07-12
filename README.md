@@ -21,7 +21,7 @@ As a busy person who has some free time available now, I would like to be able t
 ---
 
 - WHEN I first visit the site<br>
-  THEN I am presented with a choice of videos, songs, fun facts or news<br>
+  THEN I am presented with a choice of video, music or news<br>
   THEN I am presented with a list of interests that will filter my results.
 
 - WHEN I click on the preferences buttons<br>
@@ -33,8 +33,9 @@ As a busy person who has some free time available now, I would like to be able t
 
 - WHEN I view the youtube card<br>
   THEN I see a thumbnail of the top recommended video (5 min max) matching my preferences
+  
 - WHEN I click on Video result<br>
-  THEN I am able to view a video (5 min max)
+  THEN I am able to view a video
 
 - WHEN I view the news card<br>
   THEN I see the preview of the top news headline matching my preferences
@@ -46,7 +47,10 @@ As a busy person who has some free time available now, I would like to be able t
   THEN I am able to read the news article for that headline
 
 - WHEN I view the music card<br>
-  THEN I am presented with the ability to preview the first song recommended song in a web playback
+  THEN I am presented with the ability to preview the first recommended song in a web playback
+  
+- WHEN I revisit the site <br>
+  THEN I am able to bypass setting up preferences, as they have been memorised within each feature and I have a freedom to reset them anytime.
 
 ### Initial wireframes/ideas
 
