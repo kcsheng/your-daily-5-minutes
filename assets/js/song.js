@@ -15,6 +15,10 @@ var playback_type = SPOTIFY_NO_PLAYER;
 
 var web_player; // spotify player object
 
+
+var access_token_valid = false; // tracks when to refresh access token
+
+
 // virtual player object to handle actions if remote player or web player
 var v_player = {
     web_player_device_id: null,
@@ -600,19 +604,27 @@ async function refreshToken() {
     // makes this call server to server.
     // for the purpose of this assignment we will just be making the call from the client
     // NOT recommended in production because it exposes the Cient Secret
-    var refresh_token = localStorage.getItem(LS_USR_REFRESH_TOKEN)
-    var response = await fetchAndRetry(`https://accounts.spotify.com/api/token?grant_type=refresh_token&refresh_token=${refresh_token}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': 'basic ' + localStorage.getItem(LS_SPOTIFY_API_KEY_B64)
-        },
-    });
-    var data = await response.json();
-//    console.log('data', data)
-    localStorage.setItem(LS_USR_ACCESS_TOKEN, data['access_token']);
-    if (data.hasOwnProperty('refresh_token'))
-        localStorage.setItem(LS_USR_REFRESH_TOKEN, data['refresh_token']);
+    if(!access_token_valid)
+    {
+        var refresh_token = localStorage.getItem(LS_USR_REFRESH_TOKEN)
+        var response = await fetchAndRetry(`https://accounts.spotify.com/api/token?grant_type=refresh_token&refresh_token=${refresh_token}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'basic ' + localStorage.getItem(LS_SPOTIFY_API_KEY_B64)
+            },
+        });
+        var data = await response.json();
+    //    console.log('data', data)
+        localStorage.setItem(LS_USR_ACCESS_TOKEN, data['access_token']);
+        if (data.hasOwnProperty('refresh_token'))
+            localStorage.setItem(LS_USR_REFRESH_TOKEN, data['refresh_token']);
+        if (data.hasOwnProperty('expires_in'))
+        {
+            access_token_valid = true;
+            setTimeout(()=>{access_token_valid = false;}, (data.expires_in) * 1000)
+        }
+    }
 }
 
 function showConnectSpotify() {
