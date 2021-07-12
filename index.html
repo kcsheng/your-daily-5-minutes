@@ -19,50 +19,46 @@
   <!-- News API CSS-->
   <link href="./assets/css/newsApi.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  
-  
- 
-
-
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <!-- <img id='menuIcon' class = '' src = "assets/img/three line menu icon.png"/> -->
-    <div class = "parentNav">
-      <img id='menuIcon' class = '' src = "assets/img/three line menu icon.png"/>
-      <img id='ydfmLogo' class=svgLogo src="assets/img/logo light.png">
-    </div>
-
-    <div id="mySidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <a href="#">Light/Dark <span><svg id="dark_mode" width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g filter="url(#filter0_i)">
-          <path id = 'path' class="moon"
-            d="M38 19C38 29.4934 29.4934 38 19 38C8.50659 38 0 29.4934 0 19C0 8.50659 8.50659 0 19 0C29.4934 0 38 8.50659 38 19Z"
-            fill="#313131" />
-        </g>
-        <defs>
-          <filter id="filter0_i" x="0" y="0" width="38" height="42" filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
-            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-              result="hardAlpha" />
-            <feOffset dy="4" />
-            <feGaussianBlur stdDeviation="2" />
-            <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
-            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-            <feBlend mode="normal" in2="shape" result="effect1_innerShadow" />
-          </filter>
-        </defs>
-      </svg></span></a>
-      <a id = 'settingsCog' onclick = "settings()">Preferences</a>
-      <a onclick = 'mtt()'>About</a>
-      <a onclick = 'reload()'>Back To Main</a>
-    </div>
-    
 </head>
+<header>
+  <div class = "parentNav">
+    <img id='menuIcon' class = '' src = "assets/img/three line menu icon.png"/>
+    <img id='ydfmLogo' class=svgLogo src="assets/img/logo light.png">
+  </div>
+
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">Light/Dark <span><svg id="dark_mode" width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g filter="url(#filter0_i)">
+        <path id = 'path' class="moon"
+          d="M38 19C38 29.4934 29.4934 38 19 38C8.50659 38 0 29.4934 0 19C0 8.50659 8.50659 0 19 0C29.4934 0 38 8.50659 38 19Z"
+          fill="#313131" />
+      </g>
+      <defs>
+        <filter id="filter0_i" x="0" y="0" width="38" height="42" filterUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB">
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha" />
+          <feOffset dy="4" />
+          <feGaussianBlur stdDeviation="2" />
+          <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+          <feBlend mode="normal" in2="shape" result="effect1_innerShadow" />
+        </filter>
+      </defs>
+    </svg></span></a>
+    <a id = 'settingsCog' onclick = "settings()">Preferences</a>
+    <a onclick = 'mtt()'>About</a>
+    <a onclick = 'reload()'>Back To Main</a>
+  </div>
+</header>
 
 <body id = 'ldChange'>
   <div id = 'mainContent'>
