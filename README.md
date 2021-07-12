@@ -2,7 +2,7 @@
 
 ---
 
-A responsive app for an individual who seeks 5 minute entertainment by a video, a song, fun facts or news headlines. Your daily 5 minutes is a collaborative project of four team members.
+A responsive app for an individual who seeks 5 minute entertainment by a video, a song or news headlines. Your daily 5 minutes is a collaborative project of four developers.
 
 ### Branding(Tagline)
 
@@ -33,6 +33,7 @@ As a busy person who has some free time available now, I would like to be able t
 
 - WHEN I view the youtube card<br>
   THEN I see a thumbnail of the top recommended video (5 min max) matching my preferences
+  
 - WHEN I click on Video result<br>
   THEN I am able to view a video (5 min max)
 
@@ -69,16 +70,18 @@ In the course of the app development, we have decided to remove the fun fact fea
 As a frontend app without the backend support, to protect API keys and or auth tokens from exposing to the public, we utilise local storage.
 
 - Music:
-  You will need to generate a spotify API key to enable the Music functionality. In order to do this, you will need a spotify account and got to:
+  You will need to generate a spotify API key to enable the Music functionality. In order to do this, you will need a spotify account and get to:
   https://developer.spotify.com/dashboard/applications
   <br> From there, create a new app and generate a base64 encoded string of in the format of `client_id:client_secret`. Add this to the Demo Settings page.
   In addition, in test mode only whitelisted users are allowed for API calls to be made on, this means if you are testing in test mode, you will need to whitelist any spotify accounts you are testing on that is not the account you generated the app on. You can whitelist users within the "Users and access" section of your app's dashboard.
-- News: The API key for the newsAPI can be obtained by filling in the registration form at https://newsapi.org/register.
-- Video: To access video, the user must have a valid youtube api key. To apply for youtube API, the user is required to have an account on the Google cloud platform and a named project associated with Youtube Data API v3. API key can be generated under credentials.
+- News: The API key for the newsAPI can be obtained by filling in the registration form at https://newsapi.org/register. Please note that the newsAPI does not work with subdomains. For the best experience, please clone the project and use the App in the development mode from the local machine.
+- Video: To access video, the user must have a valid youtube api key. To apply for [youtube API](https://developers.google.com/youtube/v3), the user is required to have an account on the Google cloud platform and a named project associated with Youtube Data API v3. API key can be generated under credentials.
 
 ### Technologies used
 
 ---
-
 - Third party APIs (NewsAPI, Spotify, YouTube)
-- Javacript, jQuery, js library(anime) and CSS framework (materialize)
+- HTML5, CSS3
+- Javacript, jQuery, anime.js, spotify webplayer SDK, SELECT2
+
+
