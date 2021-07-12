@@ -33,7 +33,6 @@ As a busy person who has some free time available now, I would like to be able t
 
 - WHEN I view the youtube card<br>
   THEN I see a thumbnail of the top recommended video (5 min max) matching my preferences
-  
 - WHEN I click on Video result<br>
   THEN I am able to view a video (5 min max)
 
@@ -63,6 +62,20 @@ As a busy person who has some free time available now, I would like to be able t
 
 In the course of the app development, we have decided to remove the fun fact feature, as its value in substantiating our app is much lower than news, music and video.
 
+### Final implementation
+
+---
+
+![Your daily 5 minutes screenshot 2](./assets/img/daily5min2.png)
+
+---
+
+![Your daily 5 minutes screenshot 1](./assets/img/daily5min1.png)
+
+---
+
+![Your daily 5 minutes screenshot 3](./assets/img/daily5min3.png)
+
 ### Media access instructions
 
 ---
@@ -80,8 +93,7 @@ As a frontend app without the backend support, to protect API keys and or auth t
 ### Technologies used
 
 ---
+
 - Third party APIs (NewsAPI, Spotify, YouTube)
 - HTML5, CSS3
 - Javacript, jQuery, anime.js, spotify webplayer SDK, SELECT2
-
-
