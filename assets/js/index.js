@@ -8,7 +8,8 @@ function checkAndRedirectAPIKeys(){
     if(
         !(
             localStorage.getItem("apiKey") && localStorage.getItem("apiKey").length == 39 &&
-            localStorage.getItem(LS_SPOTIFY_API_KEY_B64) && localStorage.getItem(LS_SPOTIFY_API_KEY_B64) != 'undefined'
+            localStorage.getItem(LS_SPOTIFY_API_KEY_B64) && localStorage.getItem(LS_SPOTIFY_API_KEY_B64) != 'undefined' &&
+            localStorage.getItem('newsAPiKey') && localStorage.getItem(LS_SPOTIFY_API_KEY_B64) != 'undefined'
         )
     ){
         window.location.replace('./DemoSettings.html');

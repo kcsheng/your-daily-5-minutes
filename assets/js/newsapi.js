@@ -47,7 +47,8 @@ $(document).ready(function () {
 
     function searchApi(query) {
         //b81303861fdb4c548b144102d6650a78
-        const apiKey = '010a2da8b8934a4b98619a8b89ac4267';//'59882bca0c60494f8922187779d44479'; //'59882bca0c60494f8922187779d44479';
+
+        const apiKey = localStorage.getItem('newsAPiKey');
         console.log(query);
         let url = "https://newsapi.org/v2/top-headlines?q=" + encodeURIComponent(query) + "&apiKey=" + apiKey;
         console.log(url);

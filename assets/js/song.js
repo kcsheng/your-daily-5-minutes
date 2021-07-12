@@ -20,6 +20,7 @@ var v_player = {
     web_player_device_id: null,
     remote_player_device_id: null,
     playback_type: playback_type,
+    no_toggle: false,
     togglePlay: async function(){
         switch(this.playback_type){
             case SPOTIFY_WEB_PLAYER:
@@ -28,41 +29,42 @@ var v_player = {
             case SPOTIFY_REMOTE_PLAYER:
                 // get remote player playback info
                 await refreshToken();
-                var playback =  await fetch(`https://api.spotify.com/v1/me/player?device_id=${this.remote_player_device_id}`, {
+                var playback =  await fetchAndRetry(`https://api.spotify.com/v1/me/player?device_id=${this.remote_player_device_id}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'Authorization': 'Bearer ' + localStorage.getItem(LS_USR_ACCESS_TOKEN),
                     },
-                });
+                }, true);
                 var data = await playback.json();
 
                 // check if playing
                 if(!data.is_playing){
                     //resume
                     await refreshToken();
-                    await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${this.remote_player_device_id}`, {
+                    await fetchAndRetry(`https://api.spotify.com/v1/me/player/play?device_id=${this.remote_player_device_id}`, {
                         method: 'PUT',
                         body: JSON.stringify({}),
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': 'Bearer ' + localStorage.getItem(LS_USR_ACCESS_TOKEN)
                         },
-                    });
+                    },true);
                 } else {
                     //pause
                     await refreshToken();
-                    await fetch(`https://api.spotify.com/v1/me/player/pause?device_id=${this.remote_player_device_id}`, {
+                    await fetchAndRetry(`https://api.spotify.com/v1/me/player/pause?device_id=${this.remote_player_device_id}`, {
                         method: 'PUT',
                         body: JSON.stringify({}),
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': 'Bearer ' + localStorage.getItem(LS_USR_ACCESS_TOKEN)
                         },
-                    });
+                    }, true);
                 }
                 break;
         }
+        v_player.no_toggle = false;
     },
     getCurrentState: async function(){
         switch(this.playback_type){
@@ -72,14 +74,17 @@ var v_player = {
             case SPOTIFY_REMOTE_PLAYER:
                 // get remote player playback info
                 await refreshToken();
-                var playback =  await fetch(`https://api.spotify.com/v1/me/player?device_id=${this.remote_player_device_id}`, {
+                var playback =  await fetchAndRetry(`https://api.spotify.com/v1/me/player?device_id=${this.remote_player_device_id}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'Authorization': 'Bearer ' + localStorage.getItem(LS_USR_ACCESS_TOKEN),
                     },
-                });
-                var data = await playback.json();
+                }, true);
+                var data = null;
+                try{
+                    data = await playback.json();
+                } catch{}
 //                console.log('data', data)
                 if(data && data.hasOwnProperty('item') && data.item &&
                     data.item.hasOwnProperty('uri'))
@@ -97,13 +102,13 @@ var v_player = {
                 break;
             case SPOTIFY_REMOTE_PLAYER:
                 await refreshToken();
-                fetch(`https://api.spotify.com/v1/me/player/volume?device_id=${this.remote_player_device_id}&volume_percent=${Math.round(vol*100)}`, {
+                fetchAndRetry(`https://api.spotify.com/v1/me/player/volume?device_id=${this.remote_player_device_id}&volume_percent=${Math.round(vol*100)}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': 'Bearer ' + localStorage.getItem(LS_USR_ACCESS_TOKEN)
                     },
-                });
+                }, true);
                 break;
         }
     },
@@ -115,27 +120,27 @@ var v_player = {
             case SPOTIFY_REMOTE_PLAYER:
                 // get remote player playback info
                 await refreshToken();
-                var playback =  await fetch(`https://api.spotify.com/v1/me/player?device_id=${this.remote_player_device_id}`, {
+                var playback =  await fetchAndRetry(`https://api.spotify.com/v1/me/player?device_id=${this.remote_player_device_id}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'Authorization': 'Bearer ' + localStorage.getItem(LS_USR_ACCESS_TOKEN),
                     },
-                });
+                }, true);
                 var data = await playback.json();
 
                 // if remote player is not playing
-                if(data.is_playing){
+                if(!data.is_playing){
                     //resume playing
                     await refreshToken();
-                    fetch(`https://api.spotify.com/v1/me/player/play?device_id=${this.remote_player_device_id}`, {
+                    fetchAndRetry(`https://api.spotify.com/v1/me/player/play?device_id=${this.remote_player_device_id}`, {
                         method: 'PUT',
                         body: JSON.stringify({}),
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': 'Bearer ' + localStorage.getItem(LS_USR_ACCESS_TOKEN)
                         },
-                    });
+                    }, true);
                 }
         }
     },
@@ -147,27 +152,27 @@ var v_player = {
             case SPOTIFY_REMOTE_PLAYER:
                 // get remote player playback info
                 await refreshToken();
-                var playback =  await fetch(`https://api.spotify.com/v1/me/player?device_id=${this.remote_player_device_id}`, {
+                var playback =  await fetchAndRetry(`https://api.spotify.com/v1/me/player?device_id=${this.remote_player_device_id}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'Authorization': 'Bearer ' + localStorage.getItem(LS_USR_ACCESS_TOKEN),
                     },
-                });
+                }, true);
                 var data = await playback.json();
 
                 // if remote player is playing
                 if(data.is_playing){
                     //pause
                     await refreshToken();
-                    fetch(`https://api.spotify.com/v1/me/player/pause?device_id=${this.remote_player_device_id}`, {
+                    fetchAndRetry(`https://api.spotify.com/v1/me/player/pause?device_id=${this.remote_player_device_id}`, {
                         method: 'PUT',
                         body: JSON.stringify({}),
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': 'Bearer ' + localStorage.getItem(LS_USR_ACCESS_TOKEN)
                         },
-                    });
+                    }, true);
                 }
                 break;
         }
@@ -186,14 +191,15 @@ var v_player = {
                 break;
         }
         await refreshToken();
-        fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
+        fetchAndRetry(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
             method: 'PUT',
             body: JSON.stringify({ uris: [spotify_uri] }),
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem(LS_USR_ACCESS_TOKEN)
             },
-        });
+        }, true);
+        v_player.no_toggle = false;
     }
     
 }
@@ -216,6 +222,7 @@ async function resumeIfPlaying(){
     if(was_playing_to_resume){
         v_player.resume();
         showSongFeature();
+        was_playing_to_resume = false;
     }
     $(".music").css("pointer-events", "auto");
 }
@@ -335,7 +342,7 @@ const play = ({
     }
 }) => {
     getOAuthToken(access_token => {
-        fetch(`https://api.spotify.com/v1/me/player/play?device_id=${player_device_id}`, {
+        fetchAndRetry(`https://api.spotify.com/v1/me/player/play?device_id=${player_device_id}`, {
             method: 'PUT',
             body: JSON.stringify({ uris: [spotify_uri] }),
             headers: {
@@ -354,7 +361,7 @@ async function playSong(play_uri) {
         alreadyPlaying = false;
     else if (state.track_window.current_track.uri == play_uri)
         alreadyPlaying = true;
-    if (!alreadyPlaying) {
+    if (!alreadyPlaying || v_player.no_toggle) {
 //        console.log('playing ' + play_uri);
         v_player.play(play_uri);
         togglePlayPauseIcon(FA_PAUSE_ICON);
@@ -398,7 +405,7 @@ async function generateSongRecommendations() {
     //if recommendation settings filled out, generate the list
     if(qString != ""){
         $('#song-pref-error').text('');
-        var response = await fetch(`https://api.spotify.com/v1/recommendations?market=AU&limit=15&max_duration_ms=300000${qString}`, {
+        var response = await fetchAndRetry(`https://api.spotify.com/v1/recommendations?market=AU&limit=15&max_duration_ms=300000${qString}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -432,6 +439,9 @@ function displaySong(track, isHidden) {
     });
     var album = track.album.name;
     var album_image_url = track.album.images[2].url;
+    // spotify doesn't provide any alt text
+    // so no descriptive text can be added.
+    var album_image_alt = `${track.album.name} album art`;
     var open_link = track.external_urls.spotify;
     var play_uri = track.uri;
 
@@ -444,7 +454,7 @@ function displaySong(track, isHidden) {
     const playIcon = $('<i class="fa" aria-hidden="true"></i>');
 
     const divSongContainer = $('<div class="song-container">');
-    const divImage = $(`<img class="song-image" src="${album_image_url}">`);
+    const elImage = $(`<img class="song-image" src="${album_image_url}">`);
     const divSongDetails = $('<div class="song-details">');
     const divPlayerControls = $('<div class="song-controls">');
     const elSpotifyLogo = $(`<img class="spotify-logo" src="${SPOTIFY_ICON_LOCATION}">`)
@@ -453,6 +463,7 @@ function displaySong(track, isHidden) {
     elTitle.text(title);
     elAlbum.text(album);
     elArtists.text(artists);
+    elImage.attr('alt', album_image_alt);
 
     linkOpen.attr('href', open_link);
     spanSpotifyOpen.text('PLAY ON SPOTIFY');
@@ -473,7 +484,7 @@ function displaySong(track, isHidden) {
     linkOpen.append(spanSpotifyOpen);
     divSongDetails.append(linkOpen);
     divPlayerControls.append(btnPlay);
-    divSongContainer.append(divImage);
+    divSongContainer.append(elImage);
     divSongContainer.append(divSongDetails);
     elLi.append(divSongContainer);
     elLi.append(divPlayerControls);
@@ -567,13 +578,13 @@ async function isPremium() {
     await refreshToken();
 
     // make api call to check user details
-    var response = await fetch(`https://api.spotify.com/v1/me`, {
+    var response = await fetchAndRetry(`https://api.spotify.com/v1/me`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': 'Bearer ' + localStorage.getItem(LS_USR_ACCESS_TOKEN),
         },
-    });
+    }, true);
     var data = await response.json();
 
     //check if the user is a premium user
@@ -590,7 +601,7 @@ async function refreshToken() {
     // for the purpose of this assignment we will just be making the call from the client
     // NOT recommended in production because it exposes the Cient Secret
     var refresh_token = localStorage.getItem(LS_USR_REFRESH_TOKEN)
-    var response = await fetch(`https://accounts.spotify.com/api/token?grant_type=refresh_token&refresh_token=${refresh_token}`, {
+    var response = await fetchAndRetry(`https://accounts.spotify.com/api/token?grant_type=refresh_token&refresh_token=${refresh_token}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -648,6 +659,10 @@ function loadPlayer() {
                     player_ready = true;
 
                     console.log('Ready with Device ID', device_id);
+                    //show web player
+                    $('.web-player-option').show();
+                    //hide upgrade text
+                    $('.spotify-basic-text').hide();
                     loadVolume();
 
                 });
@@ -669,7 +684,7 @@ function loadPlayer() {
 async function getSpotifyClientCredentials() {
     // note this should be a call to a back-end service to return this, not a front end call
     // as the client secret should not be exposed in a production site
-    const response = await fetch(`https://accounts.spotify.com/api/token?grant_type=client_credentials`, {
+    const response = await fetchAndRetry(`https://accounts.spotify.com/api/token?grant_type=client_credentials`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -770,7 +785,7 @@ async function togglePlaySong() {
             // or if it errors (due to lack of any other handling)
             togglePlayPauseIcon(FA_PLAY_ICON);
         }
-    },200));
+    },600));
 
     
 
@@ -831,13 +846,14 @@ function prevSong() {
 
 // get list of devices to play music on
 async function getSpotifyDevices(){
-    var response = await fetch(`https://api.spotify.com/v1/me/player/devices`, {
+    refreshToken();
+    var response = await fetchAndRetry(`https://api.spotify.com/v1/me/player/devices`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': 'Bearer ' + localStorage.getItem(LS_USR_ACCESS_TOKEN),
         },
-    });
+    }, true);
     var data = await response.json();
 
     //check if the user is a premium user
@@ -897,22 +913,46 @@ function hideSongFeature(){
     $('.music').addClass('hidden'); 
 }
 
-function selectPlayer(type, device_id){
+async function selectPlayer(type, device_id){
     playback_type = type;
     switch(type){
         case SPOTIFY_NO_PLAYER:
             disablePlayback();
+            var state = await v_player.getCurrentState();
+            if(state &&state.hasOwnProperty('paused') && !state.paused){
+                v_player.pause();
+                togglePlayPauseIcon(FA_PLAY_ICON);
+            }
             break;
         case SPOTIFY_WEB_PLAYER:
-            v_player.playback_type = type;
+            var state = await v_player.getCurrentState();
+            if(!(
+                v_player.playback_type == type) && 
+                state &&state.hasOwnProperty('paused') &&  !state.paused
+            ){
+                v_player.pause();
+                togglePlayPauseIcon(FA_PLAY_ICON);
+            }
             enablePlayback();
             break;
         case SPOTIFY_REMOTE_PLAYER:
-            v_player.playback_type = type;
+            var state = await v_player.getCurrentState();
+
+            if(!(
+                v_player.playback_type == type && 
+                v_player.remote_player_device_id == device_id) && 
+                state &&state.hasOwnProperty('paused') && !state.paused
+            ){
+                v_player.pause();
+                togglePlayPauseIcon(FA_PLAY_ICON);
+            }
             v_player.remote_player_device_id = device_id;
+            v_player.no_toggle = true;
             enablePlayback();
             break;
     }
+
+    v_player.playback_type = type;
     //close the current modal
     $.modal.close();
     //show the song feature
@@ -927,4 +967,24 @@ function disablePlayback(){
 function enablePlayback(){
     $('.volume-container').show();
     $('.song-controls').show();
+}
+
+// handle retry of API calls as Spotify intermittently sends erorrs
+async function fetchAndRetry(url, option, doTokenRefresh = true, retries = 4, retried = false) {
+    // try refresh client credentials on retry, just in case
+    if(retried)
+        await getSpotifyClientCredentials()
+    
+    if(doTokenRefresh && retried )
+        await refreshToken();
+
+    return fetch(url, option)
+        .then(function(response) {
+            if (response.ok) {
+                return response;
+            }else if (retries <= 0) {
+                throw error;
+            } else 
+                return fetchAndRetry(url, option, refreshToken, retries - 1, true);
+        });
 }
