@@ -550,6 +550,7 @@ li.player-select-heading {
   min-width: 70px;
   opacity: 80%;
   padding-top: 50px;
+  z-index: 2;
 }
 
 #menuIcon:hover {
