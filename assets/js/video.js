@@ -25,7 +25,7 @@ function showVideoContainer(e) {
   e.stopPropagation();
   videoContainer = $(".video-container");
   videoContainer.removeClass("hidden");
-  url = baseUrl + `&maxResults=3&topicId=%2Fm%2F01k8wb&relevanceLanguage=en`;
+  url = baseUrl + `&maxResults=10&topicId=%2Fm%2F01k8wb&relevanceLanguage=en`;
   showVideo();
 }
 //Action required when clikcing on back to main
@@ -110,15 +110,15 @@ function createApiUrl(e) {
     let randomTermsArr = randomTerms.split(",");
     let searchTerm =
       randomTermsArr[Math.floor(Math.random() * randomTermsArr.length)];
-    url = baseUrl + `&maxResults=3&q=${searchTerm}`;
+    url = baseUrl + `&maxResults=10&q=${searchTerm}`;
     console.log(url);
   } else if (e.target === knowledgeBtn[0]) {
-    url = baseUrl + `&maxResults=3&topicId=%2Fm%2F01k8wb&relevanceLanguage=en`;
+    url = baseUrl + `&maxResults=10&topicId=%2Fm%2F01k8wb&relevanceLanguage=en`;
     console.log(url);
   } else if (e.target === gamingBtn[0]) {
     let gameTopic = gamingBtn.text().toLowerCase();
     let baseGameUrl =
-      baseUrl + `&maxResults=3&relevanceLanguage=en` + `&topicId=`;
+      baseUrl + `&maxResults=10&relevanceLanguage=en` + `&topicId=`;
     let gameTopicIdMapping = {
       gaming: `%2Fm%2F0bzvm2`,
       action: `%2Fm%2F025zzc`,
@@ -137,7 +137,7 @@ function createApiUrl(e) {
   } else if (e.target === sportsBtn[0]) {
     let sportsTopic = sportsBtn.text().toLowerCase();
     let baseSportsUrl =
-      baseUrl + `&maxResults=3&relevanceLanguage=en` + `&topicId=`;
+      baseUrl + `&maxResults=10&relevanceLanguage=en` + `&topicId=`;
     let sportsTopicIdMapping = {
       sports: `%2Fm%2F06ntj`,
       usFootball: `%2Fm%2F06ntj`,
@@ -158,7 +158,7 @@ function createApiUrl(e) {
   } else if (e.target === entertainmentBtn[0]) {
     let entertainmentTopic = entertainmentBtn.text().toLowerCase();
     let baseEntertainmentUrl =
-      baseUrl + `&maxResults=3&relevanceLanguage=en` + `&topicId=`;
+      baseUrl + `&maxResults=10&relevanceLanguage=en` + `&topicId=`;
     let entertainmentTopicIdMapping = {
       entertainment: `%2Fm%2F02jjt`,
       humor: `%2Fm%2F09kqc`,
@@ -173,7 +173,7 @@ function createApiUrl(e) {
   } else if (e.target === lifestyleBtn[0]) {
     let lifestyleTopic = lifestyleBtn.text().toLowerCase();
     let baseLifestyleUrl =
-      baseUrl + `&maxResults=3&relevanceLanguage=en` + `&topicId=`;
+      baseUrl + `&maxResults=10&relevanceLanguage=en` + `&topicId=`;
     let lifestyleTopicIdMapping = {
       lifestyle: `%2Fm%2F019_rr`,
       fashion: `%2Fm%2F032tl`,
@@ -191,7 +191,7 @@ function createApiUrl(e) {
   } else if (e.target === societyBtn[0]) {
     let societyTopic = societyBtn.text().toLowerCase();
     let baseSocietyUrl =
-      baseUrl + `&maxResults=3&relevanceLanguage=en` + `&topicId=`;
+      baseUrl + `&maxResults=10&relevanceLanguage=en` + `&topicId=`;
     let societyTopicIdMapping = {
       society: `%2Fm%2F098wr`,
       business: `%2Fm%2F09s1f`,
