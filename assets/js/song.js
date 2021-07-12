@@ -432,6 +432,9 @@ function displaySong(track, isHidden) {
     });
     var album = track.album.name;
     var album_image_url = track.album.images[2].url;
+    // spotify doesn't provide any alt text
+    // so no descriptive text can be added.
+    var album_image_alt = `${track.album.name} album art`;
     var open_link = track.external_urls.spotify;
     var play_uri = track.uri;
 
@@ -444,7 +447,7 @@ function displaySong(track, isHidden) {
     const playIcon = $('<i class="fa" aria-hidden="true"></i>');
 
     const divSongContainer = $('<div class="song-container">');
-    const divImage = $(`<img class="song-image" src="${album_image_url}">`);
+    const elImage = $(`<img class="song-image" src="${album_image_url}">`);
     const divSongDetails = $('<div class="song-details">');
     const divPlayerControls = $('<div class="song-controls">');
     const elSpotifyLogo = $(`<img class="spotify-logo" src="${SPOTIFY_ICON_LOCATION}">`)
@@ -453,6 +456,7 @@ function displaySong(track, isHidden) {
     elTitle.text(title);
     elAlbum.text(album);
     elArtists.text(artists);
+    elImage.attr('alt', album_image_alt);
 
     linkOpen.attr('href', open_link);
     spanSpotifyOpen.text('PLAY ON SPOTIFY');
@@ -473,7 +477,7 @@ function displaySong(track, isHidden) {
     linkOpen.append(spanSpotifyOpen);
     divSongDetails.append(linkOpen);
     divPlayerControls.append(btnPlay);
-    divSongContainer.append(divImage);
+    divSongContainer.append(elImage);
     divSongContainer.append(divSongDetails);
     elLi.append(divSongContainer);
     elLi.append(divPlayerControls);
@@ -648,6 +652,10 @@ function loadPlayer() {
                     player_ready = true;
 
                     console.log('Ready with Device ID', device_id);
+                    //show web player
+                    $('.web-player-option').show();
+                    //hide upgrade text
+                    $('.spotify-basic-text').hide();
                     loadVolume();
 
                 });
@@ -897,19 +905,42 @@ function hideSongFeature(){
     $('.music').addClass('hidden'); 
 }
 
-function selectPlayer(type, device_id){
+async function selectPlayer(type, device_id){
     playback_type = type;
     switch(type){
         case SPOTIFY_NO_PLAYER:
             disablePlayback();
+            var state = await v_player.getCurrentState();
+            if(state &&state.hasOwnProperty('paused') && !state.paused){
+                v_player.pause();
+                togglePlayPauseIcon(FA_PLAY_ICON);
+            }
             break;
         case SPOTIFY_WEB_PLAYER:
-            v_player.playback_type = type;
+            var state = await v_player.getCurrentState();
+            if(!(
+                v_player.playback_type == type) && 
+                state &&state.hasOwnProperty('paused') &&  !state.paused
+            ){
+                v_player.pause();
+                togglePlayPauseIcon(FA_PLAY_ICON);
+                v_player.playback_type = type;
+            }
             enablePlayback();
             break;
         case SPOTIFY_REMOTE_PLAYER:
-            v_player.playback_type = type;
-            v_player.remote_player_device_id = device_id;
+            var state = await v_player.getCurrentState();
+
+            if(!(
+                v_player.playback_type == type && 
+                v_player.remote_player_device_id == device_id) && 
+                state &&state.hasOwnProperty('paused') && !state.paused
+            ){
+                v_player.pause();
+                togglePlayPauseIcon(FA_PLAY_ICON);
+                v_player.playback_type = type;
+                v_player.remote_player_device_id = device_id;
+            }
             enablePlayback();
             break;
     }

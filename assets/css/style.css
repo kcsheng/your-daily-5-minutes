@@ -551,6 +551,7 @@ li.player-select-heading {
   min-width: 70px;
   opacity: 80%;
   padding-top: 50px;
+  z-index: 2;
 }
 
 #menuIcon:hover {
@@ -836,6 +837,7 @@ border: darkred;
 
 .select2-container--default .select2-results__option {
   color: black;
+}
 
 .profileCards img {
   border:7px solid rgb(98, 16, 98);
